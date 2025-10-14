@@ -1,17 +1,17 @@
 <?php
 /**
- * Newskit Theme: Typography
+ * Gulir Theme: Typography
  *
- * @package Newskit
+ * @package Gulir
  */
 
 /**
  * Generate the CSS for custom typography.
  */
-function newskit_custom_typography_css() {
+function gulir_custom_typography_css() {
 
-	$font_body   = newskit_font_stack( get_theme_mod( 'font_body', '' ), get_theme_mod( 'font_body_stack', 'serif' ) );
-	$font_header = newskit_font_stack( get_theme_mod( 'font_header', '' ), get_theme_mod( 'font_header_stack', 'serif' ) );
+	$font_body   = gulir_font_stack( get_theme_mod( 'font_body', '' ), get_theme_mod( 'font_body_stack', 'serif' ) );
+	$font_header = gulir_font_stack( get_theme_mod( 'font_header', '' ), get_theme_mod( 'font_header_stack', 'serif' ) );
 
 	$css_blocks        = '';
 	$editor_css_blocks = '';
@@ -19,13 +19,13 @@ function newskit_custom_typography_css() {
 	if ( get_theme_mod( 'font_header', '' ) ) {
 		$css_blocks .= '
 			:root {
-				--newskit-font-heading: ' . wp_kses( $font_header, null ) . ';
+				--gulir-font-heading: ' . wp_kses( $font_header, null ) . ';
 			}
 		';
 
 		$editor_css_blocks .= '
 			:root .editor-styles-wrapper {
-				--newskit-font-heading: ' . wp_kses( $font_header, null ) . ';
+				--gulir-font-heading: ' . wp_kses( $font_header, null ) . ';
 			}
 		';
 	}
@@ -33,13 +33,13 @@ function newskit_custom_typography_css() {
 	if ( get_theme_mod( 'font_body', '' ) ) {
 		$css_blocks .= '
 			:root {
-				--newskit-font-body: ' . wp_kses( $font_body, null ) . ';
+				--gulir-font-body: ' . wp_kses( $font_body, null ) . ';
 			}
 		';
 
 		$editor_css_blocks .= '
 			:root .editor-styles-wrapper {
-				--newskit-font-body: ' . wp_kses( $font_body, null ) . ';
+				--gulir-font-body: ' . wp_kses( $font_body, null ) . ';
 			}
 		';
 	}
@@ -100,7 +100,7 @@ function newskit_custom_typography_css() {
 /**
  * Generate link elements for custom typography stylesheets.
  */
-function newskit_custom_typography_link( $theme_mod ) {
+function gulir_custom_typography_link( $theme_mod ) {
 	$font_code = get_theme_mod( $theme_mod, '' );
 	if ( ! $font_code ) {
 		return false;
@@ -111,24 +111,24 @@ function newskit_custom_typography_link( $theme_mod ) {
 /**
  * Fallback font stacks
  */
-function newskit_get_font_stacks() {
+function gulir_get_font_stacks() {
 	return array(
 		'serif'      => array(
-			'name'  => __( 'Serif', 'newskit' ),
+			'name'  => __( 'Serif', 'gulir' ),
 			'fonts' => array(
 				'Georgia',
 				'serif',
 			),
 		),
 		'sans_serif' => array(
-			'name'  => __( 'Sans Serif', 'newskit' ),
+			'name'  => __( 'Sans Serif', 'gulir' ),
 			'fonts' => array(
 				'Helvetica',
 				'sans-serif',
 			),
 		),
 		'display'    => array(
-			'name'  => __( 'Display', 'newskit' ),
+			'name'  => __( 'Display', 'gulir' ),
 			'fonts' => array(
 				'Impact',
 				'Arial Black',
@@ -136,7 +136,7 @@ function newskit_get_font_stacks() {
 			),
 		),
 		'monospace'  => array(
-			'name'  => __( 'Monospace', 'newskit' ),
+			'name'  => __( 'Monospace', 'gulir' ),
 			'fonts' => array(
 				'Consolas',
 				'Courier New',
@@ -150,9 +150,9 @@ function newskit_get_font_stacks() {
 /**
  * Prepare fallback font stacks for use in a Select element
  */
-function newskit_get_font_stacks_as_select_choices() {
+function gulir_get_font_stacks_as_select_choices() {
 	$stacks = array();
-	foreach ( newskit_get_font_stacks() as $key => $value ) {
+	foreach ( gulir_get_font_stacks() as $key => $value ) {
 		$stacks[ $key ] = wp_kses( $value['name'], null );
 	}
 	return $stacks;
@@ -161,8 +161,8 @@ function newskit_get_font_stacks_as_select_choices() {
 /**
  * Prepare a font-family definition with a primary font and fallbacks.
  */
-function newskit_font_stack( $primary_font, $fallback_id ) {
-	$stacks = newskit_get_font_stacks();
+function gulir_font_stack( $primary_font, $fallback_id ) {
+	$stacks = gulir_get_font_stacks();
 	$fonts  = isset( $stacks[ $fallback_id ] ) ? $stacks[ $fallback_id ]['fonts'] : array();
 	array_unshift( $fonts, $primary_font );
 	foreach ( $fonts as &$font ) {

@@ -19,7 +19,7 @@ import { appendSubtitleToTitleDOMElement, connectWithSelect } from './utils';
  *
  * https://developer.wordpress.org/block-editor/developers/slotfills/plugin-document-setting-panel/
  */
-const NewskitSubtitlePanel = ({ subtitle }) => {
+const GulirSubtitlePanel = ({ subtitle }) => {
 	// Update the DOM when subtitle value changes.
 	useEffect(() => {
 		appendSubtitleToTitleDOMElement(subtitle);
@@ -27,17 +27,17 @@ const NewskitSubtitlePanel = ({ subtitle }) => {
 
 	return (
 		<PluginDocumentSettingPanel
-			name="newskit-subtitle"
-			title={__('Article Subtitle', 'newskit')}
-			className="newskit-subtitle"
+			name="gulir-subtitle"
+			title={__('Article Subtitle', 'gulir')}
+			className="gulir-subtitle"
 		>
-			{__('Set a Subtitle for the Article', 'newskit')}
+			{__('Set a Subtitle for the Article', 'gulir')}
 			<SubtitleEditor />
 		</PluginDocumentSettingPanel>
 	);
 };
 
-registerPlugin('plugin-document-setting-panel-newskit-subtitle', {
-	render: connectWithSelect(NewskitSubtitlePanel),
+registerPlugin('plugin-document-setting-panel-gulir-subtitle', {
+	render: connectWithSelect(GulirSubtitlePanel),
 	icon: null,
 });

@@ -1,4 +1,4 @@
-/* globals newskitScreenReaderText */
+/* globals gulirScreenReaderText */
 
 /**
  * File amp-fallback.js.
@@ -25,7 +25,7 @@
 
 				// Toggle screen reader text label and aria settings.
 				if ( searchToggleTextDefault === searchToggleTextContain.innerText ) {
-					searchToggleTextContain.innerText = newskitScreenReaderText.close_search;
+					searchToggleTextContain.innerText = gulirScreenReaderText.close_search;
 					headerSearch.setAttribute( 'aria-expanded', 'true' );
 					searchToggle.setAttribute( 'aria-expanded', 'true' );
 					headerSearchInput.focus();
@@ -173,11 +173,11 @@
 						if ( dropdownToggle[ i ].classList.contains( 'open-dropdown' ) ) {
 							dropdownToggle[ i ].classList.remove( 'open-dropdown' );
 							dropdownToggle[ i ].setAttribute( 'aria-expanded', 'false' );
-							dropdownToggleLabel.innerText = newskitScreenReaderText.close_dropdown_menu;
+							dropdownToggleLabel.innerText = gulirScreenReaderText.close_dropdown_menu;
 						} else {
 							dropdownToggle[ i ].classList.add( 'open-dropdown' );
 							dropdownToggle[ i ].setAttribute( 'aria-expanded', 'true' );
-							dropdownToggleLabel.innerText = newskitScreenReaderText.open_dropdown_menu;
+							dropdownToggleLabel.innerText = gulirScreenReaderText.open_dropdown_menu;
 						}
 					},
 					false
@@ -240,10 +240,10 @@
 			function () {
 				if ( commentsWrapper.classList.contains( 'comments-hide' ) ) {
 					commentsWrapper.classList.remove( 'comments-hide' );
-					commentsToggleTextContain.innerText = newskitScreenReaderText.collapse_comments;
+					commentsToggleTextContain.innerText = gulirScreenReaderText.collapse_comments;
 				} else {
 					commentsWrapper.classList.add( 'comments-hide' );
-					commentsToggleTextContain.innerText = newskitScreenReaderText.expand_comments;
+					commentsToggleTextContain.innerText = gulirScreenReaderText.expand_comments;
 				}
 			},
 			false
@@ -257,8 +257,8 @@
 	if ( null !== orderDetailToggle ) {
 		const orderDetailWrapper = document.getElementById( 'order-details-wrapper' ),
 			orderDetailToggleTextContain = orderDetailToggle.getElementsByTagName( 'span' )[ 0 ],
-			hideOrderDetails = newskitScreenReaderText.hide_order_details,
-			showOrderDetails = newskitScreenReaderText.show_order_details;
+			hideOrderDetails = gulirScreenReaderText.hide_order_details,
+			showOrderDetails = gulirScreenReaderText.show_order_details;
 
 		orderDetailToggle.addEventListener(
 			'click',

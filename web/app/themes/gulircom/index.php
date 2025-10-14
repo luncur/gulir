@@ -9,7 +9,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Newskit
+ * @package Gulir
  */
 
 get_header();
@@ -28,7 +28,7 @@ get_header();
 			}
 
 			// Previous/next page navigation.
-			newskit_the_posts_navigation();
+			gulir_the_posts_navigation();
 
 		} else {
 

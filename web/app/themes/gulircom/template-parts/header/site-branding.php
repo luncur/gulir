@@ -2,16 +2,16 @@
 /**
  * Displays header site branding
  *
- * @package Newskit
+ * @package Gulir
  */
 ?>
 <div class="site-branding">
 
-	<?php newskit_the_custom_logo(); ?>
+	<?php gulir_the_custom_logo(); ?>
 
 	<div class="site-identity">
 		<?php
-		newskit_the_site_title();
+		gulir_the_site_title();
 
 		$description = get_bloginfo( 'description', 'display' );
 		if ( $description || is_customize_preview() ) :

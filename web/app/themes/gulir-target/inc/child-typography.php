@@ -1,13 +1,13 @@
 <?php
 /**
- * Newskit Sacha: Typography
+ * Gulir Sacha: Typography
  *
- * @package Newskit Sacha
+ * @package Gulir Sacha
  */
 /**
  * Generate the CSS for custom typography.
  */
-function newskit_sacha_custom_typography_css() {
+function gulir_sacha_custom_typography_css() {
 	$css_blocks        = '';
 	$editor_css_blocks = '';
 

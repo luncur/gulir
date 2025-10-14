@@ -13,7 +13,7 @@
 figcaption,
 .wp-caption-text,
 .swiper-pagination-simple {
-	color: var(--newskit-color-text-light);
+	color: var(--gulir-color-text-light);
 	margin: 0 auto;
 	padding: 0;
 	text-align: left;
@@ -21,8 +21,8 @@ figcaption,
 
 // Override some specific styles coming from WordPress.
 :root :where(.wp-block-image figcaption) {
-	color: var(--newskit-color-text-light);
-	font-size: var(--newskit-font-size-xs);
+	color: var(--gulir-color-text-light);
+	font-size: var(--gulir-font-size-xs);
 }
 
 .has-text-color {
@@ -36,9 +36,9 @@ figcaption,
 .wp-caption-text,
 .amp-image-lightbox-caption,
 .swiper-pagination-simple {
-	font-size: var(--newskit-font-size-xs);
-	font-family: var(--newskit-font-heading);
-	line-height: var(--newskit-font-line-height-body);
+	font-size: var(--gulir-font-size-xs);
+	font-family: var(--gulir-font-heading);
+	line-height: var(--gulir-font-line-height-body);
 }
 
 /* Hack to address a bug that affects caption positioning in Safari only. Targets Safari 9+ only. */
@@ -71,7 +71,7 @@ figcaption,
 	}
 }
 
-.newskit-front-page,
+.gulir-front-page,
 .post-template-single-wide,
 .page-template-single-wide {
 	.entry-content {

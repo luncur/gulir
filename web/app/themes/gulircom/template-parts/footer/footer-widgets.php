@@ -2,12 +2,12 @@
 /**
  * Displays the footer widget area
  *
- * @package Newskit
+ * @package Gulir
  */
 
 if ( is_active_sidebar( 'footer-1' ) ) : ?>
 
-	<aside class="widget-area footer-widgets" role="complementary" aria-label="<?php esc_attr_e( 'Footer', 'newskit' ); ?>">
+	<aside class="widget-area footer-widgets" role="complementary" aria-label="<?php esc_attr_e( 'Footer', 'gulir' ); ?>">
 		<div class="wrapper">
 			<?php
 			if ( is_active_sidebar( 'footer-1' ) ) {

@@ -4,12 +4,12 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Newskit
+ * @package Gulir
  */
 
 ?>
 
-<?php if ( newskit_is_sticky_animated_header() ) : ?>
+<?php if ( gulir_is_sticky_animated_header() ) : ?>
 	<?php // If the header is sticky, add a position observer. ?>
 	<amp-position-observer target="" on="enter:headerFadeIn.start; exit:headerFadeOut.start;" layout="nodisplay"></amp-position-observer>
 <?php endif; ?>
@@ -17,15 +17,15 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<div class="entry-content">
 		<?php
-		do_action( 'newskit_theme_before_page_content' );
+		do_action( 'gulir_theme_before_page_content' );
 
 		the_content();
 
-		do_action( 'newskit_theme_after_page_content' );
+		do_action( 'gulir_theme_after_page_content' );
 
 		wp_link_pages(
 			array(
-				'before' => '<div class="page-links">' . __( 'Pages:', 'newskit' ),
+				'before' => '<div class="page-links">' . __( 'Pages:', 'gulir' ),
 				'after'  => '</div>',
 			)
 		);
@@ -39,7 +39,7 @@
 				sprintf(
 					wp_kses(
 						/* translators: %s: Name of current post; only visible to screen readers. */
-						__( 'Edit <span class="screen-reader-text">%s</span>', 'newskit' ),
+						__( 'Edit <span class="screen-reader-text">%s</span>', 'gulir' ),
 						array(
 							'span' => array(
 								'class' => array(),

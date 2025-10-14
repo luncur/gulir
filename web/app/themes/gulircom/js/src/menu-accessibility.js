@@ -1,4 +1,4 @@
-/* globals newskitScreenReaderText */
+/* globals gulirScreenReaderText */
 
 /**
  * File amp-fallback.js.
@@ -30,7 +30,7 @@
 	}
 
 	// If AMP is on, we need to hold off running this JavaScript until we're sure the menus are in their right spots:
-	if ( newskitScreenReaderText.is_amp ) {
+	if ( gulirScreenReaderText.is_amp ) {
 		const primaryMenu = document.getElementById( 'site-navigation' ),
 			secondaryMenu = document.getElementById( 'secondary-nav-contain' ),
 			config = { childList: true };

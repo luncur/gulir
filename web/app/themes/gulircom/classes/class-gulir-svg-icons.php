@@ -2,7 +2,7 @@
 /**
  * SVG Icons class
  *
- * @package Newskit
+ * @package Gulir
  */
 
 /**
@@ -17,7 +17,7 @@
  *
  * @since 1.0.0
  */
-class Newskit_SVG_Icons {
+class Gulir_SVG_Icons {
 
 	/**
 	 * Gets the SVG code for a given icon.
@@ -79,7 +79,7 @@ class Newskit_SVG_Icons {
 		 *
 		 * @param array $servers Social icons map.
 		 */
-		return apply_filters( 'newskit_social_icons_map', self::$social_icons_map );
+		return apply_filters( 'gulir_social_icons_map', self::$social_icons_map );
 	}
 
 	/**

@@ -3,8 +3,8 @@
  */
 import { withSelect } from '@wordpress/data';
 
-export const META_FIELD_SUMMARY = 'newskit_article_summary';
-export const META_FIELD_TITLE = 'newskit_article_summary_title';
+export const META_FIELD_SUMMARY = 'gulir_article_summary';
+export const META_FIELD_TITLE = 'gulir_article_summary_title';
 
 export const connectWithSelect = withSelect( select => ( {
 	summary: select( 'core/editor' ).getEditedPostAttribute( 'meta' )[ META_FIELD_SUMMARY ],

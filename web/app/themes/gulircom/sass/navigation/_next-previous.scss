@@ -38,7 +38,7 @@
 			}
 
 			&.current {
-				background-color: var(--newskit-color-text-light);
+				background-color: var(--gulir-color-text-light);
 				color: #fff;
 			}
 		}
@@ -103,7 +103,7 @@
 	}
 
 	.current {
-		background-color: var(--newskit-color-text-light);
+		background-color: var(--gulir-color-text-light);
 		color: #fff;
 	}
 }
@@ -123,7 +123,7 @@
 	.nav-next {
 		min-width: 50%;
 		width: 100%;
-		font-family: var(--newskit-font-heading);
+		font-family: var(--gulir-font-heading);
 		font-weight: bold;
 		padding: #{0.5 * structure.$size__spacing-unit} 0;
 

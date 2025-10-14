@@ -3,8 +3,8 @@
 .highlight-menu-contain {
 	margin-top: #{0.25 * structure.$size__spacing-unit};
 	.wrapper {
-		font-family: var(--newskit-font-heading);
-		font-size: var(--newskit-font-size-xs);
+		font-family: var(--gulir-font-heading);
+		font-size: var(--gulir-font-size-xs);
 		height: 1.5em;
 		overflow: hidden;
 		word-wrap: break-word;
@@ -31,13 +31,13 @@
 	}
 
 	.menu-label {
-		color: var(--newskit-color-secondary-against-white);
+		color: var(--gulir-color-secondary-against-white);
 		font-weight: bold;
 	}
 
 	a,
 	a:visited {
-		color: var(--newskit-color-text-light);
+		color: var(--gulir-color-text-light);
 	}
 }
 

@@ -1,5 +1,5 @@
 {
-  "name": "newskit/wp-theme",
+  "name": "gulir/wp-theme",
   "description": "The starting point for all 10up WordPress themes.",
   "license": "MIT",
   "type": "wordpress-theme",
@@ -16,7 +16,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Newskit\\": "src/"
+      "Gulir\\": "src/"
     }
   }
 }

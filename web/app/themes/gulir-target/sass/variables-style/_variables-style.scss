@@ -1,6 +1,6 @@
 // Import the default variable values.
-@use "../../../newskit/sass/variables-site/colors";
-@use "../../../newskit/sass/variables-site/fonts";
+@use "../../../gulir/sass/variables-site/colors";
+@use "../../../gulir/sass/variables-site/fonts";
 
 // Use @font-face to make the theme's font files available.
 @font-face {
@@ -35,5 +35,5 @@
 
 // Now overlay our style-specific variables, so we're only overriding specific variables.
 :root {
-	--newskit-font-heading: "IBM Plex Serif", georgia, serif;
+	--gulir-font-heading: "IBM Plex Serif", georgia, serif;
 }

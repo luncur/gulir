@@ -38,13 +38,13 @@
 body.h-db.h-dh .site-header {
 	.nav3 {
 		.menu-highlight a {
-			background-color: var(--newskit-color-primary);
+			background-color: var(--gulir-color-primary);
 			border: 0;
-			color: var(--newskit-color-against-primary);
+			color: var(--gulir-color-against-primary);
 
 			&:hover {
-				background-color: var(--newskit-color-text-main);
-				color: var(--newskit-color-bg-body);
+				background-color: var(--gulir-color-text-main);
+				color: var(--gulir-color-bg-body);
 			}
 		}
 	}
@@ -58,7 +58,7 @@ body.h-db.h-dh .site-header {
 
 	li {
 		display: inline-block;
-		font-size: var(--newskit-font-size-xs);
+		font-size: var(--gulir-font-size-xs);
 
 		@include utilities.media( tablet ) {
 			&:nth-child(n + 2) {
@@ -73,7 +73,7 @@ body.h-db.h-dh .site-header {
 
 	// Header Short Height
 	.h-sh & {
-		font-size: var(--newskit-font-size-base);
+		font-size: var(--gulir-font-size-base);
 		margin-left: structure.$size__spacing-unit;
 	}
 }

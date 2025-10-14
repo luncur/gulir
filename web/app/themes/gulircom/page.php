@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
  *
- * @package Newskit
+ * @package Gulir
  */
 
 get_header();
@@ -19,7 +19,7 @@ get_header();
 				the_post();
 
 				// Template part for large featured images.
-				if ( in_array( newskit_featured_image_position(), array( 'large', 'behind', 'beside', 'above' ) ) ) :
+				if ( in_array( gulir_featured_image_position(), array( 'large', 'behind', 'beside', 'above' ) ) ) :
 					get_template_part( 'template-parts/post/large-featured-image' );
 				else :
 				?>
@@ -34,15 +34,15 @@ get_header();
 					<?php
 
 					// Place smaller featured images inside of 'content' area.
-					if ( 'small' === newskit_featured_image_position() ) :
-						newskit_post_thumbnail();
+					if ( 'small' === gulir_featured_image_position() ) :
+						gulir_post_thumbnail();
 					endif;
 
 					get_template_part( 'template-parts/content/content', 'page' );
 
 					// If comments are open or we have at least one comment, load up the comment template.
 					if ( comments_open() || get_comments_number() ) {
-						newskit_comments_template();
+						gulir_comments_template();
 					}
 					?>
 				</div><!-- .main-content -->

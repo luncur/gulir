@@ -1,23 +1,23 @@
 @use "theme-description";
 @use "variables-style/variables-style";
-@use "../../newskit/sass/style-base";
-@use "../../newskit/sass/mixins/utilities";
-@use "../../newskit/sass/variables-site/structure";
+@use "../../gulir/sass/style-base";
+@use "../../gulir/sass/mixins/utilities";
+@use "../../gulir/sass/variables-site/structure";
 
 // Header
 // Solid Background
 .h-sb {
 	.top-header-contain,
 	.middle-header-contain {
-		background-color: var(--newskit-color-bg-dark);
+		background-color: var(--gulir-color-bg-dark);
 	}
 
 	.top-header-contain {
-		border-color: var(--newskit-color-bg-dark-lighten-5);
+		border-color: var(--gulir-color-bg-dark-lighten-5);
 	}
 
 	.bottom-header-contain {
-		background-color: var(--newskit-color-bg-dark-darken-5);
+		background-color: var(--gulir-color-bg-dark-darken-5);
 	}
 
 	.site-header,
@@ -35,7 +35,7 @@
 .h-sub.h-sb.single-featured-image-beside {
 	@include utilities.media( tablet ) {
 		.middle-header-contain {
-			color: var(--newskit-color-text-main);
+			color: var(--gulir-color-text-main);
 		}
 
 		.alternative-logo {
@@ -66,7 +66,7 @@
 #secondary .widgettitle,
 .article-section-title,
 .cat-links {
-	color: var(--newskit-color-primary-against-white);
+	color: var(--gulir-color-primary-against-white);
 	margin-bottom: structure.$size__spacing-unit;
 	text-align: center;
 }
@@ -74,11 +74,11 @@
 .accent-header,
 div.wpnbha .article-section-title,
 .cat-links {
-	font-size: var(--newskit-font-size-xs);
+	font-size: var(--gulir-font-size-xs);
 }
 
 .wpnbha .cat-links a {
-	color: var(--newskit-color-text-light);
+	color: var(--gulir-color-text-light);
 }
 
 .accent-header,
@@ -90,7 +90,7 @@ div.wpnbha .article-section-title,
 
 	&::before,
 	&::after {
-		border-top: 1px solid var(--newskit-color-border);
+		border-top: 1px solid var(--gulir-color-border);
 		content: "";
 		flex: 1 0 0.5rem;
 		height: 1px;
@@ -123,7 +123,7 @@ div.wpnbha .article-section-title,
 }
 
 .cat-links {
-	font-size: var(--newskit-font-size-sm);
+	font-size: var(--gulir-font-size-sm);
 
 	a {
 		color: inherit;
@@ -151,7 +151,7 @@ figcaption,
 
 blockquote,
 cite {
-	font-family: var(--newskit-font-heading);
+	font-family: var(--gulir-font-heading);
 	font-style: italic;
 
 	em,
@@ -162,11 +162,11 @@ cite {
 
 //! Paragraph
 .has-drop-cap:not(:focus)::first-letter {
-	background-color: var(--newskit-color-primary);
-	color: var(--newskit-color-against-primary);
-	font-family: var(--newskit-font-heading);
+	background-color: var(--gulir-color-primary);
+	color: var(--gulir-color-against-primary);
+	font-family: var(--gulir-font-heading);
 	font-weight: bold;
-	font-size: var(--newskit-font-size-xxl);
+	font-size: var(--gulir-font-size-xxl);
 	padding: 0.4em;
 }
 
@@ -179,7 +179,7 @@ cite {
 	blockquote p,
 	&.is-style-solid-color blockquote p {
 		@include utilities.media( tablet ) {
-			font-size: var(--newskit-font-size-xl);
+			font-size: var(--gulir-font-size-xl);
 		}
 	}
 
@@ -187,7 +187,7 @@ cite {
 	&.has-text-align-left:not(.alignleft):not(.alignright) {
 		@include utilities.media( tablet ) {
 			p {
-				font-size: var(--newskit-font-size-xl);
+				font-size: var(--gulir-font-size-xl);
 			}
 		}
 	}
@@ -206,7 +206,7 @@ cite {
 		@include utilities.media( tablet ) {
 			blockquote p,
 			&.is-style-solid-color blockquote p {
-				font-size: var(--newskit-font-size-lg);
+				font-size: var(--gulir-font-size-lg);
 			}
 		}
 	}
@@ -248,7 +248,7 @@ cite {
 				margin-bottom: #{0.7 * structure.$size__spacing-unit};
 			}
 		}
-		.newskit-post-subtitle {
+		.gulir-post-subtitle {
 			margin-bottom: #{3.3 * structure.$size__spacing-unit};
 		}
 	}
@@ -280,8 +280,8 @@ cite {
 	}
 
 	.entry-subhead {
-		border-bottom: 1px solid var(--newskit-color-border);
-		border-top: 1px solid var(--newskit-color-border);
+		border-bottom: 1px solid var(--gulir-color-border);
+		border-top: 1px solid var(--gulir-color-border);
 		display: block;
 		margin-bottom: structure.$size__spacing-unit;
 		padding: #{0.75 * structure.$size__spacing-unit} 0;
@@ -311,9 +311,9 @@ cite {
 	}
 }
 
-//! Newskit
+//! Gulir
 .wpnbha,
-.wp-block-newskit-blocks-carousel {
+.wp-block-gulir-blocks-carousel {
 	.cat-links {
 		text-align: left;
 	}
@@ -321,14 +321,14 @@ cite {
 
 @include utilities.media( tablet ) {
 	.h-sb .featured-image-beside {
-		background-color: var(--newskit-color-bg-pre);
+		background-color: var(--gulir-color-bg-pre);
 
 		.entry-header {
-			color: var(--newskit-color-text-main);
+			color: var(--gulir-color-text-main);
 		}
 
 		.cat-links {
-			color: var(--newskit-color-primary-against-white);
+			color: var(--gulir-color-primary-against-white);
 		}
 	}
 
@@ -345,12 +345,12 @@ cite {
 }
 
 .entry .entry-footer {
-	color: var(--newskit-color-primary-against-white);
+	color: var(--gulir-color-primary-against-white);
 	text-align: center;
 
 	a,
 	a:hover {
-		color: var(--newskit-color-text-main);
+		color: var(--gulir-color-text-main);
 	}
 }
 
@@ -360,13 +360,13 @@ cite {
 	}
 
 	a {
-		background: var(--newskit-color-bg-pre);
-		color: var(--newskit-color-text-main);
+		background: var(--gulir-color-bg-pre);
+		color: var(--gulir-color-text-main);
 		margin: 0 #{0.25 * structure.$size__spacing-unit} #{0.25 * structure.$size__spacing-unit} 0;
 		padding: #{0.25 * structure.$size__spacing-unit} #{0.5 * structure.$size__spacing-unit};
 
 		&:hover {
-			background: var(--newskit-color-bg-pre-lighten-5);
+			background: var(--gulir-color-bg-pre-lighten-5);
 		}
 	}
 
@@ -390,7 +390,7 @@ cite {
 	}
 
 	h2 {
-		color: var(--newskit-color-text-main);
+		color: var(--gulir-color-text-main);
 		margin: 0;
 
 		@include utilities.media( tablet ) {
@@ -450,7 +450,7 @@ cite {
 	text-transform: none;
 
 	@include utilities.media( tablet ) {
-		font-size: var(--newskit-font-size-base);
+		font-size: var(--gulir-font-size-base);
 	}
 
 	.page-description {
@@ -459,7 +459,7 @@ cite {
 }
 
 .taxonomy-description {
-	font-family: var(--newskit-font-heading);
+	font-family: var(--gulir-font-heading);
 	font-style: normal;
 
 	@include utilities.media( tablet ) {
@@ -508,11 +508,11 @@ cite {
 
 .site-footer {
 	background-color: #f1f1f1;
-	color: var(--newskit-color-text-main);
+	color: var(--gulir-color-text-main);
 
 	.widget .widget-title,
 	.widget .widgettitle {
-		color: var(--newskit-color-primary-against-white);
+		color: var(--gulir-color-primary-against-white);
 		font-weight: bold;
 	}
 
@@ -533,7 +533,7 @@ cite {
 }
 
 .site-info {
-	background-color: var(--newskit-color-bg-dark);
+	background-color: var(--gulir-color-bg-dark);
 
 	.site-info-contain:first-child,
 	.widget-area .wrapper {
@@ -544,7 +544,7 @@ cite {
 	a,
 	a:hover,
 	a:visited {
-		color: var(--newskit-color-bg-body);
+		color: var(--gulir-color-bg-body);
 	}
 }
 
@@ -559,8 +559,8 @@ cite {
 // Pop-up
 
 .entry-content {
-	.newskit-lightbox {
-		.newskit-popup-title {
+	.gulir-lightbox {
+		.gulir-popup-title {
 			font-weight: normal;
 		}
 	}
@@ -670,7 +670,7 @@ body.single {
 }
 
 // Listings
-.newskit-listings {
+.gulir-listings {
 	&.hide-date.hide-author {
 		.entry-subhead {
 			border-top: 0;

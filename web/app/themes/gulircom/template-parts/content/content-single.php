@@ -4,12 +4,12 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Newskit
+ * @package Gulir
  */
 
 // Get sponsors for this taxonomy archive.
-if ( function_exists( 'newskit_get_all_sponsors' ) ) {
-	$all_sponsors         = newskit_get_all_sponsors(
+if ( function_exists( 'gulir_get_all_sponsors' ) ) {
+	$all_sponsors         = gulir_get_all_sponsors(
 		get_the_id(),
 		null,
 		'post',
@@ -18,12 +18,12 @@ if ( function_exists( 'newskit_get_all_sponsors' ) ) {
 			'maxheight' => 100,
 		]
 	);
-	$native_sponsors      = newskit_get_native_sponsors( $all_sponsors );
-	$underwriter_sponsors = newskit_get_underwriter_sponsors( $all_sponsors );
+	$native_sponsors      = gulir_get_native_sponsors( $all_sponsors );
+	$underwriter_sponsors = gulir_get_underwriter_sponsors( $all_sponsors );
 }
 ?>
 
-<?php if ( newskit_is_sticky_animated_header() ) : ?>
+<?php if ( gulir_is_sticky_animated_header() ) : ?>
 	<?php // If the header is sticky, add a position observer. ?>
 	<amp-position-observer target="" on="enter:headerFadeIn.start; exit:headerFadeOut.start;" layout="nodisplay"></amp-position-observer>
 <?php endif; ?>
@@ -33,11 +33,11 @@ if ( function_exists( 'newskit_get_all_sponsors' ) ) {
 
 		<?php
 		if ( ! empty( $underwriter_sponsors ) ) :
-			newskit_sponsored_underwriters_info( $underwriter_sponsors );
+			gulir_sponsored_underwriters_info( $underwriter_sponsors );
 		endif;
 
 		if ( ! empty( $native_sponsors ) ) :
-			newskit_sponsor_footer_bio( $native_sponsors );
+			gulir_sponsor_footer_bio( $native_sponsors );
 		endif;
 		?>
 
@@ -46,7 +46,7 @@ if ( function_exists( 'newskit_get_all_sponsors' ) ) {
 			sprintf(
 				wp_kses(
 					/* translators: %s: Name of current post. Only visible to screen readers */
-					__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'newskit' ),
+					__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'gulir' ),
 					array(
 						'span' => array(
 							'class' => array(),
@@ -59,7 +59,7 @@ if ( function_exists( 'newskit_get_all_sponsors' ) ) {
 
 		wp_link_pages(
 			array(
-				'before' => '<div class="page-links">' . __( 'Pages:', 'newskit' ),
+				'before' => '<div class="page-links">' . __( 'Pages:', 'gulir' ),
 				'after'  => '</div>',
 			)
 		);
@@ -71,11 +71,11 @@ if ( function_exists( 'newskit_get_all_sponsors' ) ) {
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer">
-		<?php newskit_entry_footer(); ?>
+		<?php gulir_entry_footer(); ?>
 	</footer><!-- .entry-footer -->
 
 	<?php
-	$show_author = ! empty( $native_sponsors ) ? newskit_display_sponsors_and_authors( $native_sponsors ) : true;
+	$show_author = ! empty( $native_sponsors ) ? gulir_display_sponsors_and_authors( $native_sponsors ) : true;
 	if ( $show_author && ! is_singular( 'attachment' ) ) :
 		get_template_part( 'template-parts/post/author', 'bio' );
 	endif;

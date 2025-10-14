@@ -6,7 +6,7 @@
 /* !Block styles */
 
 .entry .entry-content > *,
-.newskit-inline-popup > *,
+.gulir-inline-popup > *,
 [id="pico"] > * {
 	margin: 32px 0;
 	max-width: 100%;
@@ -65,12 +65,12 @@
 	}
 }
 
-.newskit-inline-popup > *:first-child {
+.gulir-inline-popup > *:first-child {
 	margin-top: 0;
 }
 
 // Wide and full widths need adjustment for the wider templates
-.newskit-front-page,
+.gulir-front-page,
 .post-template-single-wide,
 .page-template-single-wide {
 	.entry .entry-content {
@@ -234,7 +234,7 @@ p.has-background {
 	padding: 20px 30px;
 }
 
-//! Newskit Article Block
+//! Gulir Article Block
 .wpnbha {
 	figcaption {
 		max-width: 100%;
@@ -257,7 +257,7 @@ p.has-background {
 	}
 }
 
-//! Newskit Carousel Block
+//! Gulir Carousel Block
 .wpnbpc {
 	h3 a,
 	h3 a:visited,
@@ -275,14 +275,14 @@ p.has-background {
 .desktop-sidebar,
 .mobile-sidebar,
 .subpage-sidebar {
-	//! Newskit Carousel Block
-	.wp-block-newskit-blocks-carousel {
+	//! Gulir Carousel Block
+	.wp-block-gulir-blocks-carousel {
 		article {
 			.entry-title {
 				font-size: 0.9rem;
 			}
 			.entry-meta {
-				font-size: var(--newskit-font-size-xs);
+				font-size: var(--gulir-font-size-xs);
 			}
 			.entry-wrapper {
 				padding: 20px 36px;
@@ -295,7 +295,7 @@ p.has-background {
 
 		.swiper-button,
 		.amp-carousel-button,
-		.wp-block-newskit-carousel__amp-carousel button {
+		.wp-block-gulir-carousel__amp-carousel button {
 			width: 24px;
 			height: 24px;
 		}
@@ -327,7 +327,7 @@ p.has-background {
 		}
 	}
 
-	//! Newskit Donate Block
+	//! Gulir Donate Block
 	.wpbnbd {
 		&.tiered .tiers {
 			margin-left: #{0.62 * structure.$size__spacing-unit};
@@ -353,14 +353,14 @@ p.has-background {
 .desktop-sidebar,
 .subpage-sidebar,
 .mobile-sidebar {
-	//! Newskit Profile block
-	.wp-block-newskit-blocks-author-profile {
-		font-size: var(--newskit-font-size-sm);
+	//! Gulir Profile block
+	.wp-block-gulir-blocks-author-profile {
+		font-size: var(--gulir-font-size-sm);
 	}
 }
 
-//! Newskit Newlsetter Subscription Block
-.wp-block-newskit-newsletters-subscribe {
+//! Gulir Newlsetter Subscription Block
+.wp-block-gulir-newsletters-subscribe {
 	// Make sure custom colors don't override the color that should be used for the modern style.
 	&.is-style-modern input[type="checkbox"]::before {
 		background:
@@ -475,7 +475,7 @@ p.has-background {
 
 	blockquote p,
 	&.is-style-solid-color blockquote p {
-		font-size: var(--newskit-font-size-lg);
+		font-size: var(--gulir-font-size-lg);
 	}
 
 	p {
@@ -489,16 +489,16 @@ p.has-background {
 		}
 
 		@include utilities.media( tablet ) {
-			font-size: var(--newskit-font-size-lg);
+			font-size: var(--gulir-font-size-lg);
 		}
 	}
 
 	&.has-text-align-right:not(.alignleft):not(.alignright),
 	&.has-text-align-left:not(.alignleft):not(.alignright) {
 		p {
-			font-size: var(--newskit-font-size-lg);
+			font-size: var(--gulir-font-size-lg);
 			@include utilities.media( tablet ) {
-				font-size: var(--newskit-font-size-lg);
+				font-size: var(--gulir-font-size-lg);
 			}
 		}
 	}
@@ -506,8 +506,8 @@ p.has-background {
 	cite {
 		display: inline-block;
 		color: inherit;
-		font-family: var(--newskit-font-heading);
-		font-size: var(--newskit-font-size-xs);
+		font-family: var(--gulir-font-heading);
+		font-size: var(--gulir-font-size-xs);
 		opacity: 0.8;
 		line-height: 1.6;
 		text-transform: none;
@@ -542,7 +542,7 @@ p.has-background {
 				font-size: 1rem;
 
 				@include utilities.media( tablet ) {
-					font-size: var(--newskit-font-size-md);
+					font-size: var(--gulir-font-size-md);
 				}
 
 				&:first-child {
@@ -553,12 +553,12 @@ p.has-background {
 	}
 
 	&.is-style-solid-color {
-		background-color: var(--newskit-color-primary);
+		background-color: var(--gulir-color-primary);
 		padding-left: 0;
 		padding-right: 0;
 
 		a {
-			color: var(--newskit-color-bg-body);
+			color: var(--gulir-color-bg-body);
 		}
 
 		cite {
@@ -627,17 +627,17 @@ p.has-background {
 	padding-left: 0;
 
 	.wp-block-latest-comments__comment {
-		font-size: var(--newskit-font-size-sm);
-		line-height: var(--newskit-font-line-height-body);
+		font-size: var(--gulir-font-size-sm);
+		line-height: var(--gulir-font-line-height-body);
 	}
 
 	.wp-block-latest-comments__comment-meta {
-		font-family: var(--newskit-font-heading);
+		font-family: var(--gulir-font-heading);
 		font-weight: bold;
 
 		a,
 		a:visited {
-			color: var(--newskit-color-text-main);
+			color: var(--gulir-color-text-main);
 			text-decoration: none;
 		}
 
@@ -646,7 +646,7 @@ p.has-background {
 		}
 
 		.wp-block-latest-comments__comment-date {
-			color: var(--newskit-color-text-light);
+			color: var(--gulir-color-text-light);
 			font-size: 0.9em;
 			font-weight: normal;
 			margin: #{0.15 * structure.$size__spacing-unit} 0 0;
@@ -708,20 +708,20 @@ p.has-background {
 .wp-block-buttons,
 .wp-block-button {
 	.wp-block-button__link {
-		color: var(--newskit-color-against-secondary);
+		color: var(--gulir-color-against-secondary);
 	}
 }
 
 .wp-block-button__link {
-	background-color: var(--newskit-color-secondary);
+	background-color: var(--gulir-color-secondary);
 	@include utilities.button-transition;
 
 	border: none;
 	border-radius: 5px;
-	color: var(--newskit-color-against-secondary);
-	font-family: var(--newskit-font-heading);
-	font-size: var(--newskit-font-size-sm);
-	line-height: var(--newskit-font-line-height-heading);
+	color: var(--gulir-color-against-secondary);
+	font-family: var(--gulir-font-heading);
+	font-size: var(--gulir-font-size-sm);
+	line-height: var(--gulir-font-line-height-heading);
 	box-sizing: border-box;
 	font-weight: bold;
 	text-decoration: none;
@@ -729,15 +729,15 @@ p.has-background {
 	outline: none;
 
 	&:visited {
-		color: var(--newskit-color-against-secondary);
+		color: var(--gulir-color-against-secondary);
 	}
 }
 
 .wp-block-jetpack-button button.wp-block-button__link {
-	font-family: var(--newskit-font-heading);
-	font-size: var(--newskit-font-size-sm);
+	font-family: var(--gulir-font-heading);
+	font-size: var(--gulir-font-size-sm);
 	font-weight: bold;
-	line-height: var(--newskit-font-line-height-heading);
+	line-height: var(--gulir-font-line-height-heading);
 	padding: ( structure.$size__spacing-unit * 0.76 ) structure.$size__spacing-unit;
 }
 
@@ -767,7 +767,7 @@ p.has-background {
 .wp-block-button__link.is-style-outline,
 .is-style-outline > .wp-block-button__link:not(.has-text-color),
 .wp-block-button.is-style-outline > .wp-block-button__link:not(.has-text-color) {
-	color: var(--newskit-color-secondary-against-white);
+	color: var(--gulir-color-secondary-against-white);
 }
 
 .wp-block-button {
@@ -777,7 +777,7 @@ p.has-background {
 		&:active,
 		&:focus {
 			color: #fff !important; // to override !important from Gutenberg styles
-			background: var(--newskit-color-bg-button-hover) !important; // to override !important from Gutenberg styles
+			background: var(--gulir-color-bg-button-hover) !important; // to override !important from Gutenberg styles
 		}
 
 		&:focus {
@@ -788,7 +788,7 @@ p.has-background {
 		&.is-style-outline:hover,
 		&.is-style-outline:active,
 		&.is-style-outline:focus {
-			border-color: var(--newskit-color-bg-button-hover);
+			border-color: var(--gulir-color-bg-button-hover);
 		}
 	}
 }
@@ -823,9 +823,9 @@ p.has-background {
 .wp-block-archives,
 .wp-block-categories {
 	li {
-		font-family: var(--newskit-font-heading);
+		font-family: var(--gulir-font-heading);
 		font-weight: bold;
-		line-height: var(--newskit-font-line-height-heading);
+		line-height: var(--gulir-font-line-height-heading);
 	}
 
 	&.aligncenter {
@@ -860,13 +860,13 @@ p.has-background {
 
 .wp-block-latest-posts {
 	li > a {
-		font-family: var(--newskit-font-heading);
+		font-family: var(--gulir-font-heading);
 		font-weight: bold;
-		line-height: var(--newskit-font-line-height-heading);
+		line-height: var(--gulir-font-line-height-heading);
 	}
 	time {
-		color: var(--newskit-color-text-light);
-		font-family: var(--newskit-font-heading);
+		color: var(--gulir-color-text-light);
+		font-family: var(--gulir-font-heading);
 	}
 	.wp-block-latest-posts__post-excerpt {
 		font-size: 0.8em;
@@ -874,7 +874,7 @@ p.has-background {
 
 	&.is-grid {
 		li {
-			border-top: 2px solid var(--newskit-color-border);
+			border-top: 2px solid var(--gulir-color-border);
 			padding-top: ( 1 * structure.$size__spacing-unit );
 			margin-bottom: ( 2 * structure.$size__spacing-unit );
 			a {
@@ -894,19 +894,19 @@ p.has-background {
 
 //! Latest preformatted text
 .wp-block-preformatted {
-	font-size: var(--newskit-font-size-xs);
+	font-size: var(--gulir-font-size-xs);
 	line-height: 1.8;
 	padding: structure.$size__spacing-unit;
 }
 
 .widget .wp-block-preformatted {
-	font-size: var(--newskit-font-size-sm);
+	font-size: var(--gulir-font-size-sm);
 }
 
 //! Verse
 .wp-block-verse {
-	font-family: var(--newskit-font-body);
-	font-size: var(--newskit-font-size-base);
+	font-family: var(--gulir-font-body);
+	font-size: var(--gulir-font-size-base);
 	line-height: 1.8;
 }
 
@@ -915,7 +915,7 @@ p.has-background {
 	&:not(.is-large),
 	&:not(.is-style-large) {
 		border-width: 2px;
-		border-color: var(--newskit-color-link);
+		border-color: var(--gulir-color-link);
 		padding-top: 0;
 		padding-bottom: 0;
 	}
@@ -937,7 +937,7 @@ p.has-background {
 		border-left: none;
 
 		p {
-			font-size: var(--newskit-font-size-lg);
+			font-size: var(--gulir-font-size-lg);
 			font-style: italic;
 			line-height: 1.4;
 		}
@@ -952,7 +952,7 @@ p.has-background {
 			padding: structure.$size__spacing-unit 0;
 
 			p {
-				font-size: var(--newskit-font-size-lg);
+				font-size: var(--gulir-font-size-lg);
 			}
 		}
 	}
@@ -1006,7 +1006,7 @@ p.has-background {
 hr {
 	background-color: transparent;
 	border: 0;
-	border-top: 1px solid var(--newskit-color-border);
+	border-top: 1px solid var(--gulir-color-border);
 	height: 1px;
 	margin: ( 2 * structure.$size__spacing-unit ) auto;
 	max-width: #{5 * structure.$size__spacing-unit};
@@ -1024,10 +1024,10 @@ hr {
 		text-align: center;
 
 		&::before {
-			color: var(--newskit-color-text-light);
-			font-size: var(--newskit-font-size-lg);
-			letter-spacing: var(--newskit-font-size-sm);
-			padding-left: var(--newskit-font-size-sm);
+			color: var(--gulir-color-text-light);
+			font-size: var(--gulir-font-size-lg);
+			letter-spacing: var(--gulir-font-size-sm);
+			padding-left: var(--gulir-font-size-sm);
 		}
 	}
 
@@ -1057,7 +1057,7 @@ hr {
 .wp-block-table {
 	&.is-style-stripes td,
 	&.is-style-stripes th {
-		border-color: var(--newskit-color-text-light);
+		border-color: var(--gulir-color-text-light);
 	}
 
 	&.aligncenter {
@@ -1068,8 +1068,8 @@ hr {
 
 //! File
 .wp-block-file {
-	font-family: var(--newskit-font-heading);
-	font-size: var(--newskit-font-size-sm);
+	font-family: var(--gulir-font-heading);
+	font-size: var(--gulir-font-size-sm);
 
 	&.has-background {
 		padding: structure.$size__spacing-unit;
@@ -1081,20 +1081,20 @@ hr {
 
 		border: none;
 		border-radius: 5px;
-		background: var(--newskit-color-secondary);
-		font-family: var(--newskit-font-heading);
+		background: var(--gulir-color-secondary);
+		font-family: var(--gulir-font-heading);
 		font-size: inherit;
-		line-height: var(--newskit-font-line-height-heading);
+		line-height: var(--gulir-font-line-height-heading);
 		text-decoration: none;
 		font-weight: bold;
 		padding: ( structure.$size__spacing-unit * 0.75 ) structure.$size__spacing-unit;
-		color: var(--newskit-color-against-secondary);
+		color: var(--gulir-color-against-secondary);
 		margin-left: 0;
 		margin-top: calc(0.75 * #{structure.$size__spacing-unit});
 
 		&:hover,
 		&:focus {
-			background: var(--newskit-color-bg-button-hover);
+			background: var(--gulir-color-bg-button-hover);
 			color: #fff;
 			cursor: pointer;
 		}
@@ -1119,7 +1119,7 @@ hr {
 
 	&.wp-block-search__button-inside {
 		.wp-block-search__inside-wrapper {
-			border-color: var(--newskit-color-border);
+			border-color: var(--gulir-color-border);
 			padding: 0;
 
 			input {
@@ -1143,7 +1143,7 @@ hr {
 			}
 
 			&:not(.has-text-color) {
-				color: var(--newskit-color-text-main);
+				color: var(--gulir-color-text-main);
 			}
 		}
 	}
@@ -1161,7 +1161,7 @@ hr {
 	border-radius: 0;
 
 	code {
-		font-size: var(--newskit-font-size-md);
+		font-size: var(--gulir-font-size-md);
 		white-space: pre-wrap;
 		word-break: break-word;
 	}
@@ -1226,8 +1226,8 @@ hr {
 }
 
 // Remove space between full-width group block and header on homepage.
-.newskit-front-page.hide-homepage-title .entry-content > .wp-block-group.alignfull:first-child,
-.newskit-front-page.hide-homepage-title [id="pico"] > .wp-block-group.alignfull:first-child {
+.gulir-front-page.hide-homepage-title .entry-content > .wp-block-group.alignfull:first-child,
+.gulir-front-page.hide-homepage-title [id="pico"] > .wp-block-group.alignfull:first-child {
 	margin-top: 0;
 	@include utilities.media( tablet ) {
 		margin-top: calc(#{-0.5 * structure.$size__spacing-unit} - 1px); // minus 1px to offset bottom border on header
@@ -1235,7 +1235,7 @@ hr {
 }
 
 //! iFrame Block
-.wp-block-newskit-blocks-iframe {
+.wp-block-gulir-blocks-iframe {
 	.wp-block-embed__wrapper {
 		max-width: 100%;
 	}
@@ -1250,7 +1250,7 @@ hr {
 
 //! Details block
 .wp-block-details {
-	border: solid var(--newskit-color-border);
+	border: solid var(--gulir-color-border);
 	border-width: 1px 0;
 	padding: 0.5rem 1.5rem;
 
@@ -1260,7 +1260,7 @@ hr {
 	}
 
 	summary {
-		font-family: var(--newskit-font-heading);
+		font-family: var(--gulir-font-heading);
 		margin-left: -1rem;
 	}
 
@@ -1290,7 +1290,7 @@ hr {
 		margin: 0;
 
 		&[id^="wp-block-jetpack-mailchimp"] {
-			font-size: var(--newskit-font-size-sm);
+			font-size: var(--gulir-font-size-sm);
 		}
 	}
 
@@ -1299,7 +1299,7 @@ hr {
 	}
 
 	.wp-block-jetpack-mailchimp_notification {
-		font-size: var(--newskit-font-size-sm);
+		font-size: var(--gulir-font-size-sm);
 		margin-top: calc(structure.$size__spacing-unit / 2);
 
 		&.is-visible {
@@ -1311,8 +1311,8 @@ hr {
 		}
 	}
 
-	.newskit-pattern.subscribe__style-5 &,
-	.newskit-pattern.subscribe__style-6 & {
+	.gulir-pattern.subscribe__style-5 &,
+	.gulir-pattern.subscribe__style-6 & {
 		.wp-block-button__link {
 			width: 100%;
 
@@ -1346,7 +1346,7 @@ hr {
 		}
 	}
 
-	.newskit-pattern.subscribe__style-5 & {
+	.gulir-pattern.subscribe__style-5 & {
 		form {
 			@include utilities.media( tablet ) {
 				margin-left: auto;
@@ -1398,14 +1398,14 @@ hr {
 		padding: 0;
 
 		h5 {
-			color: var(--newskit-color-text-light);
+			color: var(--gulir-color-text-light);
 		}
 	}
 
 	.organic-profile-social {
 		.social-link {
 			border: 0;
-			color: var(--newskit-color-text-light);
+			color: var(--gulir-color-text-light);
 			display: inline-block;
 			font-size: 16px;
 			height: 32px;
@@ -1425,23 +1425,23 @@ hr {
 
 //! Font Sizes
 .has-xx-small-font-size {
-	font-size: var(--newskit-font-size-xxs);
+	font-size: var(--gulir-font-size-xxs);
 }
 
 .has-x-small-font-size {
-	font-size: var(--newskit-font-size-xs);
+	font-size: var(--gulir-font-size-xs);
 }
 
 .has-small-font-size {
-	font-size: var(--newskit-font-size-sm);
+	font-size: var(--gulir-font-size-sm);
 }
 
 .has-normal-font-size {
-	font-size: var(--newskit-font-size-base);
+	font-size: var(--gulir-font-size-base);
 }
 
 .has-large-font-size {
-	font-size: var(--newskit-font-size-lg);
+	font-size: var(--gulir-font-size-lg);
 }
 
 .has-huge-font-size,
@@ -1450,48 +1450,48 @@ hr {
 .has-xxx-large-font-size,
 .has-xxxx-large-font-size,
 .has-xxxxx-large-font-size {
-	font-size: var(--newskit-font-size-xl);
+	font-size: var(--gulir-font-size-xl);
 }
 
 @include utilities.media( tablet ) {
 	.has-large-font-size {
-		font-size: var(--newskit-font-size-xl);
+		font-size: var(--gulir-font-size-xl);
 	}
 
 	.has-huge-font-size,
 	.has-x-large-font-size,
 	.has-xx-large-font-size {
-		font-size: var(--newskit-font-size-xxl);
+		font-size: var(--gulir-font-size-xxl);
 	}
 
 	.has-xxx-large-font-size {
-		font-size: var(--newskit-font-size-xxxl);
+		font-size: var(--gulir-font-size-xxxl);
 	}
 
 	.has-xxxx-large-font-size {
-		font-size: var(--newskit-font-size-xxxxl);
+		font-size: var(--gulir-font-size-xxxxl);
 	}
 
 	.has-xxxxx-large-font-size {
-		font-size: var(--newskit-font-size-xxxxxl);
+		font-size: var(--gulir-font-size-xxxxxl);
 	}
 }
 
 $colors: (
-	"accent": var(--newskit-color-primary),
-	"primary": var(--newskit-color-primary),
-	"primary-variation": var(--newskit-color-primary-variation),
-	"accent-2": var(--newskit-color-secondary),
-	"secondary": var(--newskit-color-secondary),
-	"secondary-variation": var(--newskit-color-secondary-variation),
+	"accent": var(--gulir-color-primary),
+	"primary": var(--gulir-color-primary),
+	"primary-variation": var(--gulir-color-primary-variation),
+	"accent-2": var(--gulir-color-secondary),
+	"secondary": var(--gulir-color-secondary),
+	"secondary-variation": var(--gulir-color-secondary-variation),
 	"contrast": #111,
 	"dark-gray": #111,
-	"contrast-2": var(--newskit-color-bg-dark),
+	"contrast-2": var(--gulir-color-bg-dark),
 	"contrast-3": #767676,
 	"medium-gray": #767676,
-	"base-5": var(--newskit-color-text-light),
-	"base-4": var(--newskit-color-border),
-	"base-3": var(--newskit-color-border-light),
+	"base-5": var(--gulir-color-text-light),
+	"base-4": var(--gulir-color-border),
+	"base-3": var(--gulir-color-border-light),
 	"base-2": #eee,
 	"light-gray": #eee,
 	"base": #fff,
@@ -1507,7 +1507,7 @@ $colors: (
 	.is-style-outline .wp-block-button__link.has-#{$name}-background-color:not( :hover ),
 	.wp-block-navigation-item.has-#{$name}-background-color,
 	.wp-block-search__button.has-#{$name}-background-color,
-	.newskit-newsletters-subscribe input[type='submit'].has-#{$name}-background-color {
+	.gulir-newsletters-subscribe input[type='submit'].has-#{$name}-background-color {
 		background-color: $hex;
 	}
 
@@ -1520,7 +1520,7 @@ $colors: (
 	.is-style-outline .wp-block-button__link.has-#{$name}-color:not( :hover ), //legacy selector
 	.wp-block-button__link.is-style-outline.has-#{$name}-color:not( :hover ),
 	.wp-block-search__button.has-#{$name}-color,
-	.newskit-newsletters-subscribe input[type='submit'].has-#{$name}-color {
+	.gulir-newsletters-subscribe input[type='submit'].has-#{$name}-color {
 		color: $hex;
 	}
 
@@ -1533,10 +1533,10 @@ $colors: (
 
 // Gradients
 .has-grad-1-gradient-background {
-	background-image: linear-gradient(135deg, var(--newskit-color-primary) 0%, var(--newskit-color-primary-variation) 100%);
+	background-image: linear-gradient(135deg, var(--gulir-color-primary) 0%, var(--gulir-color-primary-variation) 100%);
 }
 .has-grad-2-gradient-background {
-	background-image: linear-gradient(135deg, var(--newskit-color-secondary) 0%, var(--newskit-color-secondary-variation) 100%);
+	background-image: linear-gradient(135deg, var(--gulir-color-secondary) 0%, var(--gulir-color-secondary-variation) 100%);
 }
 .has-grad-3-gradient-background {
 	background-image: linear-gradient(135deg, rgb(17, 17, 17) 0%, rgb(85, 85, 85) 100%);
@@ -1681,7 +1681,7 @@ $colors: (
 	}
 }
 
-.newskit-front-page,
+.gulir-front-page,
 .post-template-single-wide,
 .page-template-single-wide,
 .post-template-single-feature,
@@ -1736,11 +1736,11 @@ $colors: (
 
 	// Make ad placements full-width.
 	.main-content {
-		.scaip .newskit_global_ad,
-		.scaip .widget_newskit-ads-widget,
-		.newskit_global_ad.sidebar_article-1,
-		.newskit_global_ad.sidebar_article-2 {
-			background-color: var(--newskit-color-bg-pre);
+		.scaip .gulir_global_ad,
+		.scaip .widget_gulir-ads-widget,
+		.gulir_global_ad.sidebar_article-1,
+		.gulir_global_ad.sidebar_article-2 {
+			background-color: var(--gulir-color-bg-pre);
 			margin-left: calc(50% - 50vw);
 			margin-right: calc(50% - 50vw);
 			max-width: 100vw;

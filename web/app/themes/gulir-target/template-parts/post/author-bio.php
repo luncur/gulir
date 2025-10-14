@@ -2,7 +2,7 @@
 /**
  * The template for displaying Author info
  *
- * @package Newskit Sacha
+ * @package Gulir Sacha
  */
 
 // Check if the author bio is turned on
@@ -21,7 +21,7 @@ if ( function_exists( 'coauthors_posts_links' ) && is_single() && ! empty( get_c
 	foreach ( $authors as $author ) {
 
 		if ( '' !== $author->description ) {
-			// avatar_img_tag is a property added by Newskit Network plugin to distributed posts.
+			// avatar_img_tag is a property added by Gulir Network plugin to distributed posts.
 			$author_avatar = $author->avatar_img_tag ?? coauthors_get_avatar( $author, 80 );
 			$author_url    = get_author_posts_url( $author->ID, $author->user_nicename );
 			?>
@@ -33,7 +33,7 @@ if ( function_exists( 'coauthors_posts_links' ) && is_single() && ! empty( get_c
 							<?php if ( '#' !== $author_url ) : ?>
 								<a class="author-link" href="<?php echo esc_url( $author_url ); ?>" rel="author">
 							<?php endif; ?>
-								<?php echo wp_kses( $author_avatar, newskit_sanitize_avatars() ); ?>
+								<?php echo wp_kses( $author_avatar, gulir_sanitize_avatars() ); ?>
 							<?php if ( '#' !== $author_url ) : ?>
 								</a>
 							<?php endif; ?>
@@ -44,7 +44,7 @@ if ( function_exists( 'coauthors_posts_links' ) && is_single() && ! empty( get_c
 								<?php if ( '#' !== $author_url ) : ?>
 									<a class="author-link" href="<?php echo esc_url( $author_url ); ?>" rel="author">
 								<?php endif; ?>
-									<?php echo wp_kses( apply_filters( 'newskit_author_bio_name', $author->display_name, $author->ID, $author ), array( 'span' => array( 'class' => array() ) ) ); ?>
+									<?php echo wp_kses( apply_filters( 'gulir_author_bio_name', $author->display_name, $author->ID, $author ), array( 'span' => array( 'class' => array() ) ) ); ?>
 								<?php if ( '#' !== $author_url ) : ?>
 									</a>
 								<?php endif; ?>
@@ -53,7 +53,7 @@ if ( function_exists( 'coauthors_posts_links' ) && is_single() && ! empty( get_c
 							<?php if ( true === get_theme_mod( 'show_author_email', false ) && '' !== $author->user_email ) : ?>
 								<div class="author-meta">
 									<a class="author-email" href="<?php echo 'mailto:' . esc_attr( $author->user_email ); ?>">
-										<?php echo wp_kses( newskit_get_social_icon_svg( 'mail', 18 ), newskit_sanitize_svgs() ); ?>
+										<?php echo wp_kses( gulir_get_social_icon_svg( 'mail', 18 ), gulir_sanitize_svgs() ); ?>
 										<?php echo esc_html( $author->user_email ); ?>
 									</a>
 								</div><!-- .author-meta -->
@@ -63,12 +63,12 @@ if ( function_exists( 'coauthors_posts_links' ) && is_single() && ! empty( get_c
 
 					<?php if ( get_theme_mod( 'author_bio_truncate', true ) ) : ?>
 						<p>
-							<?php echo esc_html( newskit_truncate_text( wp_strip_all_tags( $author->description ), $author_bio_length ) ); ?>
+							<?php echo esc_html( gulir_truncate_text( wp_strip_all_tags( $author->description ), $author_bio_length ) ); ?>
 							<?php if ( '#' !== $author_url ) : ?>
 								<a class="author-link" href="<?php echo esc_url( $author_url ); ?>" rel="author">
 								<?php
 									/* translators: %s is the current author's name. */
-									printf( esc_html__( 'More by %s', 'newskit' ), esc_html( $author->display_name ) );
+									printf( esc_html__( 'More by %s', 'gulir' ), esc_html( $author->display_name ) );
 								?>
 								</a>
 							<?php endif; ?>
@@ -79,13 +79,13 @@ if ( function_exists( 'coauthors_posts_links' ) && is_single() && ! empty( get_c
 							<a class="author-link" href="<?php echo esc_url( $author_url ); ?>" rel="author">
 								<?php
 									/* translators: %s is the current author's name. */
-									printf( esc_html__( 'More by %s', 'newskit' ), esc_html( $author->display_name ) );
+									printf( esc_html__( 'More by %s', 'gulir' ), esc_html( $author->display_name ) );
 								?>
 							</a>
 						<?php endif; ?>
 					<?php endif; ?>
 
-					<?php newskit_author_social_links( $author->ID ); ?>
+					<?php gulir_author_social_links( $author->ID ); ?>
 
 				</div><!-- .author-bio-text -->
 
@@ -116,14 +116,14 @@ elseif ( (bool) get_the_author_meta( 'description' ) && is_single() ) :
 			<div>
 				<h2 class="accent-header">
 					<a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" rel="author">
-						<?php echo wp_kses( apply_filters( 'newskit_author_bio_name', get_the_author(), get_the_author_meta( 'ID' ), get_user_by( 'id', get_the_author_meta( 'ID' ) ) ), array( 'span' => array( 'class' => array() ) ) ); ?>
+						<?php echo wp_kses( apply_filters( 'gulir_author_bio_name', get_the_author(), get_the_author_meta( 'ID' ), get_user_by( 'id', get_the_author_meta( 'ID' ) ) ), array( 'span' => array( 'class' => array() ) ) ); ?>
 					</a>
 				</h2>
 
 				<?php if ( true === get_theme_mod( 'show_author_email', false ) ) : ?>
 					<div class="author-meta">
 						<a class="author-email" href="<?php echo 'mailto:' . esc_attr( get_the_author_meta( 'user_email' ) ); ?>">
-							<?php echo wp_kses( newskit_get_social_icon_svg( 'mail', 18 ), newskit_sanitize_svgs() ); ?>
+							<?php echo wp_kses( gulir_get_social_icon_svg( 'mail', 18 ), gulir_sanitize_svgs() ); ?>
 							<?php echo esc_html( get_the_author_meta( 'user_email' ) ); ?>
 						</a>
 					</div><!-- .author-meta -->
@@ -133,11 +133,11 @@ elseif ( (bool) get_the_author_meta( 'description' ) && is_single() ) :
 
 		<?php if ( get_theme_mod( 'author_bio_truncate', true ) ) : ?>
 			<p>
-				<?php echo esc_html( newskit_truncate_text( wp_strip_all_tags( get_the_author_meta( 'description' ) ), $author_bio_length ) ); ?>
+				<?php echo esc_html( gulir_truncate_text( wp_strip_all_tags( get_the_author_meta( 'description' ) ), $author_bio_length ) ); ?>
 				<a class="author-link" href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" rel="author">
 				<?php
 					/* translators: %s is the current author's name. */
-					printf( esc_html__( 'More by %s', 'newskit' ), esc_html( get_the_author() ) );
+					printf( esc_html__( 'More by %s', 'gulir' ), esc_html( get_the_author() ) );
 				?>
 				</a>
 			</p>
@@ -147,12 +147,12 @@ elseif ( (bool) get_the_author_meta( 'description' ) && is_single() ) :
 			<a class="author-link" href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" rel="author">
 				<?php
 					/* translators: %s is the current author's name. */
-					printf( esc_html__( 'More by %s', 'newskit' ), esc_html( get_the_author() ) );
+					printf( esc_html__( 'More by %s', 'gulir' ), esc_html( get_the_author() ) );
 				?>
 			</a>
 		<?php endif; ?>
 
-		<?php newskit_author_social_links( get_the_author_meta( 'ID' ) ); ?>
+		<?php gulir_author_social_links( get_the_author_meta( 'ID' ) ); ?>
 
 	</div><!-- .author-bio-text -->
 </div><!-- .author-bio -->

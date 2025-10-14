@@ -16,17 +16,17 @@ const PostStatusExtensions = ({ meta, postType, updateMetaValue }) => {
 		return null;
 	}
 	const {
-		newskit_hide_page_title,
-		newskit_hide_updated_date,
-		newskit_show_updated_date,
-		newskit_show_share_buttons,
+		gulir_hide_page_title,
+		gulir_hide_updated_date,
+		gulir_show_updated_date,
+		gulir_show_share_buttons,
 	} = meta;
 	const {
 		hide_date = [],
 		show_date = [],
 		hide_title = [],
 		show_share_buttons = [],
-	} = window.newskit_post_meta_post_types;
+	} = window.gulir_post_meta_post_types;
 	const hideDate = 0 <= hide_date.indexOf(postType);
 	const showDate = 0 <= show_date.indexOf(postType);
 	const hideTitle = 0 <= hide_title.indexOf(postType);
@@ -37,18 +37,18 @@ const PostStatusExtensions = ({ meta, postType, updateMetaValue }) => {
 	}
 
 	return (
-		<PluginPostStatusInfo className="newskit__post-meta-toggles">
+		<PluginPostStatusInfo className="gulir__post-meta-toggles">
 			{hideDate && (
 				<div>
 					<label htmlFor="hide_updated_date">
-						{__('Hide last updated date', 'newskit')}
+						{__('Hide last updated date', 'gulir')}
 					</label>
 					<FormToggle
-						checked={newskit_hide_updated_date}
+						checked={gulir_hide_updated_date}
 						onChange={() =>
 							updateMetaValue(
-								'newskit_hide_updated_date',
-								!newskit_hide_updated_date
+								'gulir_hide_updated_date',
+								!gulir_hide_updated_date
 							)
 						}
 						id="hide_updated_date"
@@ -58,14 +58,14 @@ const PostStatusExtensions = ({ meta, postType, updateMetaValue }) => {
 			{showDate && (
 				<div>
 					<label htmlFor="show_updated_date">
-						{__('Show last updated date', 'newskit')}
+						{__('Show last updated date', 'gulir')}
 					</label>
 					<FormToggle
-						checked={newskit_show_updated_date}
+						checked={gulir_show_updated_date}
 						onChange={() =>
 							updateMetaValue(
-								'newskit_show_updated_date',
-								!newskit_show_updated_date
+								'gulir_show_updated_date',
+								!gulir_show_updated_date
 							)
 						}
 						id="show_updated_date"
@@ -75,14 +75,14 @@ const PostStatusExtensions = ({ meta, postType, updateMetaValue }) => {
 			{hideTitle && 'page' === postType && (
 				<div>
 					<label htmlFor="hide_page_title">
-						{__('Hide page title', 'newskit')}
+						{__('Hide page title', 'gulir')}
 					</label>
 					<FormToggle
-						checked={newskit_hide_page_title}
+						checked={gulir_hide_page_title}
 						onChange={() =>
 							updateMetaValue(
-								'newskit_hide_page_title',
-								!newskit_hide_page_title
+								'gulir_hide_page_title',
+								!gulir_hide_page_title
 							)
 						}
 						id="hide_page_title"
@@ -91,15 +91,15 @@ const PostStatusExtensions = ({ meta, postType, updateMetaValue }) => {
 			)}
 			{showShareButtons && 'page' === postType && (
 				<div>
-					<label htmlFor="newskit_show_share_buttons">
-						{__('Show Jetpack share buttons', 'newskit')}
+					<label htmlFor="gulir_show_share_buttons">
+						{__('Show Jetpack share buttons', 'gulir')}
 					</label>
 					<FormToggle
-						checked={newskit_show_share_buttons}
+						checked={gulir_show_share_buttons}
 						onChange={() =>
 							updateMetaValue(
-								'newskit_show_share_buttons',
-								!newskit_show_share_buttons
+								'gulir_show_share_buttons',
+								!gulir_show_share_buttons
 							)
 						}
 						id="hide_page_title"

@@ -1,8 +1,8 @@
 // Font and typographic variables
 
 :root {
-	--newskit-font-body: georgia, garamond, "Times New Roman", serif;
-	--newskit-font-heading:
+	--gulir-font-body: georgia, garamond, "Times New Roman", serif;
+	--gulir-font-heading:
 		-apple-system,
 		blinkmacsystemfont,
 		"Segoe UI",
@@ -14,21 +14,21 @@
 		"Droid Sans",
 		"Helvetica Neue",
 		sans-serif;
-	--newskit-font-code: menlo, monaco, consolas, lucida console, monospace;
-	--newskit-font-pre: "Courier 10 Pitch", courier, monospace;
-	--newskit-font-size-base: 20px;
-	--newskit-font-size-base-sm: 18px;
-	--newskit-font-size-ratio: 1.125;
-	--newskit-font-size-xxs: calc(1em * 0.6); // 12px
-	--newskit-font-size-xs: calc(1em * 0.7); // 14px
-	--newskit-font-size-sm: calc(1em * 0.8); // 16px
-	--newskit-font-size-md: calc(1em * 1.2); // 24px
-	--newskit-font-size-lg: calc(1em * 1.4); // 28px
-	--newskit-font-size-xl: calc(1em * 1.8); // 36px
-	--newskit-font-size-xxl: calc(1em * 2.2); // 44px
-	--newskit-font-size-xxxl: calc(1em * 2.8); // 56px
-	--newskit-font-size-xxxxl: calc(1em * 3.2); // 64px
-	--newskit-font-size-xxxxxl: calc(1em * 4); // 80px
-	--newskit-font-line-height-body: 1.6;
-	--newskit-font-line-height-heading: 1.2;
+	--gulir-font-code: menlo, monaco, consolas, lucida console, monospace;
+	--gulir-font-pre: "Courier 10 Pitch", courier, monospace;
+	--gulir-font-size-base: 20px;
+	--gulir-font-size-base-sm: 18px;
+	--gulir-font-size-ratio: 1.125;
+	--gulir-font-size-xxs: calc(1em * 0.6); // 12px
+	--gulir-font-size-xs: calc(1em * 0.7); // 14px
+	--gulir-font-size-sm: calc(1em * 0.8); // 16px
+	--gulir-font-size-md: calc(1em * 1.2); // 24px
+	--gulir-font-size-lg: calc(1em * 1.4); // 28px
+	--gulir-font-size-xl: calc(1em * 1.8); // 36px
+	--gulir-font-size-xxl: calc(1em * 2.2); // 44px
+	--gulir-font-size-xxxl: calc(1em * 2.8); // 56px
+	--gulir-font-size-xxxxl: calc(1em * 3.2); // 64px
+	--gulir-font-size-xxxxxl: calc(1em * 4); // 80px
+	--gulir-font-line-height-body: 1.6;
+	--gulir-font-line-height-heading: 1.2;
 }

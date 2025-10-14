@@ -2,28 +2,28 @@
 /**
  * Displays the post header
  *
- * @package Newskit
+ * @package Gulir
  */
 
-$discussion = ! is_page() && newskit_can_show_post_thumbnail() ? newskit_get_discussion_data() : null;
+$discussion = ! is_page() && gulir_can_show_post_thumbnail() ? gulir_get_discussion_data() : null;
 
 // Get sponsors for this post.
-if ( function_exists( 'newskit_get_all_sponsors' ) ) {
-	$all_sponsors                    = newskit_get_all_sponsors( get_the_id() );
-	$native_sponsors                 = newskit_get_native_sponsors( $all_sponsors );
-	$underwriter_sponsors            = newskit_get_underwriter_sponsors( $all_sponsors );
-	$display_sponsors_and_categories = newskit_display_sponsors_and_categories( $native_sponsors );
-	$display_sponsors_and_authors    = newskit_display_sponsors_and_authors( $native_sponsors );
+if ( function_exists( 'gulir_get_all_sponsors' ) ) {
+	$all_sponsors                    = gulir_get_all_sponsors( get_the_id() );
+	$native_sponsors                 = gulir_get_native_sponsors( $all_sponsors );
+	$underwriter_sponsors            = gulir_get_underwriter_sponsors( $all_sponsors );
+	$display_sponsors_and_categories = gulir_display_sponsors_and_categories( $native_sponsors );
+	$display_sponsors_and_authors    = gulir_display_sponsors_and_authors( $native_sponsors );
 }
 
 // Get page title visibility.
-$page_hide_title = get_post_meta( $post->ID, 'newskit_hide_page_title', true );
+$page_hide_title = get_post_meta( $post->ID, 'gulir_hide_page_title', true );
 
 // Get post subtitle.
 if ( true === get_theme_mod( 'post_excerpt_instead_of_subtitle', false ) ) {
 	$subtitle = $post->post_excerpt;
 } else {
-	$subtitle = newskit_post_subtitle();
+	$subtitle = gulir_post_subtitle();
 }
 ?>
 
@@ -31,12 +31,12 @@ if ( true === get_theme_mod( 'post_excerpt_instead_of_subtitle', false ) ) {
 	<?php
 	if ( ! is_page() ) :
 		if ( ! empty( $native_sponsors ) ) {
-			newskit_sponsor_label( $native_sponsors, null, true );
+			gulir_sponsor_label( $native_sponsors, null, true );
 			if ( $display_sponsors_and_categories ) {
-				newskit_categories();
+				gulir_categories();
 			}
 		} else {
-			newskit_categories();
+			gulir_categories();
 		}
 	endif;
 	?>
@@ -46,7 +46,7 @@ if ( true === get_theme_mod( 'post_excerpt_instead_of_subtitle', false ) ) {
 		</h1>
 	<?php endif; ?>
 	<?php if ( $subtitle ) : ?>
-		<div class="newskit-post-subtitle">
+		<div class="gulir-post-subtitle">
 			<?php echo $subtitle; ?>
 		</div>
 	<?php endif; ?>
@@ -59,7 +59,7 @@ if ( true === get_theme_mod( 'post_excerpt_instead_of_subtitle', false ) ) {
 <?php endif; ?>
 
 <?php
-$sharing_enabled = ! is_page() || ! empty( get_post_meta( $post->ID, 'newskit_show_share_buttons', true ) );
+$sharing_enabled = ! is_page() || ! empty( get_post_meta( $post->ID, 'gulir_show_share_buttons', true ) );
 if ( $sharing_enabled ) :
 	?>
 	<div class="entry-subhead">
@@ -71,31 +71,31 @@ if ( $sharing_enabled ) :
 				?>
 					<div class="entry-meta">
 						<?php
-						newskit_posted_by();
-						newskit_posted_on();
+						gulir_posted_by();
+						gulir_posted_on();
 						?>
 					</div>
 				<?php endif; ?>
 				<div class="entry-meta entry-sponsor">
-					<?php newskit_sponsor_logo_list( $native_sponsors ); ?>
+					<?php gulir_sponsor_logo_list( $native_sponsors ); ?>
 					<span>
 						<?php
-							newskit_sponsor_byline( $native_sponsors );
+							gulir_sponsor_byline( $native_sponsors );
 
 							// If not showing the author, we still need to show the date.
 							if ( ! $display_sponsors_and_authors ) {
-								newskit_posted_on();
+								gulir_posted_on();
 							}
-							do_action( 'newskit_theme_entry_meta' );
+							do_action( 'gulir_theme_entry_meta' );
 						?>
 					</span>
 				</div>
 			<?php else : ?>
 				<div class="entry-meta">
 					<?php
-						newskit_posted_by();
-						newskit_posted_on();
-						do_action( 'newskit_theme_entry_meta' );
+						gulir_posted_by();
+						gulir_posted_on();
+						do_action( 'gulir_theme_entry_meta' );
 					?>
 				</div><!-- .meta-info -->
 			<?php endif; ?>

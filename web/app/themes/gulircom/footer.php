@@ -6,13 +6,13 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package Newskit
+ * @package Gulir
  */
 
 
 $show_footer_branding = get_theme_mod( 'footer_show_branding', true );
 $has_footer_logo = false;
-if ( '' !== get_theme_mod( 'newskit_footer_logo', '' ) && 0 !== get_theme_mod( 'newskit_footer_logo', '' ) ) {
+if ( '' !== get_theme_mod( 'gulir_footer_logo', '' ) && 0 !== get_theme_mod( 'gulir_footer_logo', '' ) ) {
 	$has_footer_logo = true;
 }
 ?>
@@ -31,7 +31,7 @@ if ( '' !== get_theme_mod( 'newskit_footer_logo', '' ) && 0 !== get_theme_mod( '
 
 	<footer id="colophon" class="site-footer">
 
-		<?php remove_filter( 'get_the_date', 'newskit_convert_to_time_ago', 10, 3 ); ?>
+		<?php remove_filter( 'get_the_date', 'gulir_convert_to_time_ago', 10, 3 ); ?>
 		<?php get_template_part( 'template-parts/footer/footer', 'branding' ); ?>
 		<?php get_template_part( 'template-parts/footer/footer', 'widgets' ); ?>
 
@@ -57,10 +57,10 @@ if ( '' !== get_theme_mod( 'newskit_footer_logo', '' ) && 0 !== get_theme_mod( '
 					the_privacy_policy_link( '', '' );
 				}
 
-				newskit_accessibility_page_link();
+				gulir_accessibility_page_link();
 
 				if ( ( ! is_active_sidebar( 'footer-1' ) || ! ( has_custom_logo() || $has_footer_logo ) ) || ! $show_footer_branding ) {
-					newskit_social_menu_footer();
+					gulir_social_menu_footer();
 				}
 				?>
 			</div><!-- .wrapper -->

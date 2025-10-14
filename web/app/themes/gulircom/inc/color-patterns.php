@@ -1,15 +1,15 @@
 <?php
 /**
- * Newskit Theme: Color Patterns
+ * Gulir Theme: Color Patterns
  *
- * @package Newskit
+ * @package Gulir
  */
 
 /**
  * Generate the CSS for the current primary color.
  */
-function newskit_custom_colors_css() {
-	$colors = newskit_get_colors();
+function gulir_custom_colors_css() {
+	$colors = gulir_get_colors();
 	$theme_css = '';
 	$editor_css = '';
 
@@ -17,22 +17,22 @@ function newskit_custom_colors_css() {
 	if ( 'default' !== get_theme_mod( 'theme_colors', 'default' ) ) {
 
 		$css_variables =  '
-				--newskit-color-primary: ' . esc_attr( $colors['primary'] ) . ';
-				--newskit-color-primary-variation: ' . esc_attr( newskit_adjust_brightness( $colors['primary'], -30 ) ) . ';
-				--newskit-color-secondary: ' . esc_attr( $colors['secondary'] ) . ' !important;
-				--newskit-color-secondary-variation: ' . esc_attr( newskit_adjust_brightness( $colors['secondary'], -40 ) ) . ';
+				--gulir-color-primary: ' . esc_attr( $colors['primary'] ) . ';
+				--gulir-color-primary-variation: ' . esc_attr( gulir_adjust_brightness( $colors['primary'], -30 ) ) . ';
+				--gulir-color-secondary: ' . esc_attr( $colors['secondary'] ) . ' !important;
+				--gulir-color-secondary-variation: ' . esc_attr( gulir_adjust_brightness( $colors['secondary'], -40 ) ) . ';
 
-				--newskit-color-primary-darken-5: ' . esc_attr( newskit_adjust_brightness( $colors['primary'], -5 ) ) . ';
-				--newskit-color-primary-darken-10: ' . esc_attr( newskit_adjust_brightness( $colors['primary'], -10 ) ) . ';
+				--gulir-color-primary-darken-5: ' . esc_attr( gulir_adjust_brightness( $colors['primary'], -5 ) ) . ';
+				--gulir-color-primary-darken-10: ' . esc_attr( gulir_adjust_brightness( $colors['primary'], -10 ) ) . ';
 
-				--newskit-color-primary-against-white: ' . esc_attr( newskit_color_with_contrast( $colors['primary'] ) ) . ';
-				--newskit-color-secondary-against-white: ' . esc_attr( newskit_color_with_contrast( $colors['secondary'] ) ) . ';
+				--gulir-color-primary-against-white: ' . esc_attr( gulir_color_with_contrast( $colors['primary'] ) ) . ';
+				--gulir-color-secondary-against-white: ' . esc_attr( gulir_color_with_contrast( $colors['secondary'] ) ) . ';
 
-				--newskit-color-primary-variation-against-white: ' . esc_attr( newskit_color_with_contrast( newskit_adjust_brightness( $colors['primary'], -30 ) ) ) . ';
-				--newskit-color-secondary-variation-against-white: ' . esc_attr( newskit_color_with_contrast( newskit_adjust_brightness( $colors['secondary'], -40 ) ) ) . ';
+				--gulir-color-primary-variation-against-white: ' . esc_attr( gulir_color_with_contrast( gulir_adjust_brightness( $colors['primary'], -30 ) ) ) . ';
+				--gulir-color-secondary-variation-against-white: ' . esc_attr( gulir_color_with_contrast( gulir_adjust_brightness( $colors['secondary'], -40 ) ) ) . ';
 
-				--newskit-color-against-primary: ' . esc_attr( $colors['primary_contrast'] ) . ';
-				--newskit-color-against-secondary: ' . esc_attr( $colors['secondary_contrast'] ) . ';
+				--gulir-color-against-primary: ' . esc_attr( $colors['primary_contrast'] ) . ';
+				--gulir-color-against-secondary: ' . esc_attr( $colors['secondary_contrast'] ) . ';
 		';
 
 		$theme_css = '
@@ -103,7 +103,7 @@ function newskit_custom_colors_css() {
 
 				.site-info .widget-area .wrapper,
 				.site-info .site-info-contain:first-child {
-					border-top-color: ' . esc_attr( newskit_adjust_brightness( $colors['footer'], -20 ) ) . ';
+					border-top-color: ' . esc_attr( gulir_adjust_brightness( $colors['footer'], -20 ) ) . ';
 				}
 			';
 		}
@@ -116,7 +116,7 @@ function newskit_custom_colors_css() {
 
 				.mobile-sidebar .accent-header,
 				.mobile-sidebar .article-section-title {
-					border-color: ' . newskit_adjust_brightness( $colors['header'], -20 ) . ';
+					border-color: ' . gulir_adjust_brightness( $colors['header'], -20 ) . ';
 					color: ' . esc_attr( $colors['header_contrast'] ) . ';
 				}
 			';
@@ -124,11 +124,11 @@ function newskit_custom_colors_css() {
 			if ( true === get_theme_mod( 'header_solid_background', false ) ) {
 				$theme_css .= '
 					.mobile-sidebar .nav3 .menu-highlight a {
-						background: ' . esc_attr( newskit_adjust_brightness( $colors['header'], -20 ) ) . ';
+						background: ' . esc_attr( gulir_adjust_brightness( $colors['header'], -20 ) ) . ';
 						color: ' . esc_attr( $colors['header_contrast'] ) . ';
 					}
 					.h-sb .site-header .nav3 a {
-						background-color: ' . newskit_adjust_brightness( $colors['header'], -17 ) . ';
+						background-color: ' . gulir_adjust_brightness( $colors['header'], -17 ) . ';
 						color: ' . esc_attr( $colors['header_contrast'] ) . ';
 					}
 				';
@@ -143,7 +143,7 @@ function newskit_custom_colors_css() {
 
 					.site-footer .accent-header,
 					.site-footer .article-section-title {
-						border-color: ' . newskit_adjust_brightness( $colors['footer'], -20 ) . ';
+						border-color: ' . gulir_adjust_brightness( $colors['footer'], -20 ) . ';
 					}
 
 					.site-footer .accent-header,
@@ -160,8 +160,8 @@ function newskit_custom_colors_css() {
 						background-color: ' . esc_attr( $colors['header'] ) . ';
 					}
 					.h-sb .top-header-contain {
-						background-color: ' . esc_attr( newskit_adjust_brightness( $colors['header'], -10 ) ) . ';
-						border-bottom-color: ' . esc_attr( newskit_adjust_brightness( $colors['header'], -15 ) ) . ';
+						background-color: ' . esc_attr( gulir_adjust_brightness( $colors['header'], -10 ) ) . ';
+						border-bottom-color: ' . esc_attr( gulir_adjust_brightness( $colors['header'], -15 ) ) . ';
 					}
 					.h-sb .site-header,
 					.h-sb .site-title,
@@ -182,7 +182,7 @@ function newskit_custom_colors_css() {
 	}
 
 	// Front-end colors that don't require the theme_colors to be set to 'custom':
-	if ( newskit_get_mobile_cta_color() !== $colors['cta'] ) {
+	if ( gulir_get_mobile_cta_color() !== $colors['cta'] ) {
 		$theme_css .= '
 			.button.mb-cta,
 			.button.mb-cta:not(:hover):visited,
@@ -196,12 +196,12 @@ function newskit_custom_colors_css() {
 	// Set ads background color
 	if ( 'default' !== get_theme_mod( 'ads_color', 'default' ) ) {
 		$theme_css .= '
-			.site .entry .entry-content .scaip .newskit_global_ad,
-			.site .entry .entry-content .scaip .widget_newskit-ads-widget,
-			.newskit_global_ad,
-			.newskit_global_ad.global_above_header,
-			.widget_newskit-ads-widget,
-			div[class*="newskit-ads-blocks-ad-unit"] {
+			.site .entry .entry-content .scaip .gulir_global_ad,
+			.site .entry .entry-content .scaip .widget_gulir-ads-widget,
+			.gulir_global_ad,
+			.gulir_global_ad.global_above_header,
+			.widget_gulir-ads-widget,
+			div[class*="gulir-ads-blocks-ad-unit"] {
 				background-color: ' . esc_attr( get_theme_mod( 'ads_color_hex', '#ffffff' ) ) . ';
 			}
 		';
@@ -217,8 +217,8 @@ function newskit_custom_colors_css() {
 		.block-editor-block-list__layout .block-editor-block-list__block .has-text-color a:hover,
 		.block-editor-block-list__layout .block-editor-block-list__block .wp-block-pullquote.is-style-solid-color a,
 		.block-editor-block-list__layout .block-editor-block-list__block .wp-block-cover a,
-		.block-editor-block-list__layout .block-editor-block-list__block .wp-block-newskit-blocks-homepage-articles .entry-title a,
-		.block-editor-block-list__layout .block-editor-block-list__block .wp-block-newskit-blocks-homepage-articles .entry-title a:hover,
+		.block-editor-block-list__layout .block-editor-block-list__block .wp-block-gulir-blocks-homepage-articles .entry-title a,
+		.block-editor-block-list__layout .block-editor-block-list__block .wp-block-gulir-blocks-homepage-articles .entry-title a:hover,
 		.block-editor-block-list__layout .block-editor-block-list__block .wp-block-cover .article-section-title {
 			color: inherit;
 		}
@@ -227,7 +227,7 @@ function newskit_custom_colors_css() {
 
 	if ( 'default' !== get_theme_mod( 'ads_color', 'default' ) ) {
 		$editor_css .= '
-			.wp-block-newskit-ads-blocks-ad-unit > div {
+			.wp-block-gulir-ads-blocks-ad-unit > div {
 				background-color: ' . esc_attr( get_theme_mod( 'ads_color_hex', '#ffffff' ) ) . ';
 				padding: 8px;
 			}

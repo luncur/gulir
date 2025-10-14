@@ -18,8 +18,8 @@ input[type="zip"],
 input[type="color"],
 textarea {
 	backface-visibility: hidden;
-	background: var(--newskit-color-bg-input);
-	border: solid 1px var(--newskit-color-border);
+	background: var(--gulir-color-bg-input);
+	border: solid 1px var(--gulir-color-border);
 	box-sizing: border-box;
 	outline: none;
 	padding: #{0.36 * structure.$size__spacing-unit} #{0.66 * structure.$size__spacing-unit};
@@ -28,8 +28,8 @@ textarea {
 	border-radius: 0;
 
 	&:focus {
-		border-color: var(--newskit-color-text-main);
-		outline: thin solid rgb(var(--newskit-color-text-main), 0.25);
+		border-color: var(--gulir-color-text-main);
+		outline: thin solid rgb(var(--gulir-color-text-main), 0.25);
 		outline-offset: -4px;
 	}
 }
@@ -57,9 +57,9 @@ form {
 input[type="checkbox"] {
 	appearance: none;
 	background: white;
-	border: solid 1px var(--newskit-color-border);
+	border: solid 1px var(--gulir-color-border);
 	border-radius: 2px;
-	color: var(--newskit-color-against-secondary);
+	color: var(--gulir-color-against-secondary);
 	cursor: pointer;
 	display: inline-grid;
 	font: inherit;
@@ -81,7 +81,7 @@ input[type="checkbox"] {
 	}
 
 	&:checked {
-		background: var(--newskit-color-secondary);
+		background: var(--gulir-color-secondary);
 		border-color: transparent;
 
 		&::before {
@@ -90,7 +90,7 @@ input[type="checkbox"] {
 	}
 
 	&:focus {
-		outline: 1.5px solid var(--newskit-color-secondary);
+		outline: 1.5px solid var(--gulir-color-secondary);
 		outline-offset: 1px;
 	}
 

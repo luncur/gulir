@@ -1,54 +1,54 @@
 <?php
 /**
- * Newskit Sponsors Compatibility File
+ * Gulir Sponsors Compatibility File
  *
- * @package Newskit
+ * @package Gulir
  */
 
 /**
  * Enqueue styles needed for the sponsors.
  */
-function newskit_sponsors_enqueue_styles() {
+function gulir_sponsors_enqueue_styles() {
 	wp_enqueue_style(
-		'newskit-sponsors-style',
-		get_template_directory_uri() . '/styles/newskit-sponsors.css',
-		array( 'newskit-style' ),
+		'gulir-sponsors-style',
+		get_template_directory_uri() . '/styles/gulir-sponsors.css',
+		array( 'gulir-style' ),
 		wp_get_theme()->get( 'Version' )
 	);
-	wp_style_add_data( 'newskit-sponsors-style', 'rtl', 'replace' );
+	wp_style_add_data( 'gulir-sponsors-style', 'rtl', 'replace' );
 }
-add_action( 'wp_enqueue_scripts', 'newskit_sponsors_enqueue_styles' );
+add_action( 'wp_enqueue_scripts', 'gulir_sponsors_enqueue_styles' );
 
 /**
  * Enqueue scripts needed for the sponsors.
  */
-function newskit_sponsors_enqueue_scripts() {
-	if ( ! newskit_is_amp() && ( is_single() || is_archive() ) ) {
-		$newskit_l10n = array(
-			'open_info'  => esc_html__( 'Learn More', 'newskit' ),
-			'close_info' => esc_html__( 'Close', 'newskit' ),
+function gulir_sponsors_enqueue_scripts() {
+	if ( ! gulir_is_amp() && ( is_single() || is_archive() ) ) {
+		$gulir_l10n = array(
+			'open_info'  => esc_html__( 'Learn More', 'gulir' ),
+			'close_info' => esc_html__( 'Close', 'gulir' ),
 		);
 
-		wp_enqueue_script( 'newskit-amp-fallback-sponsors', get_theme_file_uri( '/js/dist/amp-fallback-newskit-sponsors.js' ), array(), wp_get_theme()->get( 'Version' ), true );
-		wp_localize_script( 'newskit-amp-fallback-sponsors', 'newskitScreenReaderTextSponsors', $newskit_l10n );
+		wp_enqueue_script( 'gulir-amp-fallback-sponsors', get_theme_file_uri( '/js/dist/amp-fallback-gulir-sponsors.js' ), array(), wp_get_theme()->get( 'Version' ), true );
+		wp_localize_script( 'gulir-amp-fallback-sponsors', 'gulirScreenReaderTextSponsors', $gulir_l10n );
 	}
 }
-add_action( 'wp_enqueue_scripts', 'newskit_sponsors_enqueue_scripts' );
+add_action( 'wp_enqueue_scripts', 'gulir_sponsors_enqueue_scripts' );
 
 /**
  * Enqueue supplemental block editor styles.
  */
-function newskit_sponsor_editor_styles() {
-	wp_enqueue_style( 'newskit-sponsor-editor-styles', get_theme_file_uri( '/styles/newskit-sponsors-editor.css' ), false, wp_get_theme()->get( 'Version' ), 'all' );
+function gulir_sponsor_editor_styles() {
+	wp_enqueue_style( 'gulir-sponsor-editor-styles', get_theme_file_uri( '/styles/gulir-sponsors-editor.css' ), false, wp_get_theme()->get( 'Version' ), 'all' );
 }
-add_action( 'enqueue_block_editor_assets', 'newskit_sponsor_editor_styles' );
+add_action( 'enqueue_block_editor_assets', 'gulir_sponsor_editor_styles' );
 
 /**
  * Returns post or taxonomy sponsors.
  */
-function newskit_get_all_sponsors( $id = null, $scope = null, $type = null, $logo_options = [] ) {
-	if ( function_exists( '\Newskit_Sponsors\get_all_sponsors' ) ) {
-		return \Newskit_Sponsors\get_all_sponsors( $id, $scope, $type, $logo_options );
+function gulir_get_all_sponsors( $id = null, $scope = null, $type = null, $logo_options = [] ) {
+	if ( function_exists( '\Gulir_Sponsors\get_all_sponsors' ) ) {
+		return \Gulir_Sponsors\get_all_sponsors( $id, $scope, $type, $logo_options );
 	}
 
 	return false;
@@ -60,12 +60,12 @@ function newskit_get_all_sponsors( $id = null, $scope = null, $type = null, $log
  * @param array $sponsors Array of sponsors.
  * @return array|boolean Native sponsors only, or false if $sponsors is invalid.
  */
-function newskit_get_native_sponsors( $sponsors = [] ) {
+function gulir_get_native_sponsors( $sponsors = [] ) {
 	if ( empty( $sponsors ) || ! is_array( $sponsors ) ) {
 		return false;
 	}
 
-	$scope_override = get_post_meta( get_the_ID(), 'newskit_sponsor_sponsorship_scope', true );
+	$scope_override = get_post_meta( get_the_ID(), 'gulir_sponsor_sponsorship_scope', true );
 
 	// Scope override: if post is set to display as native-sponsored, return all sponsors.
 	if ( 'native' === $scope_override ) {
@@ -93,12 +93,12 @@ function newskit_get_native_sponsors( $sponsors = [] ) {
  * @param array $sponsors Array of sponsors.
  * @return array|boolean Underwriter sponsors only, or false if $sponsors is invalid.
  */
-function newskit_get_underwriter_sponsors( $sponsors = [] ) {
+function gulir_get_underwriter_sponsors( $sponsors = [] ) {
 	if ( empty( $sponsors ) || ! is_array( $sponsors ) ) {
 		return false;
 	}
 
-	$scope_override = get_post_meta( get_the_ID(), 'newskit_sponsor_sponsorship_scope', true );
+	$scope_override = get_post_meta( get_the_ID(), 'gulir_sponsor_sponsorship_scope', true );
 
 	// Scope override: if post is set to display as native-sponsored, return nothing.
 	if ( 'native' === $scope_override ) {
@@ -127,9 +127,9 @@ function newskit_get_underwriter_sponsors( $sponsors = [] ) {
  *
  * @return boolean True if we should display both sponsors and categories, false if we should display only sponsors.
  */
-function newskit_display_sponsors_and_authors( $sponsors ) {
-	if ( function_exists( '\Newskit_Sponsors\newskit_display_sponsors_and_authors' ) ) {
-		return \Newskit_Sponsors\newskit_display_sponsors_and_authors( $sponsors );
+function gulir_display_sponsors_and_authors( $sponsors ) {
+	if ( function_exists( '\Gulir_Sponsors\gulir_display_sponsors_and_authors' ) ) {
+		return \Gulir_Sponsors\gulir_display_sponsors_and_authors( $sponsors );
 	}
 	return false;
 }
@@ -141,9 +141,9 @@ function newskit_display_sponsors_and_authors( $sponsors ) {
  *
  * @return boolean True if we should display both sponsors and categories, false if we should display only sponsors.
  */
-function newskit_display_sponsors_and_categories( $sponsors ) {
-	if ( function_exists( '\Newskit_Sponsors\newskit_display_sponsors_and_categories' ) ) {
-		return \Newskit_Sponsors\newskit_display_sponsors_and_categories( $sponsors );
+function gulir_display_sponsors_and_categories( $sponsors ) {
+	if ( function_exists( '\Gulir_Sponsors\gulir_display_sponsors_and_categories' ) ) {
+		return \Gulir_Sponsors\gulir_display_sponsors_and_categories( $sponsors );
 	}
 	return false;
 }
@@ -151,15 +151,15 @@ function newskit_display_sponsors_and_categories( $sponsors ) {
 /**
  * Add classes to sponsored posts.
  */
-function newskit_sponsor_body_classes( $classes ) {
-	if ( ( is_category() || is_tag() ) && newskit_get_all_sponsors( get_queried_object_id(), 'native', 'archive' ) ) {
+function gulir_sponsor_body_classes( $classes ) {
+	if ( ( is_category() || is_tag() ) && gulir_get_all_sponsors( get_queried_object_id(), 'native', 'archive' ) ) {
 		$classes[] = 'sponsored-archive';
 	}
 
-	if ( is_single() && newskit_get_all_sponsors( get_queried_object_id(), 'native' ) ) {
-		$native_sponsors                 = newskit_get_all_sponsors( get_queried_object_id(), 'native' );
-		$display_sponsors_and_categories = newskit_display_sponsors_and_categories( $native_sponsors );
-		$display_sponsors_and_authors    = newskit_display_sponsors_and_authors( $native_sponsors );
+	if ( is_single() && gulir_get_all_sponsors( get_queried_object_id(), 'native' ) ) {
+		$native_sponsors                 = gulir_get_all_sponsors( get_queried_object_id(), 'native' );
+		$display_sponsors_and_categories = gulir_display_sponsors_and_categories( $native_sponsors );
+		$display_sponsors_and_authors    = gulir_display_sponsors_and_authors( $native_sponsors );
 
 		if ( $display_sponsors_and_authors ) {
 			$classes[] = 'sponsors-show-authors';
@@ -172,21 +172,21 @@ function newskit_sponsor_body_classes( $classes ) {
 
 	return $classes;
 }
-add_filter( 'body_class', 'newskit_sponsor_body_classes' );
+add_filter( 'body_class', 'gulir_sponsor_body_classes' );
 
 
-if ( ! function_exists( 'newskit_sponsor_byline' ) ) :
+if ( ! function_exists( 'gulir_sponsor_byline' ) ) :
 	/**
 	 * Outputs the sponsor byline markup for the theme.
 	 */
-	function newskit_sponsor_byline( $sponsors = null, $id = null, $scope = 'native', $type = 'post' ) {
+	function gulir_sponsor_byline( $sponsors = null, $id = null, $scope = 'native', $type = 'post' ) {
 		if ( null === $sponsors ) {
 			// Can't proceed if we don't have an id to query with.
 			if ( empty( $id ) ) {
 				return;
 			}
 
-			$sponsors = newskit_get_all_sponsors( $id, $scope, $type );
+			$sponsors = gulir_get_all_sponsors( $id, $scope, $type );
 		}
 
 		if ( ! empty( $sponsors ) ) {
@@ -201,10 +201,10 @@ if ( ! function_exists( 'newskit_sponsor_byline' ) ) :
 					$i++;
 					if ( $sponsor_count === $i ) :
 						/* translators: separates last two names; needs a space on either side. */
-						$sep = esc_html__( ' and ', 'newskit' );
+						$sep = esc_html__( ' and ', 'gulir' );
 					elseif ( $sponsor_count > $i ) :
 						/* translators: separates all but the last two names; needs a space at the end. */
-						$sep = esc_html__( ', ', 'newskit' );
+						$sep = esc_html__( ', ', 'gulir' );
 					else :
 						$sep = '';
 					endif;
@@ -226,18 +226,18 @@ if ( ! function_exists( 'newskit_sponsor_byline' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'newskit_sponsor_label' ) ) :
+if ( ! function_exists( 'gulir_sponsor_label' ) ) :
 	/**
 	 * Outputs the text 'sponsored' in place of the article category.
 	 */
-	function newskit_sponsor_label( $sponsors = null, $id = null, $show_info = false, $scope = 'native', $type = 'post' ) {
+	function gulir_sponsor_label( $sponsors = null, $id = null, $show_info = false, $scope = 'native', $type = 'post' ) {
 		if ( null === $sponsors ) {
 			// Can't proceed if we don't have an id to query with.
 			if ( empty( $id ) ) {
 				return;
 			}
 
-			$sponsors = newskit_get_all_sponsors( $id, $scope, $type );
+			$sponsors = gulir_get_all_sponsors( $id, $scope, $type );
 		}
 
 		if ( ! empty( $sponsors ) ) :
@@ -266,9 +266,9 @@ if ( ! function_exists( 'newskit_sponsor_label' ) ) :
 					);
 					?>
 					<button id="sponsor-info-toggle" on="tap:AMP.setState( { infoVisible: !infoVisible } )" aria-controls="sponsor-info" [aria-expanded]="infoVisible ? 'true' : 'false'" aria-expanded="false">
-						<?php echo wp_kses( newskit_get_icon_svg( 'help', 16 ), newskit_sanitize_svgs() ); ?>
+						<?php echo wp_kses( gulir_get_icon_svg( 'help', 16 ), gulir_sanitize_svgs() ); ?>
 						<span class="screen-reader-text">
-							<?php esc_html_e( 'Learn More', 'newskit' ); ?>
+							<?php esc_html_e( 'Learn More', 'gulir' ); ?>
 						</span>
 					</button>
 					<span id="sponsor-info" class="sponsor-info" [aria-expanded]="infoVisible ? 'true' : 'false'" aria-expanded="false">
@@ -281,18 +281,18 @@ if ( ! function_exists( 'newskit_sponsor_label' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'newskit_sponsor_logo_list' ) ) :
+if ( ! function_exists( 'gulir_sponsor_logo_list' ) ) :
 	/**
 	 * Outputs set of sponsor logos with links.
 	 */
-	function newskit_sponsor_logo_list( $sponsors = null, $id = null, $scope = 'native', $type = 'post' ) {
+	function gulir_sponsor_logo_list( $sponsors = null, $id = null, $scope = 'native', $type = 'post' ) {
 		if ( null === $sponsors ) {
 			// Can't proceed if we don't have an id to query with.
 			if ( empty( $id ) ) {
 				return;
 			}
 
-			$sponsors = newskit_get_all_sponsors( $id, $scope, $type );
+			$sponsors = gulir_get_all_sponsors( $id, $scope, $type );
 		}
 
 		if ( ! empty( $sponsors ) ) {
@@ -315,14 +315,14 @@ if ( ! function_exists( 'newskit_sponsor_logo_list' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'newskit_sponsor_footer_bio' ) ) :
+if ( ! function_exists( 'gulir_sponsor_footer_bio' ) ) :
 	/**
 	 * Outputs the 'bio' for the sponsor.
 	 * Appends it to post content to ensure that it appears before other injected modules,
 	 * such as Jetpack's Related Posts module.
 	 */
-	function newskit_sponsor_footer_bio( $sponsors = null, $id = null, $scope = 'native', $type = 'post' ) {
-		$sponsors = newskit_get_all_sponsors(
+	function gulir_sponsor_footer_bio( $sponsors = null, $id = null, $scope = 'native', $type = 'post' ) {
+		$sponsors = gulir_get_all_sponsors(
 			$id,
 			$scope,
 			$type,
@@ -378,7 +378,7 @@ if ( ! function_exists( 'newskit_sponsor_footer_bio' ) ) :
 										<?php
 											printf(
 												/* translators: %s is the post's sponsor's name. */
-												esc_html__( 'Learn more about %s', 'newskit' ),
+												esc_html__( 'Learn more about %s', 'gulir' ),
 												esc_html( $sponsor['sponsor_name'] )
 											);
 										?>
@@ -402,12 +402,12 @@ endif;
 /**
  * Outputs the 'bio' for the sponsor.
  */
-function newskit_sponsor_archive_description( $sponsors = null, $id = null, $scope = 'native', $type = 'post' ) {
+function gulir_sponsor_archive_description( $sponsors = null, $id = null, $scope = 'native', $type = 'post' ) {
 	if ( null === $sponsors ) {
 		if ( empty( $id ) ) {
 			return;
 		}
-		$sponsors = newskit_get_all_sponsors( $id, $scope, $type );
+		$sponsors = gulir_get_all_sponsors( $id, $scope, $type );
 	}
 
 	if ( ! empty( $sponsors ) ) {
@@ -455,18 +455,18 @@ function newskit_sponsor_archive_description( $sponsors = null, $id = null, $sco
 /**
  * Outputs the 'underwriters' information for the top of single posts.
  */
-function newskit_sponsored_underwriters_info( $sponsors = null, $id = null, $scope = 'underwritten', $type = 'post' ) {
+function gulir_sponsored_underwriters_info( $sponsors = null, $id = null, $scope = 'underwritten', $type = 'post' ) {
 	if ( null === $sponsors ) {
 		if ( empty( $id ) ) {
 			return;
 		}
-		$sponsors = newskit_get_all_sponsors( $id, $scope, $type );
+		$sponsors = gulir_get_all_sponsors( $id, $scope, $type );
 	}
 
 	if ( ! empty( $sponsors ) ) {
 		// If the post has overrides set, all underwriters will be shown with those settings.
-		$override_style     = get_post_meta( get_the_ID(), 'newskit_sponsor_underwriter_style', true );
-		$override_placement = get_post_meta( get_the_ID(), 'newskit_sponsor_underwriter_placement', true );
+		$override_style     = get_post_meta( get_the_ID(), 'gulir_sponsor_underwriter_style', true );
+		$override_placement = get_post_meta( get_the_ID(), 'gulir_sponsor_underwriter_placement', true );
 
 		add_filter(
 			'the_content',
@@ -500,11 +500,11 @@ function newskit_sponsored_underwriters_info( $sponsors = null, $id = null, $sco
 
 				$prepend = '';
 				foreach ( $underwriters_top as $underwriter_top ) {
-					$prepend .= newskit_sponsors_get_underwriter_content( $underwriter_top, $override_style );
+					$prepend .= gulir_sponsors_get_underwriter_content( $underwriter_top, $override_style );
 				}
 				$append = '';
 				foreach ( $underwriters_bottom as $underwriter_bottom ) {
-					$append .= newskit_sponsors_get_underwriter_content( $underwriter_bottom, $override_style );
+					$append .= gulir_sponsors_get_underwriter_content( $underwriter_bottom, $override_style );
 				}
 
 				return $prepend . $content . $append;
@@ -513,7 +513,7 @@ function newskit_sponsored_underwriters_info( $sponsors = null, $id = null, $sco
 	}
 }
 
-function newskit_sponsors_get_underwriter_content( $sponsor, $style = 'standard' ) {
+function gulir_sponsors_get_underwriter_content( $sponsor, $style = 'standard' ) {
 	ob_start();
 	if (
 		( 'simple' === $style ) ||
@@ -557,11 +557,11 @@ function newskit_sponsors_get_underwriter_content( $sponsor, $style = 'standard'
 /**
  * Adds section to customizer for Sponsored Content options.
  */
-function newskit_sponsored_customize_register( $wp_customize ) {
+function gulir_sponsored_customize_register( $wp_customize ) {
 	$wp_customize->add_section(
-		'newskit_sponsored_content',
+		'gulir_sponsored_content',
 		array(
-			'title' => esc_html__( 'Sponsored Content', 'newskit' ),
+			'title' => esc_html__( 'Sponsored Content', 'gulir' ),
 		)
 	);
 
@@ -578,21 +578,21 @@ function newskit_sponsored_customize_register( $wp_customize ) {
 			$wp_customize,
 			'sponsored_flag_hex',
 			array(
-				'label'       => esc_html__( 'Sponsored Content Label', 'newskit' ),
-				'description' => esc_html__( 'Changes the background of the sponsored content flag that appears on posts and blocks. It should stand out boldly against your site\'s color scheme.', 'newskit' ),
-				'section'     => 'newskit_sponsored_content',
+				'label'       => esc_html__( 'Sponsored Content Label', 'gulir' ),
+				'description' => esc_html__( 'Changes the background of the sponsored content flag that appears on posts and blocks. It should stand out boldly against your site\'s color scheme.', 'gulir' ),
+				'section'     => 'gulir_sponsored_content',
 			)
 		)
 	);
 }
-add_action( 'customize_register', 'newskit_sponsored_customize_register' );
+add_action( 'customize_register', 'gulir_sponsored_customize_register' );
 
 /**
  * Add custom colors to trust indicators.
  */
-function newskit_sponsored_styles() {
+function gulir_sponsored_styles() {
 	$flag_color          = get_theme_mod( 'sponsored_flag_hex', '#FED850' );
-	$flag_color_contrast = newskit_get_color_contrast( $flag_color );
+	$flag_color_contrast = gulir_get_color_contrast( $flag_color );
 	?>
 	<style>
 		.sponsor-label .flag,
@@ -603,14 +603,14 @@ function newskit_sponsored_styles() {
 	</style>
 	<?php
 }
-add_action( 'wp_head', 'newskit_sponsored_styles' );
+add_action( 'wp_head', 'gulir_sponsored_styles' );
 
 /**
  * Add custom colors for trust indicators to editor.
  */
-function newskit_sponsored_styles_editor() {
+function gulir_sponsored_styles_editor() {
 	$flag_color          = get_theme_mod( 'sponsored_flag_hex', '#FED850' );
-	$flag_color_contrast = newskit_get_color_contrast( $flag_color );
+	$flag_color_contrast = gulir_get_color_contrast( $flag_color );
 
 	$sponsor_customizations = '
 		.editor-styles-wrapper .sponsor-label .flag  {
@@ -619,6 +619,6 @@ function newskit_sponsored_styles_editor() {
 		}
 	';
 
-	wp_add_inline_style( 'newskit-sponsor-editor-styles', $sponsor_customizations );
+	wp_add_inline_style( 'gulir-sponsor-editor-styles', $sponsor_customizations );
 }
-add_action( 'enqueue_block_editor_assets', 'newskit_sponsored_styles_editor' );
+add_action( 'enqueue_block_editor_assets', 'gulir_sponsored_styles_editor' );

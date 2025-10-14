@@ -1,13 +1,13 @@
 /*!
-Newskit Sacha Editor Styles
+Gulir Sacha Editor Styles
 */
 
 /** === Includes === */
 
 @use "variables-style/variables-style";
-@use "../../newskit/sass/style-editor-base";
-@use "../../newskit/sass/mixins/utilities";
-@use "../../newskit/sass/variables-site/structure";
+@use "../../gulir/sass/style-editor-base";
+@use "../../gulir/sass/mixins/utilities";
+@use "../../gulir/sass/variables-site/structure";
 
 .editor-post-title__block .editor-post-title__input,
 h1.wp-block-post-title,
@@ -18,9 +18,9 @@ h1.wp-block-post-title,
 .accent-header,
 .article-section-title {
 	align-items: center;
-	color: var(--newskit-color-primary-against-white);
+	color: var(--gulir-color-primary-against-white);
 	display: flex;
-	font-size: var(--newskit-font-size-xs);
+	font-size: var(--gulir-font-size-xs);
 	margin-bottom: #{1.5 * structure.$size__spacing-unit};
 	overflow: hidden;
 	text-align: center;
@@ -28,7 +28,7 @@ h1.wp-block-post-title,
 
 	&::before,
 	&::after {
-		background: var(--newskit-color-border);
+		background: var(--gulir-color-border);
 		content: "";
 		flex: 1 0 0.5rem;
 		height: 1px;
@@ -45,11 +45,11 @@ h1.wp-block-post-title,
 }
 
 .has-drop-cap:not(:focus)::first-letter {
-	background-color: var(--newskit-color-primary);
-	color: var(--newskit-color-against-primary);
-	font-family: var(--newskit-font-heading);
+	background-color: var(--gulir-color-primary);
+	color: var(--gulir-color-against-primary);
+	font-family: var(--gulir-font-heading);
 	font-weight: bold;
-	font-size: var(--newskit-font-size-xxl);
+	font-size: var(--gulir-font-size-xxl);
 	padding: 0.4em;
 }
 
@@ -60,7 +60,7 @@ figcaption,
 
 blockquote,
 cite {
-	font-family: var(--newskit-font-heading);
+	font-family: var(--gulir-font-heading);
 
 	em,
 	i {
@@ -79,19 +79,19 @@ cite {
 
 	&.is-style-solid-color blockquote p,
 	blockquote p {
-		font-size: var(--newskit-font-size-lg);
+		font-size: var(--gulir-font-size-lg);
 
 		@include utilities.media( tablet ) {
-			font-size: var(--newskit-font-size-xl);
+			font-size: var(--gulir-font-size-xl);
 		}
 	}
 
 	p {
-		font-family: var(--newskit-font-heading);
+		font-family: var(--gulir-font-heading);
 	}
 
 	.wp-block-pullquote__citation {
-		font-family: var(--newskit-font-heading);
+		font-family: var(--gulir-font-heading);
 		font-style: italic;
 
 		em,
@@ -110,7 +110,7 @@ cite {
 	@include utilities.media( tablet ) {
 		&.is-style-solid-color blockquote p,
 		blockquote p {
-			font-size: var(--newskit-font-size-lg);
+			font-size: var(--gulir-font-size-lg);
 		}
 	}
 }
@@ -124,6 +124,6 @@ cite {
 	}
 }
 
-#newskit-post-subtitle-element {
+#gulir-post-subtitle-element {
 	text-align: center;
 }

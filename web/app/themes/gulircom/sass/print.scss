@@ -1,5 +1,5 @@
 /*!
-Theme Name: Newskit Theme
+Theme Name: Gulir Theme
 
 Adding print support. The print styles are based on the the great work of
 Andreas Hecht in https://www.jotform.com/blog/css-perfect-print-stylesheet-98272/.
@@ -159,7 +159,7 @@ Andreas Hecht in https://www.jotform.com/blog/css-perfect-print-stylesheet-98272
 	.mobile-sidebar,
 	.desktop-sidebar,
 	.subpage-sidebar,
-	.newskit-reader__account-link__mobile,
+	.gulir-reader__account-link__mobile,
 	.jp-relatedposts-i2,
 	.social-navigation,
 	.subpage-toggle-contain,
@@ -180,7 +180,7 @@ Andreas Hecht in https://www.jotform.com/blog/css-perfect-print-stylesheet-98272
 	.wc-memberships-frontend-banner,
 	#atomic-proxy-bar,
 	// Ads
-	.widget_newskit-ads-widget,
+	.widget_gulir-ads-widget,
 	.scaip,
 	//Widgets
 	.widget-area,
@@ -189,18 +189,18 @@ Andreas Hecht in https://www.jotform.com/blog/css-perfect-print-stylesheet-98272
 	.above-footer-widgets,
 	.footer-branding,
 	// Campaigns
-	.newskit-lightbox,
-	.newskit-popup,
-	.newskit-inline-popup {
+	.gulir-lightbox,
+	.gulir-popup,
+	.gulir-inline-popup {
 		display: none;
 	}
 
 	// Third-party elements to hide
 	broadstreet-zone-container,
 	.bs_zones,
-	.newskit_global_ad,
-	.newskit_amp_sticky_ad,
-	.newskit-ads-blocks-ad-unit,
+	.gulir_global_ad,
+	.gulir_amp_sticky_ad,
+	.gulir-ads-blocks-ad-unit,
 	#pico_header,
 	#pico_prompt,
 	#pico_launcher {

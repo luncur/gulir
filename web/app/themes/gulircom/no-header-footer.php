@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package Newskit
+ * @package Gulir
  */
 
 ?><!doctype html>
@@ -20,7 +20,7 @@
 <?php do_action( 'wp_body_open' ); ?>
 
 <div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#main"><?php _e( 'Skip to content', 'newskit' ); ?></a>
+	<a class="skip-link screen-reader-text" href="#main"><?php _e( 'Skip to content', 'gulir' ); ?></a>
 
 	<div id="content" class="site-content">
 
@@ -33,7 +33,7 @@
 					the_post();
 
 					// Template part for large featured images.
-					if ( in_array( newskit_featured_image_position(), array( 'large', 'behind', 'beside', 'above' ) ) ) :
+					if ( in_array( gulir_featured_image_position(), array( 'large', 'behind', 'beside', 'above' ) ) ) :
 						get_template_part( 'template-parts/post/large-featured-image' );
 					else :
 					?>
@@ -46,15 +46,15 @@
 
 						<?php
 						// Place smaller featured images inside of 'content' area.
-						if ( 'small' === newskit_featured_image_position() ) {
-							newskit_post_thumbnail( 'newskit-featured-image-small');
+						if ( 'small' === gulir_featured_image_position() ) {
+							gulir_post_thumbnail( 'gulir-featured-image-small');
 						}
 
 						get_template_part( 'template-parts/content/content', 'page' );
 
 						// If comments are open or we have at least one comment, load up the comment template.
 						if ( comments_open() || get_comments_number() ) {
-							newskit_comments_template();
+							gulir_comments_template();
 						}
 						?>
 					</div>

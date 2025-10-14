@@ -6,7 +6,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package Newskit
+ * @package Gulir
  */
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
@@ -45,7 +45,7 @@ endif;
 ?>
 
 <div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#main"><?php _e( 'Skip to content', 'newskit' ); ?></a>
+	<a class="skip-link screen-reader-text" href="#main"><?php _e( 'Skip to content', 'gulir' ); ?></a>
 
 	<?php if ( is_active_sidebar( 'header-2' ) ) : ?>
 		<div class="header-widget above-header-widgets">
@@ -60,23 +60,23 @@ endif;
 		<?php if ( true === $header_sub_simplified && ! is_front_page() ) : ?>
 			<div class="middle-header-contain">
 				<div class="wrapper">
-					<?php if ( newskit_has_menus() || true === $show_slideout_sidebar ) : ?>
+					<?php if ( gulir_has_menus() || true === $show_slideout_sidebar ) : ?>
 						<div class="subpage-toggle-contain">
 							<button class="subpage-toggle" on="tap:subpage-sidebar.toggle">
-								<?php echo wp_kses( newskit_get_icon_svg( 'menu', 20 ), newskit_sanitize_svgs() ); ?>
-								<span class="screen-reader-text"><?php esc_html_e( 'Menu', 'newskit' ); ?></span>
+								<?php echo wp_kses( gulir_get_icon_svg( 'menu', 20 ), gulir_sanitize_svgs() ); ?>
+								<span class="screen-reader-text"><?php esc_html_e( 'Menu', 'gulir' ); ?></span>
 							</button>
 						</div>
 					<?php endif; ?>
 
 					<?php get_template_part( 'template-parts/header/site', 'branding' ); ?>
 
-					<?php newskit_mobile_cta(); ?>
+					<?php gulir_mobile_cta(); ?>
 
-					<?php if ( newskit_has_menus() ) : ?>
+					<?php if ( gulir_has_menus() ) : ?>
 						<button class="mobile-menu-toggle" on="tap:mobile-sidebar.toggle">
-							<?php echo wp_kses( newskit_get_icon_svg( 'menu', 20 ), newskit_sanitize_svgs() ); ?>
-							<span><?php esc_html_e( 'Menu', 'newskit' ); ?></span>
+							<?php echo wp_kses( gulir_get_icon_svg( 'menu', 20 ), gulir_sanitize_svgs() ); ?>
+							<span><?php esc_html_e( 'Menu', 'gulir' ); ?></span>
 						</button>
 					<?php endif; ?>
 
@@ -89,15 +89,15 @@ endif;
 					<div class="wrapper">
 						<?php if ( true === $show_slideout_sidebar && 'left' === $slideout_sidebar_side ) : ?>
 							<button class="desktop-menu-toggle" on="tap:desktop-sidebar.toggle">
-								<?php echo wp_kses( newskit_get_icon_svg( 'menu', 20 ), newskit_sanitize_svgs() ); ?>
-								<span><?php echo esc_html( get_theme_mod( 'slideout_label', esc_html__( 'Menu', 'newskit' ) ) ); ?></span>
+								<?php echo wp_kses( gulir_get_icon_svg( 'menu', 20 ), gulir_sanitize_svgs() ); ?>
+								<span><?php echo esc_html( get_theme_mod( 'slideout_label', esc_html__( 'Menu', 'gulir' ) ) ); ?></span>
 							</button>
 						<?php endif; ?>
 
 						<div id="secondary-nav-contain">
 							<?php
-							if ( ! newskit_is_amp() ) {
-								newskit_secondary_menu();
+							if ( ! gulir_is_amp() ) {
+								gulir_secondary_menu();
 							}
 							?>
 						</div>
@@ -111,8 +111,8 @@ endif;
 						?>
 							<div id="social-nav-contain">
 								<?php
-								if ( ! newskit_is_amp() ) {
-									newskit_social_menu_header();
+								if ( ! gulir_is_amp() ) {
+									gulir_social_menu_header();
 								}
 								?>
 							</div>
@@ -120,8 +120,8 @@ endif;
 
 						<?php if ( true === $show_slideout_sidebar && 'right' === $slideout_sidebar_side ) : ?>
 							<button class="desktop-menu-toggle dir-right" on="tap:desktop-sidebar.toggle">
-								<?php echo wp_kses( newskit_get_icon_svg( 'menu', 20 ), newskit_sanitize_svgs() ); ?>
-								<span><?php echo esc_html( get_theme_mod( 'slideout_label', esc_html__( 'Menu', 'newskit' ) ) ); ?></span>
+								<?php echo wp_kses( gulir_get_icon_svg( 'menu', 20 ), gulir_sanitize_svgs() ); ?>
+								<span><?php echo esc_html( get_theme_mod( 'slideout_label', esc_html__( 'Menu', 'gulir' ) ) ); ?></span>
 							</button>
 						<?php endif; ?>
 					</div><!-- .wrapper -->
@@ -132,8 +132,8 @@ endif;
 				<div class="wrapper">
 					<?php if ( true === $show_slideout_sidebar && ! has_nav_menu( 'secondary-menu' ) && 'left' === $slideout_sidebar_side ) : ?>
 						<button class="desktop-menu-toggle" on="tap:desktop-sidebar.toggle">
-							<?php echo wp_kses( newskit_get_icon_svg( 'menu', 20 ), newskit_sanitize_svgs() ); ?>
-							<span><?php echo esc_html( get_theme_mod( 'slideout_label', esc_html__( 'Menu', 'newskit' ) ) ); ?></span>
+							<?php echo wp_kses( gulir_get_icon_svg( 'menu', 20 ), gulir_sanitize_svgs() ); ?>
+							<span><?php echo esc_html( get_theme_mod( 'slideout_label', esc_html__( 'Menu', 'gulir' ) ) ); ?></span>
 						</button>
 					<?php endif; ?>
 
@@ -143,8 +143,8 @@ endif;
 					?>
 						<div id="social-nav-contain" class="desktop-only">
 							<?php
-							if ( ! newskit_is_amp() ) {
-								newskit_social_menu_header();
+							if ( ! gulir_is_amp() ) {
+								gulir_social_menu_header();
 							}
 							?>
 						</div>
@@ -158,8 +158,8 @@ endif;
 						<div class="nav-wrapper desktop-only">
 							<div id="site-navigation">
 								<?php
-								if ( ! newskit_is_amp() ) {
-									newskit_primary_menu();
+								if ( ! gulir_is_amp() ) {
+									gulir_primary_menu();
 								}
 								?>
 							</div><!-- #site-navigation -->
@@ -177,8 +177,8 @@ endif;
 						<div class="nav-wrapper desktop-only">
 							<div id="site-navigation">
 								<?php
-								if ( ! newskit_is_amp() ) {
-									newskit_primary_menu();
+								if ( ! gulir_is_amp() ) {
+									gulir_primary_menu();
 								}
 								?>
 							</div><!-- #site-navigation -->
@@ -197,8 +197,8 @@ endif;
 					<div class="nav-wrapper desktop-only">
 						<div id="tertiary-nav-contain">
 							<?php
-							if ( ! newskit_is_amp() ) {
-								newskit_tertiary_menu();
+							if ( ! gulir_is_amp() ) {
+								gulir_tertiary_menu();
 							}
 							?>
 						</div><!-- #tertiary-nav-contain -->
@@ -213,23 +213,23 @@ endif;
 
 					<?php if ( true === $show_slideout_sidebar && ! has_nav_menu( 'secondary-menu' ) && 'right' === $slideout_sidebar_side ) : ?>
 						<button class="desktop-menu-toggle dir-right" on="tap:desktop-sidebar.toggle">
-							<?php echo wp_kses( newskit_get_icon_svg( 'menu', 20 ), newskit_sanitize_svgs() ); ?>
-							<span><?php echo esc_html( get_theme_mod( 'slideout_label', esc_html__( 'Menu', 'newskit' ) ) ); ?></span>
+							<?php echo wp_kses( gulir_get_icon_svg( 'menu', 20 ), gulir_sanitize_svgs() ); ?>
+							<span><?php echo esc_html( get_theme_mod( 'slideout_label', esc_html__( 'Menu', 'gulir' ) ) ); ?></span>
 						</button>
 					<?php endif; ?>
 
-					<?php newskit_mobile_cta(); ?>
+					<?php gulir_mobile_cta(); ?>
 
-					<?php do_action( 'newskit_header_before_mobile_toggle' ); ?>
+					<?php do_action( 'gulir_header_before_mobile_toggle' ); ?>
 
-					<?php if ( newskit_has_menus() ) : ?>
+					<?php if ( gulir_has_menus() ) : ?>
 						<button class="mobile-menu-toggle" on="tap:mobile-sidebar.toggle">
-							<?php echo wp_kses( newskit_get_icon_svg( 'menu', 20 ), newskit_sanitize_svgs() ); ?>
-							<span><?php esc_html_e( 'Menu', 'newskit' ); ?></span>
+							<?php echo wp_kses( gulir_get_icon_svg( 'menu', 20 ), gulir_sanitize_svgs() ); ?>
+							<span><?php esc_html_e( 'Menu', 'gulir' ); ?></span>
 						</button>
 					<?php endif; ?>
 
-					<?php do_action( 'newskit_header_after_mobile_toggle' ); ?>
+					<?php do_action( 'gulir_header_after_mobile_toggle' ); ?>
 
 				</div><!-- .wrapper -->
 			</div><!-- .middle-header-contain -->
@@ -243,8 +243,8 @@ endif;
 					<div class="wrapper">
 						<div id="site-navigation">
 							<?php
-							if ( ! newskit_is_amp() ) {
-								newskit_primary_menu();
+							if ( ! gulir_is_amp() ) {
+								gulir_primary_menu();
 							}
 							?>
 						</div>
@@ -267,7 +267,7 @@ endif;
 			?>
 				<div class="highlight-menu-contain desktop-only">
 					<div class="wrapper">
-						<nav class="highlight-menu" aria-label="<?php esc_attr_e( 'Highlight Menu', 'newskit' ); ?>">
+						<nav class="highlight-menu" aria-label="<?php esc_attr_e( 'Highlight Menu', 'gulir' ); ?>">
 							<?php
 							wp_nav_menu(
 								array(

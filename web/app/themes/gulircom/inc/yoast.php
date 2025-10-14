@@ -1,18 +1,18 @@
 <?php
 /**
- * Newskit Theme: Yoast customizations.
+ * Gulir Theme: Yoast customizations.
  *
- * @package Newskit
+ * @package Gulir
  */
 
-add_action( 'after_setup_theme', 'newskit_theme_yoast_init', 20 );
+add_action( 'after_setup_theme', 'gulir_theme_yoast_init', 20 );
 
 /**
  * Add support for the Bluesky contact method while Yoast doesn't.
  *
  * @return void
  */
-function newskit_theme_yoast_init() {
+function gulir_theme_yoast_init() {
 
 	if ( class_exists( 'Yoast\WP\SEO\User_Meta\Framework\Additional_Contactmethods\Facebook' ) ) {
 		require_once get_template_directory() . '/inc/yoast-bluesky-contact-method.php';
@@ -26,7 +26,7 @@ function newskit_theme_yoast_init() {
 						return $contact_methods;
 					}
 				}
-				$contact_methods[] = new Newskit_Theme_Bluesky();
+				$contact_methods[] = new Gulir_Theme_Bluesky();
 				return $contact_methods;
 			}
 		);

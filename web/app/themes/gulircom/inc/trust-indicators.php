@@ -4,22 +4,22 @@
  *
  * @link https://thetrustproject.org/
  *
- * @package Newskit
+ * @package Gulir
  */
 
 /**
  * Enqueue styles needed for trust indicators.
  */
-function newskit_trust_indicators_enqueue_styles() {
+function gulir_trust_indicators_enqueue_styles() {
 	wp_enqueue_style(
-		'newskit-trust-indicators-style',
+		'gulir-trust-indicators-style',
 		get_template_directory_uri() . '/styles/trust-indicators.css',
-		array( 'newskit-style' ),
+		array( 'gulir-style' ),
 		wp_get_theme()->get( 'Version' )
 	);
-	wp_style_add_data( 'newskit-trust-indicators-style', 'rtl', 'replace' );
+	wp_style_add_data( 'gulir-trust-indicators-style', 'rtl', 'replace' );
 }
-add_action( 'wp_enqueue_scripts', 'newskit_trust_indicators_enqueue_styles' );
+add_action( 'wp_enqueue_scripts', 'gulir_trust_indicators_enqueue_styles' );
 
 /**
  * Add a label saying what type of work a post is (analysis, opinion, etc.)
@@ -27,7 +27,7 @@ add_action( 'wp_enqueue_scripts', 'newskit_trust_indicators_enqueue_styles' );
  * @param string $categories_html HTML for the category label on an article.
  * @return string Modified $categories_html
  */
-function newskit_trust_indicators_add_type_of_work_label( $categories_html ) {
+function gulir_trust_indicators_add_type_of_work_label( $categories_html ) {
 	if ( ! taxonomy_exists( 'type-of-work' ) || ! is_single() ) {
 		return $categories_html;
 	}
@@ -40,12 +40,12 @@ function newskit_trust_indicators_add_type_of_work_label( $categories_html ) {
 
 	return $categories_html;
 }
-add_filter( 'newskit_theme_categories', 'newskit_trust_indicators_add_type_of_work_label' );
+add_filter( 'gulir_theme_categories', 'gulir_trust_indicators_add_type_of_work_label' );
 
 /**
  * Output a "Why trust Sitename" link to the publishing principles in the post byline area.
  */
-function newskit_trust_indicators_output_why_trust_link() {
+function gulir_trust_indicators_output_why_trust_link() {
 	$publishing_principles_url = get_option( 'publishing_principles', '' );
 	if ( ! $publishing_principles_url ) {
 		return;
@@ -54,7 +54,7 @@ function newskit_trust_indicators_output_why_trust_link() {
 	$site_name = get_bloginfo( 'name' );
 
 	/* translators: %s - site name */
-	$message = sprintf( __( 'Why you can trust %s', 'newskit' ), $site_name );
+	$message = sprintf( __( 'Why you can trust %s', 'gulir' ), $site_name );
 	?>
 
 	<a href="<?php echo esc_url( $publishing_principles_url ); ?>" class="trust-label">
@@ -63,12 +63,12 @@ function newskit_trust_indicators_output_why_trust_link() {
 	</a>
 	<?php
 }
-add_action( 'newskit_theme_entry_meta', 'newskit_trust_indicators_output_why_trust_link' );
+add_action( 'gulir_theme_entry_meta', 'gulir_trust_indicators_output_why_trust_link' );
 
 /**
  * Output author work contact info on author archives.
  */
-function newskit_trust_indicators_output_author_info() {
+function gulir_trust_indicators_output_author_info() {
 	if ( ! is_author() || ! class_exists( 'Trust_Indicators_User_Settings' ) ) {
 		return;
 	}
@@ -89,35 +89,35 @@ function newskit_trust_indicators_output_author_info() {
 	<div class="trust-indicators author-meta">
 		<?php if ( $author_email ) : ?>
 			<a class="author-expanded-social-link" href="mailto:<?php echo esc_attr( $author_email ); ?>">
-				<?php echo newskit_get_social_icon_svg( 'mail', 20 ); ?>
+				<?php echo gulir_get_social_icon_svg( 'mail', 20 ); ?>
 				<?php echo esc_html( $author_email ); ?>
 			</a>
 		<?php endif; ?>
 
 		<?php if ( $author_twitter ) : ?>
 			<a class="author-expanded-social-link" href="<?php echo esc_attr( 'https://twitter.com/' . $author_twitter ); ?>" target="_blank">
-				<?php echo newskit_get_social_icon_svg( 'twitter', 20 ); ?>
+				<?php echo gulir_get_social_icon_svg( 'twitter', 20 ); ?>
 				<?php echo esc_html( $author_twitter ); ?>
 			</a>
 		<?php endif; ?>
 
 		<?php if ( $author_phone ) : ?>
 			<span class="author-expanded-social-link">
-				<?php echo newskit_get_social_icon_svg( 'phone', 20 ); ?>
+				<?php echo gulir_get_social_icon_svg( 'phone', 20 ); ?>
 				<?php echo esc_html( $author_phone ); ?>
 			</span>
 		<?php endif; ?>
 
-		<?php newskit_author_social_links( $author->ID, 20 ); ?>
+		<?php gulir_author_social_links( $author->ID, 20 ); ?>
 	</div>
 	<?php
 }
-add_action( 'newskit_theme_below_archive_title', 'newskit_trust_indicators_output_author_info' );
+add_action( 'gulir_theme_below_archive_title', 'gulir_trust_indicators_output_author_info' );
 
 /**
  * Adds author title to the_archive_title().
  */
-function newskit_trust_indicators_output_author_job_title( $title ) {
+function gulir_trust_indicators_output_author_job_title( $title ) {
 	if ( is_author() ) {
 		$author = get_queried_object();
 		$role   = get_user_meta( $author->ID, 'title', true );
@@ -127,7 +127,7 @@ function newskit_trust_indicators_output_author_job_title( $title ) {
 	}
 	return $title;
 }
-add_filter( 'get_the_archive_title', 'newskit_trust_indicators_output_author_job_title' );
+add_filter( 'get_the_archive_title', 'gulir_trust_indicators_output_author_job_title' );
 
 /**
  * Adds author role to author footer.
@@ -135,19 +135,19 @@ add_filter( 'get_the_archive_title', 'newskit_trust_indicators_output_author_job
  * @param string $author_name string The author name.
  * @param int    $author_id string The author ID.
  */
-function newskit_trust_indicators_author_bio_name( $author_name, $author_id ) {
+function gulir_trust_indicators_author_bio_name( $author_name, $author_id ) {
 	$role = get_user_meta( $author_id, 'title', true );
 	if ( $role ) {
 		$author_name .= '<span class="author-job-title">' . $role . '</span>';
 	}
 	return $author_name;
 }
-add_filter( 'newskit_author_bio_name', 'newskit_trust_indicators_author_bio_name', 10, 2 );
+add_filter( 'gulir_author_bio_name', 'gulir_trust_indicators_author_bio_name', 10, 2 );
 
 /**
  * Gets author role to add to single post author bios.
  */
-function newskit_trust_indicators_job_title_single( $author_ID ) {
+function gulir_trust_indicators_job_title_single( $author_ID ) {
 	if ( '' !== $author_ID ) {
 		$role = get_user_meta( $author_ID, 'title', true );
 		return $role;
@@ -157,7 +157,7 @@ function newskit_trust_indicators_job_title_single( $author_ID ) {
 /**
  * Output location and expertise info on author archive pages.
  */
-function newskit_trust_indicators_output_author_details() {
+function gulir_trust_indicators_output_author_details() {
 	if ( ! is_author() || ! class_exists( 'Trust_Indicators_User_Settings' ) ) {
 		return;
 	}
@@ -188,4 +188,4 @@ function newskit_trust_indicators_output_author_details() {
 	</div>
 	<?php
 }
-add_action( 'newskit_theme_below_author_archive_meta', 'newskit_trust_indicators_output_author_details' );
+add_action( 'gulir_theme_below_author_archive_meta', 'gulir_trust_indicators_output_author_details' );

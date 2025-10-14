@@ -1,13 +1,13 @@
 <?php
 /**
- * Newskit Sacha: Color Patterns
+ * Gulir Sacha: Color Patterns
  *
- * @package Newskit Sacha
+ * @package Gulir Sacha
  */
 /**
  * Add child theme-specific custom colours.
  */
-function newskit_sacha_custom_colors_css() {
+function gulir_sacha_custom_colors_css() {
 	$header_color    = '#333';
 
 	if ( 'default' !== get_theme_mod( 'theme_colors', 'default' ) ) {
@@ -17,12 +17,12 @@ function newskit_sacha_custom_colors_css() {
 
 		if ( 'default' !== get_theme_mod( 'footer_color', 'default' ) ) {
 			$footer_color          = get_theme_mod( 'footer_color_hex', '' );
-			$footer_color_contrast = newskit_get_color_contrast( $footer_color );
+			$footer_color_contrast = gulir_get_color_contrast( $footer_color );
 		}
 	}
 
 	// Set colour contrasts.
-	$header_color_contrast    = newskit_get_color_contrast( $header_color );
+	$header_color_contrast    = gulir_get_color_contrast( $header_color );
 
 	$theme_css  = '';
 	$editor_css = '';
@@ -35,8 +35,8 @@ function newskit_sacha_custom_colors_css() {
 					background-color: ' . esc_html( $header_color ) . ';
 				}
 				.h-sb .top-header-contain {
-					background-color: ' . esc_html( newskit_adjust_brightness( $header_color, -10 ) ) . ';
-					border-bottom-color: ' . esc_html( newskit_adjust_brightness( $header_color, -15 ) ) . ';
+					background-color: ' . esc_html( gulir_adjust_brightness( $header_color, -10 ) ) . ';
+					border-bottom-color: ' . esc_html( gulir_adjust_brightness( $header_color, -15 ) ) . ';
 				}
 
 				/* Header solid background */
@@ -66,7 +66,7 @@ function newskit_sacha_custom_colors_css() {
 			}
 
 			.site-info {
-				background-color: ' . esc_html( newskit_adjust_brightness( $footer_color, -10 ) ) . ';
+				background-color: ' . esc_html( gulir_adjust_brightness( $footer_color, -10 ) ) . ';
 			}
 		';
 	}

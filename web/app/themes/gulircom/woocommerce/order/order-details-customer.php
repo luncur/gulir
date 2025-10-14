@@ -21,7 +21,7 @@ $show_shipping = ! wc_ship_to_billing_address_only() && $order->needs_shipping_a
 ?>
 <section class="woocommerce-customer-details">
 
-	<h4><?php esc_html_e( 'Your Information', 'newskit' ); ?></h4>
+	<h4><?php esc_html_e( 'Your Information', 'gulir' ); ?></h4>
 
 	<?php if ( $show_shipping ) : ?>
 
@@ -31,11 +31,11 @@ $show_shipping = ! wc_ship_to_billing_address_only() && $order->needs_shipping_a
 	<?php endif; ?>
 
 	<?php if ( $show_shipping ) : ?>
-		<h5 class="woocommerce-column__title"><?php esc_html_e( 'Billing address', 'newskit' ); ?></h5>
+		<h5 class="woocommerce-column__title"><?php esc_html_e( 'Billing address', 'gulir' ); ?></h5>
 	<?php endif; ?>
 
 	<address>
-		<?php echo wp_kses_post( $order->get_formatted_billing_address( esc_html__( 'N/A', 'newskit' ) ) ); ?>
+		<?php echo wp_kses_post( $order->get_formatted_billing_address( esc_html__( 'N/A', 'gulir' ) ) ); ?>
 
 		<?php if ( $order->get_billing_phone() ) : ?>
 			<p class="woocommerce-customer-details--phone"><?php echo esc_html( $order->get_billing_phone() ); ?></p>
@@ -62,9 +62,9 @@ $show_shipping = ! wc_ship_to_billing_address_only() && $order->needs_shipping_a
 		</div><!-- /.col-1 -->
 
 		<div class="woocommerce-column woocommerce-column--2 woocommerce-column--shipping-address col-2">
-			<h5 class="woocommerce-column__title"><?php esc_html_e( 'Shipping address', 'newskit' ); ?></h5>
+			<h5 class="woocommerce-column__title"><?php esc_html_e( 'Shipping address', 'gulir' ); ?></h5>
 			<address>
-				<?php echo wp_kses_post( $order->get_formatted_shipping_address( esc_html__( 'N/A', 'newskit' ) ) ); ?>
+				<?php echo wp_kses_post( $order->get_formatted_shipping_address( esc_html__( 'N/A', 'gulir' ) ) ); ?>
 
 				<?php
 					/**

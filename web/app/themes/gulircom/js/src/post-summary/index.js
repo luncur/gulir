@@ -19,17 +19,17 @@ import { connectWithSelect } from './utils';
  *
  * https://developer.wordpress.org/block-editor/developers/slotfills/plugin-document-setting-panel/
  */
-const NewskitSummaryPanel = () => {
+const GulirSummaryPanel = () => {
 	return (
 		<PluginDocumentSettingPanel
-			name="newskit-summary"
-			title={__('Article Summary', 'newskit')}
-			className="newskit-summary"
+			name="gulir-summary"
+			title={__('Article Summary', 'gulir')}
+			className="gulir-summary"
 		>
 			<p>
 				{__(
 					'Write a summary that will be appended to the top of the article content.',
-					'newskit'
+					'gulir'
 				)}
 			</p>
 			<SummaryTitleEditor />
@@ -38,7 +38,7 @@ const NewskitSummaryPanel = () => {
 	);
 };
 
-registerPlugin('plugin-document-setting-panel-newskit-summary', {
-	render: connectWithSelect(NewskitSummaryPanel),
+registerPlugin('plugin-document-setting-panel-gulir-summary', {
+	render: connectWithSelect(GulirSummaryPanel),
 	icon: null,
 });

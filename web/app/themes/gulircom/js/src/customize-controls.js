@@ -348,7 +348,7 @@
 
 		// Only show Alternative Logo option if 'simple subpage header' is picked
 		wp.customize( 'header_sub_simplified', function ( setting ) {
-			wp.customize.control( 'newskit_alternative_logo', function ( control ) {
+			wp.customize.control( 'gulir_alternative_logo', function ( control ) {
 				const visibility = function () {
 					if ( true === setting.get() ) {
 						control.container.slideDown( 180 );

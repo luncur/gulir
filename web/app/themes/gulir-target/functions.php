@@ -1,14 +1,14 @@
 <?php
 /**
- * Newskit Sacha functions and definitions
+ * Gulir Sacha functions and definitions
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
- * @package Newskit Sacha
+ * @package Gulir Sacha
  */
 
 
-if ( ! function_exists( 'newskit_sacha_setup' ) ) :
+if ( ! function_exists( 'gulir_sacha_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
 	 *
@@ -16,19 +16,19 @@ if ( ! function_exists( 'newskit_sacha_setup' ) ) :
 	 * runs before the init hook. The init hook is too late for some features, such
 	 * as indicating support for post thumbnails.
 	 */
-	function newskit_sacha_setup() {
+	function gulir_sacha_setup() {
 		// Remove the default editor styles
 		remove_editor_styles();
 		// Add child theme editor styles, compiled from `style-child-theme-editor.scss`.
 		add_editor_style( 'style-editor.css' );
 	}
 endif;
-add_action( 'after_setup_theme', 'newskit_sacha_setup', 12 );
+add_action( 'after_setup_theme', 'gulir_sacha_setup', 12 );
 
 /**
  * Display custom color CSS in customizer and on frontend.
  */
-function newskit_sacha_custom_colors_css_wrap() {
+function gulir_sacha_custom_colors_css_wrap() {
 	// Only bother if we haven't customized the color.
 	if ( ( ! is_customize_preview() && 'default' === get_theme_mod( 'theme_colors', 'default' ) ) || is_admin() ) {
 		return;
@@ -37,44 +37,44 @@ function newskit_sacha_custom_colors_css_wrap() {
 	?>
 
 	<style type="text/css" id="custom-theme-colors-sacha">
-		<?php echo newskit_sacha_custom_colors_css(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php echo gulir_sacha_custom_colors_css(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 	</style>
 	<?php
 }
-add_action( 'wp_head', 'newskit_sacha_custom_colors_css_wrap' );
+add_action( 'wp_head', 'gulir_sacha_custom_colors_css_wrap' );
 
 /**
  * Display custom font CSS in customizer and on frontend.
  */
-function newskit_sacha_typography_css_wrap() {
+function gulir_sacha_typography_css_wrap() {
 	if ( is_admin() || ( ! get_theme_mod( 'font_body', '' ) && ! get_theme_mod( 'font_header', '' ) && ! get_theme_mod( 'accent_allcaps', true ) ) ) {
 		return;
 	}
 	?>
 
 	<style type="text/css" id="custom-theme-fonts-sacha">
-		<?php echo newskit_sacha_custom_typography_css(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php echo gulir_sacha_custom_typography_css(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 	</style>
 
 <?php
 }
-add_action( 'wp_head', 'newskit_sacha_typography_css_wrap' );
+add_action( 'wp_head', 'gulir_sacha_typography_css_wrap' );
 
 /**
  * Enqueue supplemental block editor styles.
  */
-function newskit_sacha_editor_customizer_styles() {
+function gulir_sacha_editor_customizer_styles() {
 	// Check for color or font customizations.
 	$theme_customizations = '';
 	require_once get_stylesheet_directory() . '/inc/child-color-patterns.php';
 
 	if ( 'custom' === get_theme_mod( 'theme_colors' ) ) {
 		// Include color patterns.
-		$theme_customizations .= newskit_sacha_custom_colors_css();
+		$theme_customizations .= gulir_sacha_custom_colors_css();
 	}
 
 	if ( get_theme_mod( 'font_body', '' ) || get_theme_mod( 'font_header', '' ) || get_theme_mod( 'accent_allcaps', true ) ) {
-		$theme_customizations .= newskit_sacha_custom_typography_css();
+		$theme_customizations .= gulir_sacha_custom_typography_css();
 	}
 
 	// If there are any, add those styles inline.
@@ -90,7 +90,7 @@ function newskit_sacha_editor_customizer_styles() {
 	wp_enqueue_style( 'gulircom-editor-overrides', get_theme_file_uri( '/styles/child-style-editor-overrides.css' ), array(), null, 'all' );
 
 }
-add_action( 'enqueue_block_editor_assets', 'newskit_sacha_editor_customizer_styles' );
+add_action( 'enqueue_block_editor_assets', 'gulir_sacha_editor_customizer_styles' );
 
 /**
  * Custom typography styles for child theme.

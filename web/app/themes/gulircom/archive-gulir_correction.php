@@ -1,10 +1,10 @@
 <?php
 /**
- * The template for displaying archive pages for the newskit_correction post type
+ * The template for displaying archive pages for the gulir_correction post type
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Newskit
+ * @package Gulir
  */
 get_header();
 
@@ -16,9 +16,9 @@ get_header();
 
 			<span>
 
-				<h1 class="page-title"><?php esc_html_e( 'Corrections and clarifications', 'newskit' ); ?></h1>
+				<h1 class="page-title"><?php esc_html_e( 'Corrections and clarifications', 'gulir' ); ?></h1>
 
-				<?php do_action( 'newskit_theme_below_archive_title' ); ?>
+				<?php do_action( 'gulir_theme_below_archive_title' ); ?>
 
 
 			</span>
@@ -48,8 +48,8 @@ get_header();
 			the_posts_pagination(
 				array(
 					'mid_size'  => 2,
-					'prev_text' => __( 'Previous', 'newskit' ),
-					'next_text' => __( 'Next', 'newskit' ),
+					'prev_text' => __( 'Previous', 'gulir' ),
+					'next_text' => __( 'Next', 'gulir' ),
 				)
 			);
 

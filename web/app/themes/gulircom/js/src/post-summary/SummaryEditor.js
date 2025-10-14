@@ -34,7 +34,7 @@ const SummaryEditor = ({ summary, saveSummary }) => {
 
 	return (
 		<TextareaControl
-			label={__('Body:', 'newskit')}
+			label={__('Body:', 'gulir')}
 			value={value}
 			onChange={setValue}
 			style={{ width: '100%' }}

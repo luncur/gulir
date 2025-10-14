@@ -12,7 +12,7 @@ html {
 }
 
 body {
-	background-color: var(--newskit-color-bg-body);
+	background-color: var(--gulir-color-bg-body);
 }
 
 h1,
@@ -25,7 +25,7 @@ h6 {
 }
 
 hr {
-	background-color: var(--newskit-color-text-light);
+	background-color: var(--gulir-color-text-light);
 	border: 0;
 	height: 2px;
 }
@@ -48,7 +48,7 @@ blockquote {
 	}
 
 	cite {
-		color: var(--newskit-color-text-light);
+		color: var(--gulir-color-text-light);
 	}
 }
 

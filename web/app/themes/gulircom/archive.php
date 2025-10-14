@@ -4,25 +4,25 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Newskit
+ * @package Gulir
  */
 get_header();
 
 // Get sponsors for this taxonomy archive.
-if ( function_exists( 'newskit_get_all_sponsors' ) ) {
-	$all_sponsors         = newskit_get_all_sponsors( get_queried_object_id() );
-	$native_sponsors      = newskit_get_native_sponsors( $all_sponsors );
-	$underwriter_sponsors = newskit_get_underwriter_sponsors( $all_sponsors );
+if ( function_exists( 'gulir_get_all_sponsors' ) ) {
+	$all_sponsors         = gulir_get_all_sponsors( get_queried_object_id() );
+	$native_sponsors      = gulir_get_native_sponsors( $all_sponsors );
+	$underwriter_sponsors = gulir_get_underwriter_sponsors( $all_sponsors );
 }
 
 $feature_latest_post = get_theme_mod( 'archive_feature_latest_post', true );
 $show_excerpt        = get_theme_mod( 'archive_show_excerpt', false );
 
 // Hide author on collection category archives.
-if ( class_exists( '\Newskit\Optional_Modules\Collections' ) &&
-	\Newskit\Optional_Modules\Collections::is_module_active() &&
-	is_tax( \Newskit\Collections\Collection_Category_Taxonomy::get_taxonomy() ) ) {
-	add_filter( 'newskit_listings_hide_author', '__return_true' );
+if ( class_exists( '\Gulir\Optional_Modules\Collections' ) &&
+	\Gulir\Optional_Modules\Collections::is_module_active() &&
+	is_tax( \Gulir\Collections\Collection_Category_Taxonomy::get_taxonomy() ) ) {
+	add_filter( 'gulir_listings_hide_author', '__return_true' );
 }
 ?>
 
@@ -42,7 +42,7 @@ if ( class_exists( '\Newskit\Optional_Modules\Collections' ) &&
 				}
 
 				if ( $author_avatar ) {
-					echo wp_kses( $author_avatar, newskit_sanitize_avatars() );
+					echo wp_kses( $author_avatar, gulir_sanitize_avatars() );
 				}
 			}
 			?>
@@ -51,18 +51,18 @@ if ( class_exists( '\Newskit\Optional_Modules\Collections' ) &&
 				<?php
 				if ( ( is_category() || is_tag() ) && ! empty( $native_sponsors ) ) {
 					// Get label for native archive sponsors.
-					newskit_sponsor_label( $native_sponsors, null, true );
+					gulir_sponsor_label( $native_sponsors, null, true );
 				}
 				?>
 
 				<?php the_archive_title( '<h1 class="page-title">', '</h1>' ); ?>
 
-				<?php do_action( 'newskit_theme_below_archive_title' ); ?>
+				<?php do_action( 'gulir_theme_below_archive_title' ); ?>
 
 				<?php
 				if ( ( is_category() || is_tag() ) && ! empty( $native_sponsors ) ) :
 					// Get description for native archive sponsors.
-					newskit_sponsor_archive_description( $native_sponsors );
+					gulir_sponsor_archive_description( $native_sponsors );
 				elseif ( '' !== get_the_archive_description() ) :
 					?>
 					<div class="taxonomy-description">
@@ -73,7 +73,7 @@ if ( class_exists( '\Newskit\Optional_Modules\Collections' ) &&
 				<?php
 				if ( ( is_category() || is_tag() ) && ! empty( $underwriter_sponsors ) ) {
 					// Get info for underwriter archive sponsors.
-					newskit_sponsored_underwriters_info( $underwriter_sponsors );
+					gulir_sponsored_underwriters_info( $underwriter_sponsors );
 				}
 
 				if ( is_author() ) :
@@ -81,7 +81,7 @@ if ( class_exists( '\Newskit\Optional_Modules\Collections' ) &&
 					$author_id          = get_the_author_meta( 'ID' );
 					$show_author_social = get_theme_mod( 'show_author_social', false );
 					$show_author_email  = get_theme_mod( 'show_author_email', false );
-					$author_social      = newskit_author_get_social_links( $author_id );
+					$author_social      = gulir_author_get_social_links( $author_id );
 					$author_email       = get_the_author_meta( 'user_email', get_query_var( 'author' ) );
 
 					// Don't output author-meta container unless it's populated.
@@ -92,17 +92,17 @@ if ( class_exists( '\Newskit\Optional_Modules\Collections' ) &&
 							if ( $show_author_email && '' !== $author_email ) :
 								?>
 								<a class="author-email" href="<?php echo 'mailto:' . esc_attr( $author_email ); ?>">
-									<?php echo wp_kses( newskit_get_social_icon_svg( 'mail', 18 ), newskit_sanitize_svgs() ); ?>
+									<?php echo wp_kses( gulir_get_social_icon_svg( 'mail', 18 ), gulir_sanitize_svgs() ); ?>
 									<?php echo esc_html( $author_email ); ?>
 								</a>
 							<?php endif; ?>
 
-							<?php newskit_author_social_links( $author_id, 20 ); ?>
+							<?php gulir_author_social_links( $author_id, 20 ); ?>
 						</div><!-- .author-meta -->
 
 					<?php endif; ?>
 
-					<?php do_action( 'newskit_theme_below_author_archive_meta' ); ?>
+					<?php do_action( 'gulir_theme_below_author_archive_meta' ); ?>
 
 				<?php endif; ?>
 			</span>
@@ -134,7 +134,7 @@ if ( class_exists( '\Newskit\Optional_Modules\Collections' ) &&
 			endwhile;
 
 			// Previous/next page navigation.
-			newskit_the_posts_navigation();
+			gulir_the_posts_navigation();
 
 			// If no content, include the "No posts found" template.
 		else :

@@ -1,34 +1,34 @@
 <?php
 /**
- * Newskit Theme: Custom login screen.
+ * Gulir Theme: Custom login screen.
  *
- * @package Newskit
+ * @package Gulir
  */
 
 /**
  * Replace the URL returned by the logo.
  */
-function newskit_login_headerurl() {
+function gulir_login_headerurl() {
     return home_url();
 }
-add_filter( 'login_headerurl', 'newskit_login_headerurl' );
+add_filter( 'login_headerurl', 'gulir_login_headerurl' );
 
 /**
  * Replace the title with the site name.
  */
-function newskit_login_headertext() {
+function gulir_login_headertext() {
     return get_bloginfo( 'name' );
 }
-add_filter( 'login_headertext', 'newskit_login_headertext' );
+add_filter( 'login_headertext', 'gulir_login_headertext' );
 
 /**
  * Adds custom CSS.
  */
-function newskit_login_enqueue_scripts() {
+function gulir_login_enqueue_scripts() {
 	$background_color = 'white';
 
 	if ( true === get_theme_mod( 'header_solid_background', false ) && has_custom_logo() ) {
-		$primary_color    = newskit_get_primary_color();
+		$primary_color    = gulir_get_primary_color();
 		$background_color = $primary_color;
 
 		if ( 'default' !== get_theme_mod( 'theme_colors', 'default' ) ) {
@@ -121,4 +121,4 @@ function newskit_login_enqueue_scripts() {
 		}
   </style>
 <?php }
-add_action( 'login_enqueue_scripts', 'newskit_login_enqueue_scripts' );
+add_action( 'login_enqueue_scripts', 'gulir_login_enqueue_scripts' );

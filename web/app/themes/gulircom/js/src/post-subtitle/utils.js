@@ -3,8 +3,8 @@
  */
 import { withSelect } from '@wordpress/data';
 
-const SUBTITLE_ID = 'newskit-post-subtitle-element';
-export const META_FIELD_NAME = 'newskit_post_subtitle';
+const SUBTITLE_ID = 'gulir-post-subtitle-element';
+export const META_FIELD_NAME = 'gulir_post_subtitle';
 
 /**
  * Appends subtitle to DOM, below the Title in the Editor.

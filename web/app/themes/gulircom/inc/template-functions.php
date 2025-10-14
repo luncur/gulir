@@ -2,16 +2,16 @@
 /**
  * Functions which enhance the theme by hooking into WordPress
  *
- * @package Newskit
+ * @package Gulir
  */
 
-if ( ! function_exists( 'newskit_featured_image_position' ) ) :
+if ( ! function_exists( 'gulir_featured_image_position' ) ) :
 	/**
 	 * Returns current post's featured image position.
 	 *
 	 * @return string
 	 */
-	function newskit_featured_image_position() {
+	function gulir_featured_image_position() {
 		// If we're not on a single page, or if there's no thumbnail, return.
 		if ( ( ! is_single() && ! is_page() ) || ! has_post_thumbnail() ) {
 			return '';
@@ -20,7 +20,7 @@ if ( ! function_exists( 'newskit_featured_image_position' ) ) :
 		$position = is_single() ? get_theme_mod( 'featured_image_default', 'large' ) : get_theme_mod( 'page_featured_image_default', 'small' );
 
 		// Get per-post image position setting.
-		$image_pos = get_post_meta( get_the_ID(), 'newskit_featured_image_position', true );
+		$image_pos = get_post_meta( get_the_ID(), 'gulir_featured_image_position', true );
 		if ( '' !== $image_pos ) {
 			$position = $image_pos;
 		}
@@ -34,7 +34,7 @@ if ( ! function_exists( 'newskit_featured_image_position' ) ) :
 		$image_wide_width = 1200;
 		if ( (
 			'large' === $position && $image_wide_width > $thumbnail_info['width'] )
-			|| ! in_array( get_post_type(), newskit_get_featured_image_post_types() )
+			|| ! in_array( get_post_type(), gulir_get_featured_image_post_types() )
 		) {
 			$position = 'small';
 		}
@@ -43,15 +43,15 @@ if ( ! function_exists( 'newskit_featured_image_position' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'newskit_is_default_template' ) ) :
+if ( ! function_exists( 'gulir_is_default_template' ) ) :
 	/**
 	 * Returns whether or not the current post/page is using hte default template.
 	 *
 	 * @return bool
 	 */
-	function newskit_is_default_template() {
+	function gulir_is_default_template() {
 		$default_template = true;
-		// Check against templates assigned in the Newskit theme, to rule out any other non-default _wp_page_template values.
+		// Check against templates assigned in the Gulir theme, to rule out any other non-default _wp_page_template values.
 		if ( is_page_template( array( 'no-header-footer.php', 'single-feature.php', 'single-wide.php' ) ) ) {
 			$default_template = false;
 		}
@@ -65,7 +65,7 @@ endif;
  * @param array $classes Classes for the body element.
  * @return array
  */
-function newskit_body_classes( $classes ) {
+function gulir_body_classes( $classes ) {
 
 	if ( is_singular() ) {
 		// Adds `singular` to singular pages.
@@ -77,12 +77,12 @@ function newskit_body_classes( $classes ) {
 
 	// Add class on front page.
 	if ( is_front_page() && 'posts' !== get_option( 'show_on_front' ) ) {
-		$classes[] = 'newskit-front-page';
+		$classes[] = 'gulir-front-page';
 	}
 
 	// Adds a class when in the Customizer.
 	if ( is_customize_preview() ) :
-		$classes[] = 'newskit-customizer';
+		$classes[] = 'gulir-customizer';
 	endif;
 
 	// Hide homepage title.
@@ -93,7 +93,7 @@ function newskit_body_classes( $classes ) {
 
 	// Hide specific page title.
 	$page_id         = get_queried_object_id();
-	$page_hide_title = get_post_meta( $page_id, 'newskit_hide_page_title', true );
+	$page_hide_title = get_post_meta( $page_id, 'gulir_hide_page_title', true );
 	if ( $page_hide_title && is_page() ) {
 		$classes[] = 'hide-page-title';
 	}
@@ -160,7 +160,7 @@ function newskit_body_classes( $classes ) {
 
 	// Adds a class of has-sidebar when there is a sidebar present and populated.
 	if ( is_active_sidebar( 'sidebar-1' )
-		&& ( ( ! is_archive() && newskit_is_default_template() && ! ( is_front_page() && 'posts' !== get_option( 'show_on_front' ) ) )
+		&& ( ( ! is_archive() && gulir_is_default_template() && ! ( is_front_page() && 'posts' !== get_option( 'show_on_front' ) ) )
 		|| ( is_archive() && 'default' === get_theme_mod( 'archive_layout', 'default' ) ) )
 	) {
 		$classes[] = 'has-sidebar';
@@ -193,33 +193,33 @@ function newskit_body_classes( $classes ) {
 	}
 
 	// Adds class if singular post or page has a featured image.
-	if ( is_singular() && has_post_thumbnail() && 'hidden' !== newskit_featured_image_position() ) {
+	if ( is_singular() && has_post_thumbnail() && 'hidden' !== gulir_featured_image_position() ) {
 		$classes[] = 'has-featured-image';
 	}
 
 	// Adds special classes, depending on the featured image position.
-	if ( 'behind' === newskit_featured_image_position() ) {
+	if ( 'behind' === gulir_featured_image_position() ) {
 		$classes[] = 'single-featured-image-behind';
-	} elseif ( 'beside' === newskit_featured_image_position() ) {
+	} elseif ( 'beside' === gulir_featured_image_position() ) {
 		$classes[] = 'single-featured-image-beside';
-	} elseif ( 'above' === newskit_featured_image_position() ) {
+	} elseif ( 'above' === gulir_featured_image_position() ) {
 		$classes[] = 'single-featured-image-above';
 	} elseif ( is_single() ) {
 		$classes[] = 'single-featured-image-default';
 	}
 
 	// Adds a class if singular post has a large featured image
-	if ( in_array( newskit_featured_image_position(), array( 'large', 'behind', 'beside' ) ) ) {
+	if ( in_array( gulir_featured_image_position(), array( 'large', 'behind', 'beside' ) ) ) {
 		$classes[] = 'has-large-featured-image';
 	}
 
 	// Add a class if updated date should display
-	if ( newskit_should_display_updated_date() ) {
+	if ( gulir_should_display_updated_date() ) {
 		$classes[] = 'show-updated';
 	}
 
 	// Add a class if the post has a summary.
-	if ( '' !== newskit_has_post_summary() ) {
+	if ( '' !== gulir_has_post_summary() ) {
 		$classes[] = 'has-summary';
 	}
 
@@ -243,7 +243,7 @@ function newskit_body_classes( $classes ) {
 
 	// Add a class when there's an ad background color, and another when there's an ad above the footer to remove the space.
 	$ads_background_color = get_theme_mod( 'ads_color', 'default' );
-	$above_footer_ad      = method_exists( 'Newskit_Ads\Placements', 'can_display_ad_unit' ) && \Newskit_Ads\Placements::can_display_ad_unit( 'global_above_footer' );
+	$above_footer_ad      = method_exists( 'Gulir_Ads\Placements', 'can_display_ad_unit' ) && \Gulir_Ads\Placements::can_display_ad_unit( 'global_above_footer' );
 	if ( 'custom' === $ads_background_color ) {
 		$classes[] = 'custom-ad-bg';
 
@@ -265,28 +265,28 @@ function newskit_body_classes( $classes ) {
 	}
 
 	// If custom fonts are used, add a class indicating that fonts will be loaded. The class will be removed by JS.
-	if ( ! empty( newskit_get_used_custom_fonts() ) ) {
-		$classes[] = 'newskit--font-loading';
+	if ( ! empty( gulir_get_used_custom_fonts() ) ) {
+		$classes[] = 'gulir--font-loading';
 	}
 
 	return $classes;
 }
-add_filter( 'body_class', 'newskit_body_classes' );
+add_filter( 'body_class', 'gulir_body_classes' );
 
 /**
  * Adds custom class to the array of posts classes.
  */
-function newskit_post_classes( $classes, $class, $post_id ) {
+function gulir_post_classes( $classes, $class, $post_id ) {
 	$classes[] = 'entry';
 
 	return $classes;
 }
-add_filter( 'post_class', 'newskit_post_classes', 10, 3 );
+add_filter( 'post_class', 'gulir_post_classes', 10, 3 );
 
 /**
  * Gets the category and tag classes from the post.
  */
-function newskit_get_category_tag_classes( $post_id ) {
+function gulir_get_category_tag_classes( $post_id ) {
 	$post_classes    = get_post_class( '', $post_id );
 	$cat_tag_classes = array();
 	foreach ( $post_classes as $post_class ) {
@@ -300,17 +300,17 @@ function newskit_get_category_tag_classes( $post_id ) {
 /**
  * Add a pingback url auto-discovery header for single posts, pages, or attachments.
  */
-function newskit_pingback_header() {
+function gulir_pingback_header() {
 	if ( is_singular() && pings_open() ) {
 		echo '<link rel="pingback" href="', esc_url( get_bloginfo( 'pingback_url' ) ), '">';
 	}
 }
-add_action( 'wp_head', 'newskit_pingback_header' );
+add_action( 'wp_head', 'gulir_pingback_header' );
 
 /**
  * Changes comment form default fields.
  */
-function newskit_comment_form_defaults( $defaults ) {
+function gulir_comment_form_defaults( $defaults ) {
 	$comment_field = $defaults['comment_field'];
 
 	// Adjust height of comment form.
@@ -318,61 +318,61 @@ function newskit_comment_form_defaults( $defaults ) {
 
 	return $defaults;
 }
-add_filter( 'comment_form_defaults', 'newskit_comment_form_defaults' );
+add_filter( 'comment_form_defaults', 'gulir_comment_form_defaults' );
 
 /**
  * Filters the default archive titles.
  */
-function newskit_get_the_archive_title() {
+function gulir_get_the_archive_title() {
 	if ( is_category() ) {
-		$title = esc_html__( 'Category: ', 'newskit' ) . '<span class="page-description">' . single_term_title( '', false ) . '</span>';
+		$title = esc_html__( 'Category: ', 'gulir' ) . '<span class="page-description">' . single_term_title( '', false ) . '</span>';
 	} elseif ( is_tag() ) {
-		$title = esc_html__( 'Tag: ', 'newskit' ) . '<span class="page-description">' . single_term_title( '', false ) . '</span>';
+		$title = esc_html__( 'Tag: ', 'gulir' ) . '<span class="page-description">' . single_term_title( '', false ) . '</span>';
 	} elseif ( is_author() ) {
-		$title = esc_html__( 'Author Archives: ', 'newskit' ) . '<span class="page-description">' . get_the_author_meta( 'display_name' ) . '</span>';
+		$title = esc_html__( 'Author Archives: ', 'gulir' ) . '<span class="page-description">' . get_the_author_meta( 'display_name' ) . '</span>';
 	} elseif ( is_year() ) {
-		remove_filter( 'get_the_date', 'newskit_convert_to_time_ago', 10, 3 );
-		$title = esc_html__( 'Yearly Archives: ', 'newskit' ) . '<span class="page-description">' . get_the_date( _x( 'Y', 'yearly archives date format', 'newskit' ) ) . '</span>';
-		add_filter( 'get_the_date', 'newskit_convert_to_time_ago', 10, 3 );
+		remove_filter( 'get_the_date', 'gulir_convert_to_time_ago', 10, 3 );
+		$title = esc_html__( 'Yearly Archives: ', 'gulir' ) . '<span class="page-description">' . get_the_date( _x( 'Y', 'yearly archives date format', 'gulir' ) ) . '</span>';
+		add_filter( 'get_the_date', 'gulir_convert_to_time_ago', 10, 3 );
 	} elseif ( is_month() ) {
-		remove_filter( 'get_the_date', 'newskit_convert_to_time_ago', 10, 3 );
-		$title = esc_html__( 'Monthly Archives: ', 'newskit' ) . '<span class="page-description">' . get_the_date( _x( 'F Y', 'monthly archives date format', 'newskit' ) ) . '</span>';
-		add_filter( 'get_the_date', 'newskit_convert_to_time_ago', 10, 3 );
+		remove_filter( 'get_the_date', 'gulir_convert_to_time_ago', 10, 3 );
+		$title = esc_html__( 'Monthly Archives: ', 'gulir' ) . '<span class="page-description">' . get_the_date( _x( 'F Y', 'monthly archives date format', 'gulir' ) ) . '</span>';
+		add_filter( 'get_the_date', 'gulir_convert_to_time_ago', 10, 3 );
 	} elseif ( is_day() ) {
-		remove_filter( 'get_the_date', 'newskit_convert_to_time_ago', 10, 3 );
-		$title = esc_html__( 'Daily Archives: ', 'newskit' ) . '<span class="page-description">' . get_the_date() . '</span>';
-		add_filter( 'get_the_date', 'newskit_convert_to_time_ago', 10, 3 );
+		remove_filter( 'get_the_date', 'gulir_convert_to_time_ago', 10, 3 );
+		$title = esc_html__( 'Daily Archives: ', 'gulir' ) . '<span class="page-description">' . get_the_date() . '</span>';
+		add_filter( 'get_the_date', 'gulir_convert_to_time_ago', 10, 3 );
 	} elseif ( is_post_type_archive() ) {
-		$title = esc_html__( 'Post Type Archives: ', 'newskit' ) . '<span class="page-description">' . post_type_archive_title( '', false ) . '</span>';
+		$title = esc_html__( 'Post Type Archives: ', 'gulir' ) . '<span class="page-description">' . post_type_archive_title( '', false ) . '</span>';
 	} elseif ( is_tax() ) {
 		$tax  = get_taxonomy( get_queried_object()->taxonomy );
 		$term = get_queried_object();
 
 		/* translators: %s: Taxonomy singular name */
-		$title = sprintf( esc_html__( '%s Archives:', 'newskit' ), $tax->labels->singular_name ) . '<span class="page-description">' . $term->name . '</span>';
+		$title = sprintf( esc_html__( '%s Archives:', 'gulir' ), $tax->labels->singular_name ) . '<span class="page-description">' . $term->name . '</span>';
 	} else {
-		$title = esc_html__( 'Archives:', 'newskit' );
+		$title = esc_html__( 'Archives:', 'gulir' );
 	}
 	return $title;
 }
-add_filter( 'get_the_archive_title', 'newskit_get_the_archive_title' );
+add_filter( 'get_the_archive_title', 'gulir_get_the_archive_title' );
 
 /**
  * Determines if post thumbnail can be displayed.
  */
-function newskit_can_show_post_thumbnail() {
-	return apply_filters( 'newskit_can_show_post_thumbnail', ! post_password_required() && ! is_attachment() && has_post_thumbnail() );
+function gulir_can_show_post_thumbnail() {
+	return apply_filters( 'gulir_can_show_post_thumbnail', ! post_password_required() && ! is_attachment() && has_post_thumbnail() );
 }
 
 /**
  * Add custom sizes attribute to responsive image functionality for post thumbnails.
  *
- * @origin Newskit Theme 1.0
+ * @origin Gulir Theme 1.0
  *
  * @param array $attr  Attributes for the image markup.
  * @return array Value for use in post thumbnail 'sizes' attribute.
  */
-function newskit_post_thumbnail_sizes_attr( $attr ) {
+function gulir_post_thumbnail_sizes_attr( $attr ) {
 
 	if ( is_admin() ) {
 		return $attr;
@@ -384,12 +384,12 @@ function newskit_post_thumbnail_sizes_attr( $attr ) {
 
 	return $attr;
 }
-add_filter( 'wp_get_attachment_image_attributes', 'newskit_post_thumbnail_sizes_attr', 10, 1 );
+add_filter( 'wp_get_attachment_image_attributes', 'gulir_post_thumbnail_sizes_attr', 10, 1 );
 
 /**
  * Returns the size for avatars used in the theme.
  */
-function newskit_get_avatar_size() {
+function gulir_get_avatar_size() {
 	return 60;
 }
 
@@ -398,7 +398,7 @@ function newskit_get_avatar_size() {
  *
  * @see get_comment_class()
  */
-function newskit_is_comment_by_post_author( $comment = null ) {
+function gulir_is_comment_by_post_author( $comment = null ) {
 	if ( is_object( $comment ) && $comment->user_id > 0 ) {
 		$user = get_userdata( $comment->user_id );
 		$post = get_post( $comment->comment_post_ID );
@@ -412,7 +412,7 @@ function newskit_is_comment_by_post_author( $comment = null ) {
 /**
  * Returns information about the current post's discussion, with cache support.
  */
-function newskit_get_discussion_data() {
+function gulir_get_discussion_data() {
 	static $discussion, $post_id;
 
 	$current_post_id = get_the_ID();
@@ -455,7 +455,7 @@ function newskit_get_discussion_data() {
  * @param object $args   Nav menu args.
  * @return string Nav menu item start element.
  */
-function newskit_add_dropdown_icons( $output, $item, $depth, $args ) {
+function gulir_add_dropdown_icons( $output, $item, $depth, $args ) {
 
 	// Only add class to 'top level' items on the 'primary' menu.
 	if ( ! isset( $args->theme_location ) || ( 'primary-menu' !== $args->theme_location && 'secondary-menu' !== $args->theme_location ) ) {
@@ -465,7 +465,7 @@ function newskit_add_dropdown_icons( $output, $item, $depth, $args ) {
 	if ( in_array( 'menu-item-has-children', $item->classes, true ) ) {
 
 		// Add SVG icon to parent items.
-		$icon = newskit_get_icon_svg( 'keyboard_arrow_down', 24 );
+		$icon = gulir_get_icon_svg( 'keyboard_arrow_down', 24 );
 		$menu_state = 'setState' . $item->ID;
 
 		$output .= sprintf(
@@ -474,8 +474,8 @@ function newskit_add_dropdown_icons( $output, $item, $depth, $args ) {
 					<span class="screen-reader-text" [text]="' . $menu_state . ' ? \'%3$s\' : \'%2$s\'">%2$s</span>
 				</button>',
 			$icon,
-			esc_html__( 'Open dropdown menu', 'newskit' ),
-			esc_html__( 'Close dropdown menu', 'newskit' )
+			esc_html__( 'Open dropdown menu', 'gulir' ),
+			esc_html__( 'Close dropdown menu', 'gulir' )
 		);
 	}
 
@@ -483,14 +483,14 @@ function newskit_add_dropdown_icons( $output, $item, $depth, $args ) {
 
 	return $output;
 }
-add_filter( 'walker_nav_menu_start_el', 'newskit_add_dropdown_icons', 10, 4 );
+add_filter( 'walker_nav_menu_start_el', 'gulir_add_dropdown_icons', 10, 4 );
 
 /**
  * The default color used for the primary color throughout this theme
  *
  * @return string the default hexidecimal color.
  */
-function newskit_get_primary_color() {
+function gulir_get_primary_color() {
 	return '#003da5';
 }
 
@@ -499,7 +499,7 @@ function newskit_get_primary_color() {
  *
  * @return string the default hexidecimal color.
  */
-function newskit_get_secondary_color() {
+function gulir_get_secondary_color() {
 	return '#666666';
 }
 
@@ -508,7 +508,7 @@ function newskit_get_secondary_color() {
  *
  * @return string the default hexidecimal color.
  */
-function newskit_get_mobile_cta_color() {
+function gulir_get_mobile_cta_color() {
 	return '#dd3333';
 }
 
@@ -519,7 +519,7 @@ function newskit_get_mobile_cta_color() {
  * @param  string $steps Number of 'steps' to adjust the hexidecimal value's brightness.
  * @return string Updated hexidecimal value.
  */
-function newskit_adjust_brightness( $hex, $steps ) {
+function gulir_adjust_brightness( $hex, $steps ) {
 
 	$steps = max( -255, min( 255, $steps ) );
 
@@ -549,7 +549,7 @@ function newskit_adjust_brightness( $hex, $steps ) {
  *
  * @ref https://stackoverflow.com/questions/1331591/given-a-background-color-black-or-white-text
  */
-function newskit_get_color_contrast( $hex ) {
+function gulir_get_color_contrast( $hex ) {
 	// hex RGB
 	$r1 = hexdec( substr( $hex, 1, 2 ) );
 	$g1 = hexdec( substr( $hex, 3, 2 ) );
@@ -584,8 +584,8 @@ function newskit_get_color_contrast( $hex ) {
 /**
  * Checks if color has sufficient contrast against white; if no, replaces it.
  */
-function newskit_color_with_contrast( $color ) {
-	$contrast = newskit_get_color_contrast( $color );
+function gulir_color_with_contrast( $color ) {
+	$contrast = gulir_get_color_contrast( $color );
 	if ( 'black' === $contrast ) {
 		return 'dimgray';
 	}
@@ -595,7 +595,7 @@ function newskit_color_with_contrast( $color ) {
 /**
  * Turns hex color value into RGB.
  */
-function newskit_hex_to_rgb( $hex ) {
+function gulir_hex_to_rgb( $hex ) {
 	list( $r, $g, $b ) = sscanf( $hex, '#%02x%02x%02x' );
 	return 'rgb( ' . $r . ', ' . $g . ', ' . $b . ')';
 }
@@ -603,16 +603,16 @@ function newskit_hex_to_rgb( $hex ) {
 /**
  * Decides which logo to use, based on Customizer settings and current post.
  */
-function newskit_the_custom_logo() {
+function gulir_the_custom_logo() {
 	// By default, don't use the alternative logo.
 	$use_alternative_logo = false;
 	// Check if the site is set to use the simplified header:
 	$simplified_header_subpages = get_theme_mod( 'header_sub_simplified', false );
 	// Check if an alternative logo has been set:
-	$has_alternative_logo = ( '' !== get_theme_mod( 'newskit_alternative_logo', '' ) && 0 !== get_theme_mod( 'newskit_alternative_logo', '' ) );
+	$has_alternative_logo = ( '' !== get_theme_mod( 'gulir_alternative_logo', '' ) && 0 !== get_theme_mod( 'gulir_alternative_logo', '' ) );
 
 	// Check if we're currently on a page where the alternative logo should be used in the short header, if set:
-	if ( $simplified_header_subpages && $has_alternative_logo && in_array( newskit_featured_image_position(), array( 'behind', 'beside' ) ) ) :
+	if ( $simplified_header_subpages && $has_alternative_logo && in_array( gulir_featured_image_position(), array( 'behind', 'beside' ) ) ) :
 		$use_alternative_logo = true;
 	endif;
 
@@ -620,8 +620,8 @@ function newskit_the_custom_logo() {
 		<a class="custom-logo-link alternative-logo" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
 			<?php
 			echo wp_get_attachment_image(
-				get_theme_mod( 'newskit_alternative_logo', '' ),
-				'newskit-alternative-logo',
+				get_theme_mod( 'gulir_alternative_logo', '' ),
+				'gulir-alternative-logo',
 				'',
 				array( 'class' => 'custom-logo' )
 			);
@@ -643,13 +643,13 @@ function newskit_the_custom_logo() {
  *
  * @return string The site title.
  */
-function newskit_site_title() {
+function gulir_site_title() {
 	/**
 	 * Filters the site name.
 	 *
 	 * @param string $blog_name The site name.
 	 */
-	$blog_name = apply_filters( 'newskit_site_title_name', get_bloginfo( 'name' ) );
+	$blog_name = apply_filters( 'gulir_site_title_name', get_bloginfo( 'name' ) );
 
 	if ( empty( $blog_name ) ) {
 		return;
@@ -660,7 +660,7 @@ function newskit_site_title() {
 	 *
 	 * @param string $site_url The site URL.
 	 */
-	$site_url = apply_filters( 'newskit_site_title_url', home_url( '/' ) );
+	$site_url = apply_filters( 'gulir_site_title_url', home_url( '/' ) );
 
 	if ( is_front_page() && is_home() ) {
 		$tag = 'h1';
@@ -680,23 +680,23 @@ function newskit_site_title() {
 	 *
 	 * @param string $site_title The site title.
 	 */
-	return apply_filters( 'newskit_site_title', $site_title );
+	return apply_filters( 'gulir_site_title', $site_title );
 }
 
 /**
  * Display the custom site title.
  */
-function newskit_the_site_title() {
-	echo wp_kses_post( newskit_site_title() );
+function gulir_the_site_title() {
+	echo wp_kses_post( gulir_site_title() );
 }
 
 /**
  * If available, returns a link to the accessibility statement page.
  */
-function newskit_accessibility_page_link() {
-	// Check if the Newskit Accessibility Statement Page class exists.
-	if ( class_exists( '\Newskit\Accessibility_Statement_Page' ) ) {
-		$page_data = \Newskit\Accessibility_Statement_Page::get_page();
+function gulir_accessibility_page_link() {
+	// Check if the Gulir Accessibility Statement Page class exists.
+	if ( class_exists( '\Gulir\Accessibility_Statement_Page' ) ) {
+		$page_data = \Gulir\Accessibility_Statement_Page::get_page();
 		// If an Accessibility Statement page exists and is published, display a link to it.
 		if ( $page_data && ( $page_data['pageUrl'] ?? '' ) && 'publish' === ( $page_data['status'] ?? '' ) ) {
 			echo '<a class="accessibility-statement-link" href="' . esc_url( $page_data['pageUrl'] ) . '">' . esc_html( $page_data['title'] ?? '' ) . '</a>';
@@ -707,7 +707,7 @@ function newskit_accessibility_page_link() {
 /**
  * Change date to 'time ago' format if enabled in the Customizer.
  */
-function newskit_math_to_time_ago( $post_time, $format, $post, $updated ) {
+function gulir_math_to_time_ago( $post_time, $format, $post, $updated ) {
 	$use_time_ago = get_theme_mod( 'post_time_ago', false );
 
 	// Only filter time when $use_time_ago is enabled, and it's not using a machine-readable format (for datetime).
@@ -731,7 +731,7 @@ function newskit_math_to_time_ago( $post_time, $format, $post, $updated ) {
 		if ( $cut_off_seconds >= ( $current_time - $org_time ) ) {
 			$post_time = sprintf(
 				/* translators: %s: Time ago date format */
-				esc_html__( '%s ago', 'newskit' ),
+				esc_html__( '%s ago', 'gulir' ),
 				human_time_diff( $org_time, $current_time )
 			);
 		}
@@ -743,23 +743,23 @@ function newskit_math_to_time_ago( $post_time, $format, $post, $updated ) {
 /**
  * Apply time ago format to publish dates if enabled.
  */
-function newskit_convert_to_time_ago( $post_time, $format, $post ) {
+function gulir_convert_to_time_ago( $post_time, $format, $post ) {
 	// Don't override specifically requested formats.
 	if ( empty( $format ) ) {
-		$post_time = newskit_math_to_time_ago( $post_time, $format, $post, false );
+		$post_time = gulir_math_to_time_ago( $post_time, $format, $post, false );
 	}
 	return $post_time;
 }
-add_filter( 'get_the_date', 'newskit_convert_to_time_ago', 10, 3 );
-add_filter( 'newskit_blocks_formatted_displayed_post_date', function($date_formatted, $post){
-	return newskit_math_to_time_ago( $date_formatted, '', $post, false );
+add_filter( 'get_the_date', 'gulir_convert_to_time_ago', 10, 3 );
+add_filter( 'gulir_blocks_formatted_displayed_post_date', function($date_formatted, $post){
+	return gulir_math_to_time_ago( $date_formatted, '', $post, false );
 }, 10, 3 );
 
 /**
  * Apply time ago format to modified dates if enabled.
  */
-function newskit_convert_modified_to_time_ago( $post_time, $format, $post ) {
-	return newskit_math_to_time_ago( $post_time, $format, $post, true );
+function gulir_convert_modified_to_time_ago( $post_time, $format, $post ) {
+	return gulir_math_to_time_ago( $post_time, $format, $post, true );
 }
 
 /**
@@ -767,28 +767,28 @@ function newskit_convert_modified_to_time_ago( $post_time, $format, $post ) {
  *
  * @return array Array of post type slugs.
  */
-function newskit_get_updated_date_supported_post_types() {
+function gulir_get_updated_date_supported_post_types() {
 	/**
 	 * Filter post types that support the updated date functionality.
 	 *
 	 * @return array Array of post type slugs.
 	 */
-	return apply_filters( 'newskit_updated_date_supported_post_types', array( 'post' ) );
+	return apply_filters( 'gulir_updated_date_supported_post_types', array( 'post' ) );
 }
 
 /**
  * Check whether updated date should be displayed.
  */
-function newskit_should_display_updated_date() {
-	$supported_post_types = newskit_get_updated_date_supported_post_types();
+function gulir_should_display_updated_date() {
+	$supported_post_types = gulir_get_updated_date_supported_post_types();
 	if ( ! is_singular( $supported_post_types ) ) {
 		return false;
 	}
 
 	$show_updated_date_sitewide = get_theme_mod( 'post_updated_date', false );
 
-	$hide_updated_date_post     = get_post_meta( get_the_ID(), 'newskit_hide_updated_date', true );
-	$show_updated_date_post     = get_post_meta( get_the_ID(), 'newskit_show_updated_date', true ) && ! $show_updated_date_sitewide;
+	$hide_updated_date_post     = get_post_meta( get_the_ID(), 'gulir_hide_updated_date', true );
+	$show_updated_date_post     = get_post_meta( get_the_ID(), 'gulir_show_updated_date', true ) && ! $show_updated_date_sitewide;
 
 	if ( ( $show_updated_date_sitewide && ! $hide_updated_date_post ) || $show_updated_date_post ) {
 		$post          = get_post();
@@ -815,7 +815,7 @@ function newskit_should_display_updated_date() {
  *
  * @param string $prefix Text to prepend the ID with.
  */
-function newskit_search_id( $prefix = '' ) {
+function gulir_search_id( $prefix = '' ) {
 	static $id_counter = 0;
 	return $prefix . ( string ) ++$id_counter;
 }
@@ -823,13 +823,13 @@ function newskit_search_id( $prefix = '' ) {
 /**
  * Check whether there's a Post Summary, and return it.
  */
-function newskit_has_post_summary() {
+function gulir_has_post_summary() {
 	if ( ! is_singular( 'post' ) ) {
 		return;
 	}
 
 	$post    = get_post();
-	$summary = get_post_meta( $post->ID, 'newskit_article_summary', true );
+	$summary = get_post_meta( $post->ID, 'gulir_article_summary', true );
 
 	return trim( $summary );
 }
@@ -839,9 +839,9 @@ function newskit_has_post_summary() {
  *
  * @param string $summary The post summary.
  */
-function newskit_post_summary_markup( $summary ) {
+function gulir_post_summary_markup( $summary ) {
 	$post          = get_post();
-	$summary_title = get_post_meta( $post->ID, 'newskit_article_summary_title', true );
+	$summary_title = get_post_meta( $post->ID, 'gulir_article_summary_title', true );
 	ob_start();
 	?>
 	<div class="article-summary">
@@ -859,30 +859,30 @@ function newskit_post_summary_markup( $summary ) {
  *
  * @param string $content The post content.
  */
-function newskit_inject_post_summary( $content ) {
+function gulir_inject_post_summary( $content ) {
 	if ( ! is_singular( 'post' ) ) {
 		return $content;
 	}
-	$summary = newskit_has_post_summary();
+	$summary = gulir_has_post_summary();
 	if ( ! $summary ) {
 		return $content;
 	}
 
-	return newskit_post_summary_markup( $summary ) . $content;
+	return gulir_post_summary_markup( $summary ) . $content;
 }
-add_filter( 'the_content', 'newskit_inject_post_summary', 11 );
+add_filter( 'the_content', 'gulir_inject_post_summary', 11 );
 
 /**
  * Change the number of corrections per page for the Corrections archive.
  *
  * @param WP_Query $query The WP_Query instance.
  */
-function newskit_corrections_per_page( $query ) {
+function gulir_corrections_per_page( $query ) {
 	if (
-		! class_exists( 'Newskit\Corrections' )
+		! class_exists( 'Gulir\Corrections' )
 		|| is_admin()
 		|| ! $query->is_main_query()
-		|| ! is_post_type_archive( \Newskit\Corrections::POST_TYPE )
+		|| ! is_post_type_archive( \Gulir\Corrections::POST_TYPE )
 	) {
 		return;
 	}
@@ -893,4 +893,4 @@ function newskit_corrections_per_page( $query ) {
 
 	return $query;
 }
-add_filter( 'pre_get_posts', 'newskit_corrections_per_page' );
+add_filter( 'pre_get_posts', 'gulir_corrections_per_page' );

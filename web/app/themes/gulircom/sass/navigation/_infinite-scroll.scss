@@ -32,7 +32,7 @@
 .site-main #infinite-handle span {
 	background: transparent;
 	display: block;
-	font-size: var(--newskit-font-size-sm);
+	font-size: var(--gulir-font-size-sm);
 	text-align: center;
 }
 
@@ -41,20 +41,20 @@
 .site-main #infinite-handle span button:focus {
 	@include utilities.button-transition;
 
-	background: var(--newskit-color-secondary);
-	color: var(--newskit-color-bg-body);
-	font-family: var(--newskit-font-heading);
+	background: var(--gulir-color-secondary);
+	color: var(--gulir-color-bg-body);
+	font-family: var(--gulir-font-heading);
 	font-weight: 700;
-	line-height: var(--newskit-font-line-height-heading);
+	line-height: var(--gulir-font-line-height-heading);
 	padding: ( structure.$size__spacing-unit * 0.76 ) structure.$size__spacing-unit;
 
 	&:hover {
-		background: var(--newskit-color-bg-button-hover);
+		background: var(--gulir-color-bg-button-hover);
 		cursor: pointer;
 	}
 
 	&:focus {
-		background: var(--newskit-color-bg-button-hover);
+		background: var(--gulir-color-bg-button-hover);
 		outline: thin dotted;
 		outline-offset: -4px;
 	}

@@ -4,7 +4,7 @@
  *
  * @link https://wp.stories.google/
  *
- * @package Newskit
+ * @package Gulir
  */
 
 /**
@@ -12,17 +12,17 @@
  *
  * @return void
  */
-function newskit_web_stories_setup() {
+function gulir_web_stories_setup() {
 	add_theme_support( 'web-stories' );
 }
-add_action( 'after_setup_theme', 'newskit_web_stories_setup' );
+add_action( 'after_setup_theme', 'gulir_web_stories_setup' );
 
 /**
  * Custom render function for Web Stories embedding.
  */
-function newskit_web_stories_embed() {
+function gulir_web_stories_embed() {
 	if ( function_exists( '\Google\Web_Stories\render_theme_stories' ) ) {
 		\Google\Web_Stories\render_theme_stories();
 	}
 }
-add_action( 'wp_body_open', 'newskit_web_stories_embed' );
+add_action( 'wp_body_open', 'gulir_web_stories_embed' );

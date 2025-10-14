@@ -1,7 +1,7 @@
 @use "../mixins/mixins-main";
 @use "../mixins/utilities";
 
-.newskit-pattern {
+.gulir-pattern {
 	/* Subscribe Style 5 */
 
 	&.subscribe__style-5 {
@@ -61,7 +61,7 @@
 			}
 		}
 
-		.newskit-pattern__heading + p {
+		.gulir-pattern__heading + p {
 			font-size: 0.8em;
 		}
 
@@ -92,7 +92,7 @@
 			padding: 0;
 		}
 
-		.newskit-lightbox & {
+		.gulir-lightbox & {
 			margin: -32px;
 
 			~ .popup-not-interested-form {
@@ -145,7 +145,7 @@
 			}
 		}
 
-		.newskit-pattern__inner {
+		.gulir-pattern__inner {
 			.wp-block-group__inner-container {
 				padding: 36px;
 
@@ -155,7 +155,7 @@
 			}
 		}
 
-		.newskit-pattern__heading + p {
+		.gulir-pattern__heading + p {
 			font-size: 0.8em;
 		}
 
@@ -165,7 +165,7 @@
 			padding: 0;
 		}
 
-		.newskit-lightbox & {
+		.gulir-lightbox & {
 			margin: -32px;
 
 			~ .popup-not-interested-form {
@@ -217,7 +217,7 @@
 			}
 		}
 
-		.newskit-pattern__heading + p {
+		.gulir-pattern__heading + p {
 			font-size: 0.8em;
 		}
 
@@ -227,9 +227,9 @@
 			padding: 32px;
 		}
 
-		.newskit-lightbox & {
+		.gulir-lightbox & {
 			~ .popup-dismiss-form {
-				.newskit-lightbox__close {
+				.gulir-lightbox__close {
 					height: 32px;
 					padding: 0;
 					width: 32px;

@@ -3,13 +3,13 @@
  * Jetpack Compatibility File
  * See: http://jetpack.com/
  *
- * @package Newskit
+ * @package Gulir
  */
 
 /**
  * Set up theme support for Jetpack.
  */
-function newskit_jetpack_setup() {
+function gulir_jetpack_setup() {
 	/**
 	 * Add theme support for Infinite Scroll.
 	 */
@@ -17,7 +17,7 @@ function newskit_jetpack_setup() {
 		'infinite-scroll',
 		array(
 			'container' => 'main',
-			'render'    => 'newskit_infinite_scroll_render',
+			'render'    => 'gulir_infinite_scroll_render',
 			'footer'    => 'page',
 			'wrapper'   => false,
 		)
@@ -39,7 +39,7 @@ function newskit_jetpack_setup() {
 				'excerpt',
 			),
 			'post-details'    => array(
-				'stylesheet' => 'newskit-style',
+				'stylesheet' => 'gulir-style',
 				'date'       => '.posted-on',
 				'categories' => '.cat-links:not(.sponsor-label)',
 				'tags'       => '.tags-links',
@@ -51,12 +51,12 @@ function newskit_jetpack_setup() {
 		)
 	);
 }
-add_action( 'after_setup_theme', 'newskit_jetpack_setup' );
+add_action( 'after_setup_theme', 'gulir_jetpack_setup' );
 
 /**
  * Custom render function for Infinite Scroll.
  */
-function newskit_infinite_scroll_render() {
+function gulir_infinite_scroll_render() {
 	while ( have_posts() ) {
 		the_post();
 		if ( is_archive() ) {
@@ -70,7 +70,7 @@ function newskit_infinite_scroll_render() {
 /**
  * Toggle between click to load or scroll to load for infinite scroll.
  */
-function newskit_toggle_infinite_scroll_type() {
+function gulir_toggle_infinite_scroll_type() {
 	if ( is_active_sidebar( 'footer-1' ) ) {
 		return true;
 	}
@@ -79,52 +79,52 @@ function newskit_toggle_infinite_scroll_type() {
 	}
 	return false;
 }
-add_filter( 'infinite_scroll_has_footer_widgets', 'newskit_toggle_infinite_scroll_type' );
+add_filter( 'infinite_scroll_has_footer_widgets', 'gulir_toggle_infinite_scroll_type' );
 
 
 /**
  * Remove Jetpack Share icons from standard location so they can be moved.
  */
-function newskit_remove_jetpack_share() {
+function gulir_remove_jetpack_share() {
 	remove_filter( 'the_content', 'sharing_display', 19 );
 	remove_filter( 'the_excerpt', 'sharing_display', 19 );
 }
-add_action( 'loop_start', 'newskit_remove_jetpack_share' );
+add_action( 'loop_start', 'gulir_remove_jetpack_share' );
 
 /**
  * Alter gallery widget default width.
  */
-function newskit_gallery_widget_content_width( $width ) {
+function gulir_gallery_widget_content_width( $width ) {
 	return 390;
 }
-add_filter( 'gallery_widget_content_width', 'newskit_gallery_widget_content_width' );
+add_filter( 'gallery_widget_content_width', 'gulir_gallery_widget_content_width' );
 
 /**
  * Increase the size of the thumbnails in the Top Posts widget.
  */
-function newskit_custom_top_posts_thumb_size( $get_image_options ) {
+function gulir_custom_top_posts_thumb_size( $get_image_options ) {
 	$get_image_options['avatar_size'] = 240;
 	return $get_image_options;
 }
-add_filter( 'jetpack_top_posts_widget_image_options', 'newskit_custom_top_posts_thumb_size' );
+add_filter( 'jetpack_top_posts_widget_image_options', 'gulir_custom_top_posts_thumb_size' );
 
 /**
  * Increase the size of images when using the One Column, One Column Wide, or No Header/Footer templates.
  *
  * @param int $content_width The content width.
  */
-function newskit_change_content_width( $content_width ){
+function gulir_change_content_width( $content_width ){
 	if ( ! is_front_page() && is_page_template( 'single-wide.php' ) || is_page_template( 'single-feature.php' ) || is_page_template( 'no-header-footer.php' ) ) {
 		return 2000;
 	}
 	return $content_width;
 }
-add_filter( 'jetpack_content_width', 'newskit_change_content_width' );
+add_filter( 'jetpack_content_width', 'gulir_change_content_width' );
 
 /**
  * Alter featured-image default visibility for content-options.
  */
-function newskit_override_post_thumbnail( $width ) {
+function gulir_override_post_thumbnail( $width ) {
 	$options         = get_theme_support( 'jetpack-content-options' );
 	$featured_images = ( ! empty( $options[0]['featured-images'] ) ) ? $options[0]['featured-images'] : null;
 
@@ -154,4 +154,4 @@ function newskit_override_post_thumbnail( $width ) {
 		return ! post_password_required() && ! is_attachment() && has_post_thumbnail();
 	}
 }
-add_filter( 'newskit_can_show_post_thumbnail', 'newskit_override_post_thumbnail', 10, 2 );
+add_filter( 'gulir_can_show_post_thumbnail', 'gulir_override_post_thumbnail', 10, 2 );

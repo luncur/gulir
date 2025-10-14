@@ -14,30 +14,30 @@ class RadioCustom extends Component {
 		return (
 			<RadioControl
 				label={__('Featured Image Position')}
-				selected={meta.newskit_featured_image_position}
+				selected={meta.gulir_featured_image_position}
 				options={[
 					{
 						label: __(
 							'Default (set in Customizer)',
-							'newskit'
+							'gulir'
 						),
 						value: '',
 					},
-					{ label: __('Large', 'newskit'), value: 'large' },
-					{ label: __('Small', 'newskit'), value: 'small' },
+					{ label: __('Large', 'gulir'), value: 'large' },
+					{ label: __('Small', 'gulir'), value: 'small' },
 					{
-						label: __('Behind article title', 'newskit'),
+						label: __('Behind article title', 'gulir'),
 						value: 'behind',
 					},
 					{
-						label: __('Beside article title', 'newskit'),
+						label: __('Beside article title', 'gulir'),
 						value: 'beside',
 					},
 					{
-						label: __('Above article title', 'newskit'),
+						label: __('Above article title', 'gulir'),
 						value: 'above',
 					},
-					{ label: __('Hidden', 'newskit'), value: 'hidden' },
+					{ label: __('Hidden', 'gulir'), value: 'hidden' },
 				]}
 				onChange={value => {
 					this.setState({ value });
@@ -63,7 +63,7 @@ const ComposedRadio = compose([
 		updateFeaturedImagePosition(value, meta) {
 			meta = {
 				...meta,
-				newskit_featured_image_position: value,
+				gulir_featured_image_position: value,
 			};
 			dispatch('core/editor').editPost({ meta });
 		},
@@ -76,7 +76,7 @@ const wrapPostFeaturedImage = OriginalComponent => {
 		const post_type = select('core/editor').getCurrentPostType();
 
 		// eslint-disable-next-line no-undef
-		if (!newskit_theme_featured_image_post_types.includes(post_type)) {
+		if (!gulir_theme_featured_image_post_types.includes(post_type)) {
 			return <OriginalComponent {...props} />;
 		}
 

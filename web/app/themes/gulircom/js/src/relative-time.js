@@ -1,4 +1,4 @@
-/* globals newskit_relative_time */
+/* globals gulir_relative_time */
 document.addEventListener('DOMContentLoaded', () => {
 
 	/**
@@ -41,8 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	if (entry_dates.length < 1) {
 		return;
 	}
-	const locale = newskit_relative_time.language_tag || 'en-US';
-	const cutoff_in_days = parseInt(newskit_relative_time.cutoff, 10) || 14;
+	const locale = gulir_relative_time.language_tag || 'en-US';
+	const cutoff_in_days = parseInt(gulir_relative_time.cutoff, 10) || 14;
 	const cutoff = cutoff_in_days * 60 * 60 * 24;
 
 	const rtf = new Intl.RelativeTimeFormat(locale, {

@@ -4,7 +4,7 @@
 // Site branding
 .site-branding {
 	align-items: center;
-	color: var(--newskit-color-text-light);
+	color: var(--gulir-color-text-light);
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: flex-start;
@@ -53,30 +53,30 @@
 
 // Site title
 .site-title {
-	color: var(--newskit-color-text-main);
+	color: var(--gulir-color-text-main);
 	font-weight: 700;
 	margin: 0;
 
 	a {
-		color: var(--newskit-color-text-main);
+		color: var(--gulir-color-text-main);
 
 		&:link,
 		&:visited {
-			color: var(--newskit-color-text-main);
+			color: var(--gulir-color-text-main);
 		}
 
 		&:hover {
-			color: var(--newskit-color-text-hover);
+			color: var(--gulir-color-text-hover);
 		}
 	}
 }
 
 // Site description
 .site-description {
-	color: var(--newskit-color-text-light);
+	color: var(--gulir-color-text-light);
 	display: none;
 	font-weight: normal;
-	font-size: var(--newskit-font-size-sm);
+	font-size: var(--gulir-font-size-sm);
 	font-style: italic;
 	margin: 0;
 	padding: 0 structure.$size__spacing-unit;
@@ -128,8 +128,8 @@
 .bottom-header-contain {
 	.wrapper {
 		@include utilities.media( tablet ) {
-			border-bottom: 1px solid var(--newskit-color-border);
-			border-top: 1px solid var(--newskit-color-border);
+			border-bottom: 1px solid var(--gulir-color-border);
+			border-top: 1px solid var(--gulir-color-border);
 		}
 	}
 }
@@ -201,7 +201,7 @@
 
 .h-db {
 	.middle-header-contain {
-		border-bottom: 1px solid var(--newskit-color-border);
+		border-bottom: 1px solid var(--gulir-color-border);
 
 		@include utilities.media( tablet ) {
 			border-bottom: 0;
@@ -321,16 +321,16 @@
 	.middle-header-contain,
 	.middle-header-contain .nav1 .main-menu > li,
 	.middle-header-contain .nav1 .main-menu > li > a {
-		color: var(--newskit-color-against-primary);
+		color: var(--gulir-color-against-primary);
 	}
 
 	.top-header-contain {
-		background-color: var(--newskit-color-primary-darken-5);
-		border-bottom: var(--newskit-color-primary-darken-10);
+		background-color: var(--gulir-color-primary-darken-5);
+		border-bottom: var(--gulir-color-primary-darken-10);
 	}
 
 	.middle-header-contain {
-		background-color: var(--newskit-color-primary);
+		background-color: var(--gulir-color-primary);
 
 		.wrapper {
 			@include utilities.media( tablet ) {
@@ -400,7 +400,7 @@
 
 	// Default background color.
 	&.h-db .middle-header-contain {
-		border-bottom: 1px solid var(--newskit-color-border);
+		border-bottom: 1px solid var(--gulir-color-border);
 	}
 
 	.middle-header-contain .wrapper {
@@ -446,7 +446,7 @@
 
 		// Default header background colour
 		&.h-db .middle-header-contain {
-			border-bottom: 1px solid var(--newskit-color-border);
+			border-bottom: 1px solid var(--gulir-color-border);
 		}
 
 		.middle-header-contain {
@@ -544,7 +544,7 @@
 // Sticky header
 .h-stk {
 	.site-header {
-		background: var(--newskit-color-bg-body);
+		background: var(--gulir-color-bg-body);
 		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 		position: sticky;
 		top: 0;
@@ -567,8 +567,8 @@
 		}
 
 		&.h-db .bottom-header-contain {
-			border-bottom: 1px solid var(--newskit-color-border);
-			border-top: 1px solid var(--newskit-color-border);
+			border-bottom: 1px solid var(--gulir-color-border);
+			border-top: 1px solid var(--gulir-color-border);
 			.wrapper {
 				border: 0;
 			}

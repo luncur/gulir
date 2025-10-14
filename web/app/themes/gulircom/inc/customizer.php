@@ -1,8 +1,8 @@
 <?php
 /**
- * Newskit Theme: Customizer
+ * Gulir Theme: Customizer
  *
- * @package Newskit
+ * @package Gulir
  */
 
 /**
@@ -10,25 +10,25 @@
  *
  * @param WP_Customize_Manager $wp_customize Theme Customizer object.
  */
-function newskit_customize_register( $wp_customize ) {
+function gulir_customize_register( $wp_customize ) {
 	$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
 	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
 	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
-	$wp_customize->get_control( 'header_text' )->label          = __( 'Display Site Title', 'newskit' );
+	$wp_customize->get_control( 'header_text' )->label          = __( 'Display Site Title', 'gulir' );
 
 	if ( isset( $wp_customize->selective_refresh ) ) {
 		$wp_customize->selective_refresh->add_partial(
 			'blogname',
 			array(
 				'selector'        => '.site-title a',
-				'render_callback' => 'newskit_customize_partial_blogname',
+				'render_callback' => 'gulir_customize_partial_blogname',
 			)
 		);
 		$wp_customize->selective_refresh->add_partial(
 			'blogdescription',
 			array(
 				'selector'        => '.site-description',
-				'render_callback' => 'newskit_customize_partial_blogdescription',
+				'render_callback' => 'gulir_customize_partial_blogdescription',
 			)
 		);
 	}
@@ -37,9 +37,9 @@ function newskit_customize_register( $wp_customize ) {
 	 * Header Options
 	 */
 	$wp_customize->add_panel(
-		'newskit_header_options',
+		'gulir_header_options',
 		array(
-			'title' => esc_html__( 'Header Settings', 'newskit' ),
+			'title' => esc_html__( 'Header Settings', 'gulir' ),
 		)
 	);
 
@@ -49,8 +49,8 @@ function newskit_customize_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'header_section_appearance',
 		array(
-			'title' => esc_html__( 'Appearance', 'newskit' ),
-			'panel' => 'newskit_header_options',
+			'title' => esc_html__( 'Appearance', 'gulir' ),
+			'panel' => 'gulir_header_options',
 		)
 	);
 
@@ -59,15 +59,15 @@ function newskit_customize_register( $wp_customize ) {
 		'header_center_logo',
 		array(
 			'default'           => false,
-			'sanitize_callback' => 'newskit_sanitize_checkbox',
+			'sanitize_callback' => 'gulir_sanitize_checkbox',
 		)
 	);
 	$wp_customize->add_control(
 		'header_center_logo',
 		array(
 			'type'        => 'checkbox',
-			'label'       => esc_html__( 'Center Logo', 'newskit' ),
-			'description' => esc_html__( 'Check to center the logo in the header.', 'newskit' ),
+			'label'       => esc_html__( 'Center Logo', 'gulir' ),
+			'description' => esc_html__( 'Check to center the logo in the header.', 'gulir' ),
 			'section'     => 'header_section_appearance',
 		)
 	);
@@ -77,15 +77,15 @@ function newskit_customize_register( $wp_customize ) {
 		'header_solid_background',
 		array(
 			'default'           => false,
-			'sanitize_callback' => 'newskit_sanitize_checkbox',
+			'sanitize_callback' => 'gulir_sanitize_checkbox',
 		)
 	);
 	$wp_customize->add_control(
 		'header_solid_background',
 		array(
 			'type'        => 'checkbox',
-			'label'       => esc_html__( 'Solid Background', 'newskit' ),
-			'description' => esc_html__( 'Check to use the primary color as the header background. Can be changed under "Colors".', 'newskit' ),
+			'label'       => esc_html__( 'Solid Background', 'gulir' ),
+			'description' => esc_html__( 'Check to use the primary color as the header background. Can be changed under "Colors".', 'gulir' ),
 			'section'     => 'header_section_appearance',
 		)
 	);
@@ -95,15 +95,15 @@ function newskit_customize_register( $wp_customize ) {
 		'header_simplified',
 		array(
 			'default'           => false,
-			'sanitize_callback' => 'newskit_sanitize_checkbox',
+			'sanitize_callback' => 'gulir_sanitize_checkbox',
 		)
 	);
 	$wp_customize->add_control(
 		'header_simplified',
 		array(
 			'type'        => 'checkbox',
-			'label'       => esc_html__( 'Short Header', 'newskit' ),
-			'description' => esc_html__( 'Displays header as a shorter, simpler version.', 'newskit' ),
+			'label'       => esc_html__( 'Short Header', 'gulir' ),
+			'description' => esc_html__( 'Displays header as a shorter, simpler version.', 'gulir' ),
 			'section'     => 'header_section_appearance',
 		)
 	);
@@ -113,15 +113,15 @@ function newskit_customize_register( $wp_customize ) {
 		'header_sticky',
 		array(
 			'default'           => false,
-			'sanitize_callback' => 'newskit_sanitize_checkbox',
+			'sanitize_callback' => 'gulir_sanitize_checkbox',
 		)
 	);
 	$wp_customize->add_control(
 		'header_sticky',
 		array(
 			'type'        => 'checkbox',
-			'label'       => esc_html__( 'Sticky Header', 'newskit' ),
-			'description' => esc_html__( 'Makes header "stick" to the top of the page on scroll. Forces a fixed height.', 'newskit' ),
+			'label'       => esc_html__( 'Sticky Header', 'gulir' ),
+			'description' => esc_html__( 'Makes header "stick" to the top of the page on scroll. Forces a fixed height.', 'gulir' ),
 			'section'     => 'header_section_appearance',
 		)
 	);
@@ -132,8 +132,8 @@ function newskit_customize_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'header_section_slideout',
 		array(
-			'title' => esc_html__( 'Slide-out Sidebar', 'newskit' ),
-			'panel' => 'newskit_header_options',
+			'title' => esc_html__( 'Slide-out Sidebar', 'gulir' ),
+			'panel' => 'gulir_header_options',
 		)
 	);
 
@@ -142,18 +142,18 @@ function newskit_customize_register( $wp_customize ) {
 		'header_show_slideout',
 		array(
 			'default'           => false,
-			'sanitize_callback' => 'newskit_sanitize_checkbox',
+			'sanitize_callback' => 'gulir_sanitize_checkbox',
 		)
 	);
 	$wp_customize->add_control(
 		'header_show_slideout',
 		array(
 			'type'        => 'checkbox',
-			'label'       => esc_html__( 'Show Slide-out Sidebar', 'newskit' ),
+			'label'       => esc_html__( 'Show Slide-out Sidebar', 'gulir' ),
 			'description' => sprintf(
 				/* translators: %s: link to Slide Out Sidebar widget panel in Customizer. */
-				esc_html__( 'Show a Slide-out sidebar in the header, which you can populate by adding widgets %1$s.', 'newskit' ),
-				'<a rel="goto-section" href="#sidebar-widgets-header-1">' . __( 'here', 'newskit' ) . '</a>'
+				esc_html__( 'Show a Slide-out sidebar in the header, which you can populate by adding widgets %1$s.', 'gulir' ),
+				'<a rel="goto-section" href="#sidebar-widgets-header-1">' . __( 'here', 'gulir' ) . '</a>'
 			),
 			'section'     => 'header_section_slideout',
 		)
@@ -163,7 +163,7 @@ function newskit_customize_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'slideout_label',
 		array(
-			'default'           => esc_html__( 'Menu', 'newskit' ),
+			'default'           => esc_html__( 'Menu', 'gulir' ),
 			'sanitize_callback' => 'sanitize_text_field',
 		)
 	);
@@ -171,8 +171,8 @@ function newskit_customize_register( $wp_customize ) {
 		'slideout_label',
 		array(
 			'type'        => 'text',
-			'label'       => esc_html__( 'Slide-out Sidebar Text', 'newskit' ),
-			'description' => esc_html__( 'Use this field to change the text on the Slide-out Sidebar toggle. The text is not visible when using the short header, but can always be read by screen readers.', 'newskit' ),
+			'label'       => esc_html__( 'Slide-out Sidebar Text', 'gulir' ),
+			'description' => esc_html__( 'Use this field to change the text on the Slide-out Sidebar toggle. The text is not visible when using the short header, but can always be read by screen readers.', 'gulir' ),
 			'section'     => 'header_section_slideout',
 		)
 	);
@@ -182,15 +182,15 @@ function newskit_customize_register( $wp_customize ) {
 		'slideout_widget_mobile',
 		array(
 			'default'           => false,
-			'sanitize_callback' => 'newskit_sanitize_checkbox',
+			'sanitize_callback' => 'gulir_sanitize_checkbox',
 		)
 	);
 	$wp_customize->add_control(
 		'slideout_widget_mobile',
 		array(
 			'type'        => 'checkbox',
-			'label'       => esc_html__( 'Add slide-out widgets to mobile menu', 'newskit' ),
-			'description' => esc_html__( 'Adds the widgets assigned to the Slide-out Sidebar area to the mobile menu, too.', 'newskit' ),
+			'label'       => esc_html__( 'Add slide-out widgets to mobile menu', 'gulir' ),
+			'description' => esc_html__( 'Adds the widgets assigned to the Slide-out Sidebar area to the mobile menu, too.', 'gulir' ),
 			'section'     => 'header_section_slideout',
 		)
 	);
@@ -200,17 +200,17 @@ function newskit_customize_register( $wp_customize ) {
 		'slideout_sidebar_side',
 		array(
 			'default'           => 'left',
-			'sanitize_callback' => 'newskit_sanitize_slideout_sidebar_side',
+			'sanitize_callback' => 'gulir_sanitize_slideout_sidebar_side',
 		)
 	);
 	$wp_customize->add_control(
 		'slideout_sidebar_side',
 		array(
 			'type'    => 'radio',
-			'label'   => esc_html__( 'Slide-out sidebar side', 'newskit' ),
+			'label'   => esc_html__( 'Slide-out sidebar side', 'gulir' ),
 			'choices' => array(
-				'left'  => _x( 'Left', 'slide-out menu side', 'newskit' ),
-				'right' => _x( 'Right', 'slide-out menu side', 'newskit' ),
+				'left'  => _x( 'Left', 'slide-out menu side', 'gulir' ),
+				'right' => _x( 'Right', 'slide-out menu side', 'gulir' ),
 			),
 			'section' => 'header_section_slideout',
 		)
@@ -222,8 +222,8 @@ function newskit_customize_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'header_section_subpages',
 		array(
-			'title' => esc_html__( 'Subpage Header', 'newskit' ),
-			'panel' => 'newskit_header_options',
+			'title' => esc_html__( 'Subpage Header', 'gulir' ),
+			'panel' => 'gulir_header_options',
 		)
 	);
 
@@ -232,15 +232,15 @@ function newskit_customize_register( $wp_customize ) {
 		'header_sub_simplified',
 		array(
 			'default'           => false,
-			'sanitize_callback' => 'newskit_sanitize_checkbox',
+			'sanitize_callback' => 'gulir_sanitize_checkbox',
 		)
 	);
 	$wp_customize->add_control(
 		'header_sub_simplified',
 		array(
 			'type'        => 'checkbox',
-			'label'       => esc_html__( 'Use simple header on subpages', 'newskit' ),
-			'description' => esc_html__( 'On posts, pages, archive and search results, use a header that only displays the site logo and search icon, with all menus hidden under a toggle.', 'newskit' ),
+			'label'       => esc_html__( 'Use simple header on subpages', 'gulir' ),
+			'description' => esc_html__( 'On posts, pages, archive and search results, use a header that only displays the site logo and search icon, with all menus hidden under a toggle.', 'gulir' ),
 			'section'     => 'header_section_subpages',
 		)
 	);
@@ -251,8 +251,8 @@ function newskit_customize_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'header_section_cta',
 		array(
-			'title' => esc_html__( 'Mobile Call-to-Action', 'newskit' ),
-			'panel' => 'newskit_header_options',
+			'title' => esc_html__( 'Mobile Call-to-Action', 'gulir' ),
+			'panel' => 'gulir_header_options',
 		)
 	);
 
@@ -261,15 +261,15 @@ function newskit_customize_register( $wp_customize ) {
 		'show_header_cta',
 		array(
 			'default'           => false,
-			'sanitize_callback' => 'newskit_sanitize_checkbox',
+			'sanitize_callback' => 'gulir_sanitize_checkbox',
 		)
 	);
 	$wp_customize->add_control(
 		'show_header_cta',
 		array(
 			'type'        => 'checkbox',
-			'label'       => esc_html__( 'Show Mobile CTA', 'newskit' ),
-			'description' => esc_html__( 'Show an essential call-to-action button in the mobile header, that is always visible.', 'newskit' ),
+			'label'       => esc_html__( 'Show Mobile CTA', 'gulir' ),
+			'description' => esc_html__( 'Show an essential call-to-action button in the mobile header, that is always visible.', 'gulir' ),
 			'section'     => 'header_section_cta',
 		)
 	);
@@ -278,7 +278,7 @@ function newskit_customize_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'header_cta_text',
 		array(
-			'default'           => esc_html__( 'Donate', 'newskit' ),
+			'default'           => esc_html__( 'Donate', 'gulir' ),
 			'sanitize_callback' => 'sanitize_text_field',
 		)
 	);
@@ -286,7 +286,7 @@ function newskit_customize_register( $wp_customize ) {
 		'header_cta_text',
 		array(
 			'type'    => 'text',
-			'label'   => esc_html__( 'Button Text', 'newskit' ),
+			'label'   => esc_html__( 'Button Text', 'gulir' ),
 			'section' => 'header_section_cta',
 		)
 	);
@@ -303,7 +303,7 @@ function newskit_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'header_cta_url',
 		array(
-			'label'   => esc_html__( 'Button URL', 'newskit' ),
+			'label'   => esc_html__( 'Button URL', 'gulir' ),
 			'type'    => 'text',
 			'section' => 'header_section_cta',
 		)
@@ -314,14 +314,14 @@ function newskit_customize_register( $wp_customize ) {
 		'header_cta_target',
 		array(
 			'default'           => false,
-			'sanitize_callback' => 'newskit_sanitize_checkbox',
+			'sanitize_callback' => 'gulir_sanitize_checkbox',
 		)
 	);
 
 	$wp_customize->add_control(
 		'header_cta_target',
 		array(
-			'label'   => esc_html__( 'Open link in new window', 'newskit' ),
+			'label'   => esc_html__( 'Open link in new window', 'gulir' ),
 			'type'    => 'checkbox',
 			'section' => 'header_section_cta',
 		)
@@ -332,7 +332,7 @@ function newskit_customize_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'header_cta_hex',
 		array(
-			'default'           => newskit_get_mobile_cta_color(),
+			'default'           => gulir_get_mobile_cta_color(),
 			'sanitize_callback' => 'sanitize_hex_color',
 		)
 	);
@@ -342,8 +342,8 @@ function newskit_customize_register( $wp_customize ) {
 			$wp_customize,
 			'header_cta_hex',
 			array(
-				'label'       => esc_html__( 'Background Color', 'newskit' ),
-				'description' => __( 'Selecting a strong, non-palette color is recommended to ensure the CTA stands out.', 'newskit' ),
+				'label'       => esc_html__( 'Background Color', 'gulir' ),
+				'description' => __( 'Selecting a strong, non-palette color is recommended to ensure the CTA stands out.', 'gulir' ),
 				'section'     => 'header_section_cta',
 			)
 		)
@@ -354,21 +354,21 @@ function newskit_customize_register( $wp_customize ) {
 		'cta_in_simplified_header',
 		array(
 			'default'           => false,
-			'sanitize_callback' => 'newskit_sanitize_checkbox',
+			'sanitize_callback' => 'gulir_sanitize_checkbox',
 		)
 	);
 	$wp_customize->add_control(
 		'cta_in_simplified_header',
 		array(
 			'type'    => 'checkbox',
-			'label'   => esc_html__( 'Show Mobile CTA in Simplfied Subpage Header', 'newskit' ),
+			'label'   => esc_html__( 'Show Mobile CTA in Simplfied Subpage Header', 'gulir' ),
 			'section' => 'header_section_cta',
 		)
 	);
 
 	// Add option to upload logo specifically for the footer.
 	$wp_customize->add_setting(
-		'newskit_alternative_logo',
+		'gulir_alternative_logo',
 		array(
 			'default'           => '',
 			'sanitize_callback' => 'absint',
@@ -378,12 +378,12 @@ function newskit_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		new WP_Customize_Cropped_Image_Control(
 			$wp_customize,
-			'newskit_alternative_logo',
+			'gulir_alternative_logo',
 			array(
-				'label'       => esc_html__( 'Alternative Logo', 'newskit' ),
-				'description' => esc_html__( 'Upload an alternative logo to be used on posts with the featured image behind and featured image beside settings, where the logo will be overlapping.', 'newskit' ),
+				'label'       => esc_html__( 'Alternative Logo', 'gulir' ),
+				'description' => esc_html__( 'Upload an alternative logo to be used on posts with the featured image behind and featured image beside settings, where the logo will be overlapping.', 'gulir' ),
 				'section'     => 'header_section_subpages',
-				'settings'    => 'newskit_alternative_logo',
+				'settings'    => 'gulir_alternative_logo',
 				'flex_width'  => false,
 				'flex_height' => true,
 				'width'       => 400,
@@ -399,7 +399,7 @@ function newskit_customize_register( $wp_customize ) {
 		'theme_colors',
 		array(
 			'default'           => 'default',
-			'sanitize_callback' => 'newskit_sanitize_color_option',
+			'sanitize_callback' => 'gulir_sanitize_color_option',
 		)
 	);
 
@@ -407,10 +407,10 @@ function newskit_customize_register( $wp_customize ) {
 		'theme_colors',
 		array(
 			'type'    => 'radio',
-			'label'   => __( 'Colors', 'newskit' ),
+			'label'   => __( 'Colors', 'gulir' ),
 			'choices' => array(
-				'default' => _x( 'Default', 'primary color', 'newskit' ),
-				'custom'  => _x( 'Custom', 'primary color', 'newskit' ),
+				'default' => _x( 'Default', 'primary color', 'gulir' ),
+				'custom'  => _x( 'Custom', 'primary color', 'gulir' ),
 			),
 			'section' => 'colors',
 		)
@@ -420,7 +420,7 @@ function newskit_customize_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'primary_color_hex',
 		array(
-			'default'           => newskit_get_primary_color(),
+			'default'           => gulir_get_primary_color(),
 			'sanitize_callback' => 'sanitize_hex_color',
 		)
 	);
@@ -430,7 +430,7 @@ function newskit_customize_register( $wp_customize ) {
 			$wp_customize,
 			'primary_color_hex',
 			array(
-				'description' => __( 'Apply a primary custom color.', 'newskit' ),
+				'description' => __( 'Apply a primary custom color.', 'gulir' ),
 				'section'     => 'colors',
 			)
 		)
@@ -440,7 +440,7 @@ function newskit_customize_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'secondary_color_hex',
 		array(
-			'default'           => newskit_get_secondary_color(),
+			'default'           => gulir_get_secondary_color(),
 			'sanitize_callback' => 'sanitize_hex_color',
 		)
 	);
@@ -450,7 +450,7 @@ function newskit_customize_register( $wp_customize ) {
 			$wp_customize,
 			'secondary_color_hex',
 			array(
-				'description' => __( 'Apply a secondary custom color.', 'newskit' ),
+				'description' => __( 'Apply a secondary custom color.', 'gulir' ),
 				'section'     => 'colors',
 			)
 		)
@@ -463,7 +463,7 @@ function newskit_customize_register( $wp_customize ) {
 		'header_color',
 		array(
 			'default'           => 'default',
-			'sanitize_callback' => 'newskit_sanitize_color_option',
+			'sanitize_callback' => 'gulir_sanitize_color_option',
 		)
 	);
 
@@ -471,10 +471,10 @@ function newskit_customize_register( $wp_customize ) {
 		'header_color',
 		array(
 			'type'    => 'radio',
-			'label'   => __( 'Header Background Color', 'newskit' ),
+			'label'   => __( 'Header Background Color', 'gulir' ),
 			'choices' => array(
-				'default' => _x( 'Default', 'header background color', 'newskit' ),
-				'custom'  => _x( 'Custom', 'header background color', 'newskit' ),
+				'default' => _x( 'Default', 'header background color', 'gulir' ),
+				'custom'  => _x( 'Custom', 'header background color', 'gulir' ),
 			),
 			'section' => 'colors',
 		)
@@ -494,7 +494,7 @@ function newskit_customize_register( $wp_customize ) {
 			$wp_customize,
 			'header_color_hex',
 			array(
-				'description' => __( 'Apply a background color to the header.', 'newskit' ),
+				'description' => __( 'Apply a background color to the header.', 'gulir' ),
 				'section'     => 'colors',
 			)
 		)
@@ -514,7 +514,7 @@ function newskit_customize_register( $wp_customize ) {
 			$wp_customize,
 			'header_primary_menu_color_hex',
 			array(
-				'description' => __( 'Apply a background color to the primary menu.', 'newskit' ),
+				'description' => __( 'Apply a background color to the primary menu.', 'gulir' ),
 				'section'     => 'colors',
 			)
 		)
@@ -527,7 +527,7 @@ function newskit_customize_register( $wp_customize ) {
 		'footer_color',
 		array(
 			'default'           => 'default',
-			'sanitize_callback' => 'newskit_sanitize_color_option',
+			'sanitize_callback' => 'gulir_sanitize_color_option',
 		)
 	);
 
@@ -535,10 +535,10 @@ function newskit_customize_register( $wp_customize ) {
 		'footer_color',
 		array(
 			'type'    => 'radio',
-			'label'   => __( 'Footer Background Color', 'newskit' ),
+			'label'   => __( 'Footer Background Color', 'gulir' ),
 			'choices' => array(
-				'default' => _x( 'Default', 'footer background color', 'newskit' ),
-				'custom'  => _x( 'Custom', 'footer background color', 'newskit' ),
+				'default' => _x( 'Default', 'footer background color', 'gulir' ),
+				'custom'  => _x( 'Custom', 'footer background color', 'gulir' ),
 			),
 			'section' => 'colors',
 		)
@@ -558,7 +558,7 @@ function newskit_customize_register( $wp_customize ) {
 			$wp_customize,
 			'footer_color_hex',
 			array(
-				'description' => __( 'Apply a background color to the footer.', 'newskit' ),
+				'description' => __( 'Apply a background color to the footer.', 'gulir' ),
 				'section'     => 'colors',
 			)
 		)
@@ -571,7 +571,7 @@ function newskit_customize_register( $wp_customize ) {
 		'ads_color',
 		array(
 			'default'           => 'default',
-			'sanitize_callback' => 'newskit_sanitize_color_option',
+			'sanitize_callback' => 'gulir_sanitize_color_option',
 		)
 	);
 
@@ -579,10 +579,10 @@ function newskit_customize_register( $wp_customize ) {
 		'ads_color',
 		array(
 			'type'    => 'radio',
-			'label'   => __( 'Ads Background Color', 'newskit' ),
+			'label'   => __( 'Ads Background Color', 'gulir' ),
 			'choices' => array(
-				'default' => _x( 'Default', 'primary color', 'newskit' ),
-				'custom'  => _x( 'Custom', 'primary color', 'newskit' ),
+				'default' => _x( 'Default', 'primary color', 'gulir' ),
+				'custom'  => _x( 'Custom', 'primary color', 'gulir' ),
 			),
 			'section' => 'colors',
 		)
@@ -602,7 +602,7 @@ function newskit_customize_register( $wp_customize ) {
 			$wp_customize,
 			'ads_color_hex',
 			array(
-				'description' => __( 'Apply a background color to the ads.', 'newskit' ),
+				'description' => __( 'Apply a background color to the ads.', 'gulir' ),
 				'section'     => 'colors',
 			)
 		)
@@ -614,14 +614,14 @@ function newskit_customize_register( $wp_customize ) {
 		array(
 			'default'           => false,
 			'transport'         => 'postMessage',
-			'sanitize_callback' => 'newskit_sanitize_checkbox',
+			'sanitize_callback' => 'gulir_sanitize_checkbox',
 		)
 	);
 	$wp_customize->add_control(
 		'header_display_tagline',
 		array(
 			'type'    => 'checkbox',
-			'label'   => esc_html__( 'Display Tagline', 'newskit' ),
+			'label'   => esc_html__( 'Display Tagline', 'gulir' ),
 			'section' => 'title_tagline',
 		)
 	);
@@ -633,15 +633,15 @@ function newskit_customize_register( $wp_customize ) {
 			'default'           => false,
 			'type'              => 'theme_mod',
 			'transport'         => 'postMessage',
-			'sanitize_callback' => 'newskit_sanitize_checkbox',
+			'sanitize_callback' => 'gulir_sanitize_checkbox',
 		)
 	);
 
 	$wp_customize->add_control(
 		'hide_front_page_title',
 		array(
-			'label'       => esc_html__( 'Hide Homepage Title', 'newskit' ),
-			'description' => esc_html__( 'Check to hide the page title, if your homepage is set to display a static page.', 'newskit' ),
+			'label'       => esc_html__( 'Hide Homepage Title', 'gulir' ),
+			'description' => esc_html__( 'Check to hide the page title, if your homepage is set to display a static page.', 'gulir' ),
 			'section'     => 'static_front_page',
 			'priority'    => 10,
 			'type'        => 'checkbox',
@@ -651,7 +651,7 @@ function newskit_customize_register( $wp_customize ) {
 
 	// Add option to upload logo specifically for the footer.
 	$wp_customize->add_setting(
-		'newskit_footer_logo',
+		'gulir_footer_logo',
 		array(
 			'default'           => '',
 			'sanitize_callback' => 'absint',
@@ -661,12 +661,12 @@ function newskit_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		new WP_Customize_Cropped_Image_Control(
 			$wp_customize,
-			'newskit_footer_logo',
+			'gulir_footer_logo',
 			array(
-				'label'       => esc_html__( 'Footer Logo', 'newskit' ),
-				'description' => esc_html__( 'Optional alternative logo to be displayed in the footer.', 'newskit' ),
+				'label'       => esc_html__( 'Footer Logo', 'gulir' ),
+				'description' => esc_html__( 'Optional alternative logo to be displayed in the footer.', 'gulir' ),
 				'section'     => 'title_tagline',
-				'settings'    => 'newskit_footer_logo',
+				'settings'    => 'gulir_footer_logo',
 				'priority'    => 9,
 				'flex_width'  => true,
 				'flex_height' => true,
@@ -680,23 +680,23 @@ function newskit_customize_register( $wp_customize ) {
 		'footer_logo_size',
 		array(
 			'default'           => 'medium',
-			'sanitize_callback' => 'newskit_sanitize_footer_logo_size',
+			'sanitize_callback' => 'gulir_sanitize_footer_logo_size',
 		)
 	);
 
 	$wp_customize->add_control(
 		'footer_logo_size',
 		array(
-			'label'    => esc_html__( 'Footer Logo Size', 'newskit' ),
+			'label'    => esc_html__( 'Footer Logo Size', 'gulir' ),
 			'section'  => 'title_tagline',
 			'priority' => 9,
 			'type'     => 'select',
 			'settings' => 'footer_logo_size',
 			'choices'  => array(
-				'small'  => esc_html__( 'Small', 'newskit' ),
-				'medium' => esc_html__( 'Medium', 'newskit' ),
-				'large'  => esc_html__( 'Large', 'newskit' ),
-				'xlarge' => esc_html__( 'Extra Large', 'newskit' ),
+				'small'  => esc_html__( 'Small', 'gulir' ),
+				'medium' => esc_html__( 'Medium', 'gulir' ),
+				'large'  => esc_html__( 'Large', 'gulir' ),
+				'xlarge' => esc_html__( 'Extra Large', 'gulir' ),
 			),
 		)
 	);
@@ -707,7 +707,7 @@ function newskit_customize_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'author_bio_options',
 		array(
-			'title' => esc_html__( 'Author Bio Settings', 'newskit' ),
+			'title' => esc_html__( 'Author Bio Settings', 'gulir' ),
 		)
 	);
 
@@ -716,15 +716,15 @@ function newskit_customize_register( $wp_customize ) {
 		'show_author_bio',
 		array(
 			'default'           => true,
-			'sanitize_callback' => 'newskit_sanitize_checkbox',
+			'sanitize_callback' => 'gulir_sanitize_checkbox',
 		)
 	);
 	$wp_customize->add_control(
 		'show_author_bio',
 		array(
 			'type'        => 'checkbox',
-			'label'       => esc_html__( 'Display Author Bio', 'newskit' ),
-			'description' => esc_html__( 'Display Author Bio under individual posts.', 'newskit' ),
+			'label'       => esc_html__( 'Display Author Bio', 'gulir' ),
+			'description' => esc_html__( 'Display Author Bio under individual posts.', 'gulir' ),
 			'section'     => 'author_bio_options',
 		)
 	);
@@ -734,15 +734,15 @@ function newskit_customize_register( $wp_customize ) {
 		'show_author_email',
 		array(
 			'default'           => false,
-			'sanitize_callback' => 'newskit_sanitize_checkbox',
+			'sanitize_callback' => 'gulir_sanitize_checkbox',
 		)
 	);
 	$wp_customize->add_control(
 		'show_author_email',
 		array(
 			'type'        => 'checkbox',
-			'label'       => esc_html__( 'Display Author Email', 'newskit' ),
-			'description' => esc_html__( 'Display Author email with bio on individual posts and author archives.', 'newskit' ),
+			'label'       => esc_html__( 'Display Author Email', 'gulir' ),
+			'description' => esc_html__( 'Display Author email with bio on individual posts and author archives.', 'gulir' ),
 			'section'     => 'author_bio_options',
 		)
 	);
@@ -752,15 +752,15 @@ function newskit_customize_register( $wp_customize ) {
 		'show_author_social',
 		array(
 			'default'           => false,
-			'sanitize_callback' => 'newskit_sanitize_checkbox',
+			'sanitize_callback' => 'gulir_sanitize_checkbox',
 		)
 	);
 	$wp_customize->add_control(
 		'show_author_social',
 		array(
 			'type'        => 'checkbox',
-			'label'       => esc_html__( 'Display Author Social Media links', 'newskit' ),
-			'description' => esc_html__( 'Display social media links with the author bio on individual posts and author archives (this option requires the Yoast plugin).', 'newskit' ),
+			'label'       => esc_html__( 'Display Author Social Media links', 'gulir' ),
+			'description' => esc_html__( 'Display social media links with the author bio on individual posts and author archives (this option requires the Yoast plugin).', 'gulir' ),
 			'section'     => 'author_bio_options',
 		)
 	);
@@ -770,15 +770,15 @@ function newskit_customize_register( $wp_customize ) {
 		'author_bio_truncate',
 		array(
 			'default'           => true,
-			'sanitize_callback' => 'newskit_sanitize_checkbox',
+			'sanitize_callback' => 'gulir_sanitize_checkbox',
 		)
 	);
 	$wp_customize->add_control(
 		'author_bio_truncate',
 		array(
 			'type'        => 'checkbox',
-			'label'       => esc_html__( 'Truncate Author Bio', 'newskit' ),
-			'description' => esc_html__( 'Set a specific length for author bios displayed on single posts.', 'newskit' ),
+			'label'       => esc_html__( 'Truncate Author Bio', 'gulir' ),
+			'description' => esc_html__( 'Set a specific length for author bios displayed on single posts.', 'gulir' ),
 			'section'     => 'author_bio_options',
 		)
 	);
@@ -795,8 +795,8 @@ function newskit_customize_register( $wp_customize ) {
 		'author_bio_length',
 		array(
 			'type'        => 'number',
-			'label'       => esc_html__( 'Author Bio Length (in characters)', 'newskit' ),
-			'description' => esc_html__( 'Truncates the author bio on single posts to this approximate character length, but without breaking a word.', 'newskit' ),
+			'label'       => esc_html__( 'Author Bio Length (in characters)', 'gulir' ),
+			'description' => esc_html__( 'Truncates the author bio on single posts to this approximate character length, but without breaking a word.', 'gulir' ),
 			'section'     => 'author_bio_options',
 		)
 	);
@@ -805,9 +805,9 @@ function newskit_customize_register( $wp_customize ) {
 	 * Template Settings
 	 */
 	$wp_customize->add_panel(
-		'newskit_template_settings',
+		'gulir_template_settings',
 		array(
-			'title' => esc_html__( 'Template Settings', 'newskit' ),
+			'title' => esc_html__( 'Template Settings', 'gulir' ),
 		)
 	);
 
@@ -817,8 +817,8 @@ function newskit_customize_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'post_default_settings',
 		array(
-			'title' => esc_html__( 'Post Settings', 'newskit' ),
-			'panel' => 'newskit_template_settings',
+			'title' => esc_html__( 'Post Settings', 'gulir' ),
+			'panel' => 'gulir_template_settings',
 		)
 	);
 
@@ -827,22 +827,22 @@ function newskit_customize_register( $wp_customize ) {
 		'featured_image_default',
 		array(
 			'default'           => 'large',
-			'sanitize_callback' => 'newskit_sanitize_feature_image_position',
+			'sanitize_callback' => 'gulir_sanitize_feature_image_position',
 		)
 	);
 	$wp_customize->add_control(
 		'featured_image_default',
 		array(
 			'type'        => 'radio',
-			'label'       => __( 'Featured Image Default Position', 'newskit' ),
-			'description' => esc_html__( 'Affects all posts where the Featured Image Position is set to \'Default\'.', 'newskit' ),
+			'label'       => __( 'Featured Image Default Position', 'gulir' ),
+			'description' => esc_html__( 'Affects all posts where the Featured Image Position is set to \'Default\'.', 'gulir' ),
 			'choices'     => array(
-				'large'  => esc_html__( 'Large', 'newskit' ),
-				'small'  => esc_html__( 'Small', 'newskit' ),
-				'behind' => esc_html__( 'Behind article title', 'newskit' ),
-				'beside' => esc_html__( 'Beside article title', 'newskit' ),
-				'above'  => esc_html__( 'Above article title', 'newskit' ),
-				'hidden' => esc_html__( 'Hidden', 'newskit' ),
+				'large'  => esc_html__( 'Large', 'gulir' ),
+				'small'  => esc_html__( 'Small', 'gulir' ),
+				'behind' => esc_html__( 'Behind article title', 'gulir' ),
+				'beside' => esc_html__( 'Beside article title', 'gulir' ),
+				'above'  => esc_html__( 'Above article title', 'gulir' ),
+				'hidden' => esc_html__( 'Hidden', 'gulir' ),
 			),
 			'section'     => 'post_default_settings',
 		)
@@ -853,19 +853,19 @@ function newskit_customize_register( $wp_customize ) {
 		'post_template_default',
 		array(
 			'default'           => 'default',
-			'sanitize_callback' => 'newskit_sanitize_post_template',
+			'sanitize_callback' => 'gulir_sanitize_post_template',
 		)
 	);
 	$wp_customize->add_control(
 		'post_template_default',
 		array(
 			'type'        => 'select',
-			'label'       => __( 'Default Post Template', 'newskit' ),
-			'description' => esc_html__( 'This option changes the selected template used for newly created posts going forward. The template can still be changed on a per-post basis.', 'newskit' ),
+			'label'       => __( 'Default Post Template', 'gulir' ),
+			'description' => esc_html__( 'This option changes the selected template used for newly created posts going forward. The template can still be changed on a per-post basis.', 'gulir' ),
 			'choices'     => array(
-				'default'            => esc_html__( 'With Sidebar', 'newskit' ),
-				'single-feature.php' => esc_html__( 'One Column', 'newskit' ),
-				'single-wide.php'    => esc_html__( 'One Column Wide', 'newskit' ),
+				'default'            => esc_html__( 'With Sidebar', 'gulir' ),
+				'single-feature.php' => esc_html__( 'One Column', 'gulir' ),
+				'single-wide.php'    => esc_html__( 'One Column Wide', 'gulir' ),
 			),
 			'section'     => 'post_default_settings',
 		)
@@ -875,14 +875,14 @@ function newskit_customize_register( $wp_customize ) {
 		'post_time_ago',
 		array(
 			'default'           => false,
-			'sanitize_callback' => 'newskit_sanitize_checkbox',
+			'sanitize_callback' => 'gulir_sanitize_checkbox',
 		)
 	);
 	$wp_customize->add_control(
 		'post_time_ago',
 		array(
 			'type'    => 'checkbox',
-			'label'   => esc_html__( 'Use "time ago" date format', 'newskit' ),
+			'label'   => esc_html__( 'Use "time ago" date format', 'gulir' ),
 			'section' => 'post_default_settings',
 		)
 	);
@@ -899,7 +899,7 @@ function newskit_customize_register( $wp_customize ) {
 		'post_time_ago_cut_off',
 		array(
 			'type'    => 'number',
-			'label'   => esc_html__( 'Cut off for "time ago" date in days.', 'newskit' ),
+			'label'   => esc_html__( 'Cut off for "time ago" date in days.', 'gulir' ),
 			'section' => 'post_default_settings',
 		)
 	);
@@ -908,15 +908,15 @@ function newskit_customize_register( $wp_customize ) {
 		'post_updated_date',
 		array(
 			'default'           => false,
-			'sanitize_callback' => 'newskit_sanitize_checkbox',
+			'sanitize_callback' => 'gulir_sanitize_checkbox',
 		)
 	);
 	$wp_customize->add_control(
 		'post_updated_date',
 		array(
 			'type'        => 'checkbox',
-			'label'       => esc_html__( 'Show "last updated" date on single posts', 'newskit' ),
-			'description' => esc_html__( 'When paired with the "time ago" date format, the cut off for that format will automatically be switched to one day.', 'newskit' ),
+			'label'       => esc_html__( 'Show "last updated" date on single posts', 'gulir' ),
+			'description' => esc_html__( 'When paired with the "time ago" date format, the cut off for that format will automatically be switched to one day.', 'gulir' ),
 			'section'     => 'post_default_settings',
 		)
 	);
@@ -932,8 +932,8 @@ function newskit_customize_register( $wp_customize ) {
 		'post_updated_date_threshold',
 		array(
 			'type'        => 'number',
-			'label'       => esc_html__( 'Updated date threshold', 'newskit' ),
-			'description' => esc_html__( 'The number of hours after publishing a post before updates cause the "last updated" date to appear.', 'newskit' ),
+			'label'       => esc_html__( 'Updated date threshold', 'gulir' ),
+			'description' => esc_html__( 'The number of hours after publishing a post before updates cause the "last updated" date to appear.', 'gulir' ),
 			'section'     => 'post_default_settings',
 		)
 	);
@@ -944,14 +944,14 @@ function newskit_customize_register( $wp_customize ) {
 			'post_primary_category',
 			array(
 				'default'           => 'true',
-				'sanitize_callback' => 'newskit_sanitize_checkbox',
+				'sanitize_callback' => 'gulir_sanitize_checkbox',
 			)
 		);
 		$wp_customize->add_control(
 			'post_primary_category',
 			array(
 				'type'    => 'checkbox',
-				'label'   => __( 'Use Yoast\'s primary category functionality', 'newskit' ),
+				'label'   => __( 'Use Yoast\'s primary category functionality', 'gulir' ),
 				'section' => 'post_default_settings',
 			)
 		);
@@ -962,14 +962,14 @@ function newskit_customize_register( $wp_customize ) {
 		'post_previous_next',
 		array(
 			'default'           => false,
-			'sanitize_callback' => 'newskit_sanitize_checkbox',
+			'sanitize_callback' => 'gulir_sanitize_checkbox',
 		)
 	);
 	$wp_customize->add_control(
 		'post_previous_next',
 		array(
 			'type'    => 'checkbox',
-			'label'   => __( 'Display previous and next links at the bottom of each post.', 'newskit' ),
+			'label'   => __( 'Display previous and next links at the bottom of each post.', 'gulir' ),
 			'section' => 'post_default_settings',
 		)
 	);
@@ -979,14 +979,14 @@ function newskit_customize_register( $wp_customize ) {
 		'post_excerpt_instead_of_subtitle',
 		array(
 			'default'           => false,
-			'sanitize_callback' => 'newskit_sanitize_checkbox',
+			'sanitize_callback' => 'gulir_sanitize_checkbox',
 		)
 	);
 	$wp_customize->add_control(
 		'post_excerpt_instead_of_subtitle',
 		array(
 			'type'    => 'checkbox',
-			'label'   => __( 'Display the custom excerpt at the top of single posts instead of the article subtitle.', 'newskit' ),
+			'label'   => __( 'Display the custom excerpt at the top of single posts instead of the article subtitle.', 'gulir' ),
 			'section' => 'post_default_settings',
 		)
 	);
@@ -997,8 +997,8 @@ function newskit_customize_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'page_default_settings',
 		array(
-			'title' => esc_html__( 'Page Settings', 'newskit' ),
-			'panel' => 'newskit_template_settings',
+			'title' => esc_html__( 'Page Settings', 'gulir' ),
+			'panel' => 'gulir_template_settings',
 		)
 	);
 
@@ -1007,22 +1007,22 @@ function newskit_customize_register( $wp_customize ) {
 		'page_featured_image_default',
 		array(
 			'default'           => 'small',
-			'sanitize_callback' => 'newskit_sanitize_feature_image_position',
+			'sanitize_callback' => 'gulir_sanitize_feature_image_position',
 		)
 	);
 	$wp_customize->add_control(
 		'page_featured_image_default',
 		array(
 			'type'        => 'radio',
-			'label'       => __( 'Featured Image Default Position', 'newskit' ),
-			'description' => esc_html__( 'Affects all pages where the Featured Image Position is set to \'Default\'.', 'newskit' ),
+			'label'       => __( 'Featured Image Default Position', 'gulir' ),
+			'description' => esc_html__( 'Affects all pages where the Featured Image Position is set to \'Default\'.', 'gulir' ),
 			'choices'     => array(
-				'large'  => esc_html__( 'Large', 'newskit' ),
-				'small'  => esc_html__( 'Small', 'newskit' ),
-				'behind' => esc_html__( 'Behind article title', 'newskit' ),
-				'beside' => esc_html__( 'Beside article title', 'newskit' ),
-				'above'  => esc_html__( 'Above article title', 'newskit' ),
-				'hidden' => esc_html__( 'Hidden', 'newskit' ),
+				'large'  => esc_html__( 'Large', 'gulir' ),
+				'small'  => esc_html__( 'Small', 'gulir' ),
+				'behind' => esc_html__( 'Behind article title', 'gulir' ),
+				'beside' => esc_html__( 'Beside article title', 'gulir' ),
+				'above'  => esc_html__( 'Above article title', 'gulir' ),
+				'hidden' => esc_html__( 'Hidden', 'gulir' ),
 			),
 			'section'     => 'page_default_settings',
 		)
@@ -1033,19 +1033,19 @@ function newskit_customize_register( $wp_customize ) {
 		'page_template_default',
 		array(
 			'default'           => 'default',
-			'sanitize_callback' => 'newskit_sanitize_post_template',
+			'sanitize_callback' => 'gulir_sanitize_post_template',
 		)
 	);
 	$wp_customize->add_control(
 		'page_template_default',
 		array(
 			'type'        => 'select',
-			'label'       => __( 'Default Page Template', 'newskit' ),
-			'description' => esc_html__( 'This option changes the selected template used for newly created pages going forward. The template can still be changed on a per-page basis.', 'newskit' ),
+			'label'       => __( 'Default Page Template', 'gulir' ),
+			'description' => esc_html__( 'This option changes the selected template used for newly created pages going forward. The template can still be changed on a per-page basis.', 'gulir' ),
 			'choices'     => array(
-				'default'            => esc_html__( 'With Sidebar', 'newskit' ),
-				'single-feature.php' => esc_html__( 'One Column', 'newskit' ),
-				'single-wide.php'    => esc_html__( 'One Column Wide', 'newskit' ),
+				'default'            => esc_html__( 'With Sidebar', 'gulir' ),
+				'single-feature.php' => esc_html__( 'One Column', 'gulir' ),
+				'single-wide.php'    => esc_html__( 'One Column Wide', 'gulir' ),
 			),
 			'section'     => 'page_default_settings',
 		)
@@ -1057,8 +1057,8 @@ function newskit_customize_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'archive_options',
 		array(
-			'title' => esc_html__( 'Archive Settings', 'newskit' ),
-			'panel' => 'newskit_template_settings',
+			'title' => esc_html__( 'Archive Settings', 'gulir' ),
+			'panel' => 'gulir_template_settings',
 		)
 	);
 
@@ -1067,14 +1067,14 @@ function newskit_customize_register( $wp_customize ) {
 		'archive_show_excerpt',
 		array(
 			'default'           => false,
-			'sanitize_callback' => 'newskit_sanitize_checkbox',
+			'sanitize_callback' => 'gulir_sanitize_checkbox',
 		)
 	);
 	$wp_customize->add_control(
 		'archive_show_excerpt',
 		array(
 			'type'    => 'checkbox',
-			'label'   => esc_html__( 'Show excerpts for all archives', 'newskit' ),
+			'label'   => esc_html__( 'Show excerpts for all archives', 'gulir' ),
 			'section' => 'archive_options',
 		)
 	);
@@ -1084,14 +1084,14 @@ function newskit_customize_register( $wp_customize ) {
 		'archive_show_subtitle',
 		array(
 			'default'           => false,
-			'sanitize_callback' => 'newskit_sanitize_checkbox',
+			'sanitize_callback' => 'gulir_sanitize_checkbox',
 		)
 	);
 	$wp_customize->add_control(
 		'archive_show_subtitle',
 		array(
 			'type'    => 'checkbox',
-			'label'   => esc_html__( 'Show subtitles for all archives', 'newskit' ),
+			'label'   => esc_html__( 'Show subtitles for all archives', 'gulir' ),
 			'section' => 'archive_options',
 		)
 	);
@@ -1101,14 +1101,14 @@ function newskit_customize_register( $wp_customize ) {
 		'archive_enable_cropping',
 		array(
 			'default'           => true,
-			'sanitize_callback' => 'newskit_sanitize_checkbox',
+			'sanitize_callback' => 'gulir_sanitize_checkbox',
 		)
 	);
 	$wp_customize->add_control(
 		'archive_enable_cropping',
 		array(
 			'type'    => 'checkbox',
-			'label'   => esc_html__( 'Crop archive images to a 4:3 aspect ratio (changes require regenerating thumbnails for existing featured images)', 'newskit' ),
+			'label'   => esc_html__( 'Crop archive images to a 4:3 aspect ratio (changes require regenerating thumbnails for existing featured images)', 'gulir' ),
 			'section' => 'archive_options',
 		)
 	);
@@ -1118,14 +1118,14 @@ function newskit_customize_register( $wp_customize ) {
 		'archive_show_captions',
 		array(
 			'default'           => false,
-			'sanitize_callback' => 'newskit_sanitize_checkbox',
+			'sanitize_callback' => 'gulir_sanitize_checkbox',
 		)
 	);
 	$wp_customize->add_control(
 		'archive_show_captions',
 		array(
 			'type'    => 'checkbox',
-			'label'   => esc_html__( 'Show image captions in archives and WordPress’s default search results', 'newskit' ),
+			'label'   => esc_html__( 'Show image captions in archives and WordPress’s default search results', 'gulir' ),
 			'section' => 'archive_options',
 		)
 	);
@@ -1135,14 +1135,14 @@ function newskit_customize_register( $wp_customize ) {
 		'archive_show_credits',
 		array(
 			'default'           => false,
-			'sanitize_callback' => 'newskit_sanitize_checkbox',
+			'sanitize_callback' => 'gulir_sanitize_checkbox',
 		)
 	);
 	$wp_customize->add_control(
 		'archive_show_credits',
 		array(
 			'type'    => 'checkbox',
-			'label'   => esc_html__( 'Show image credits in archives and WordPress’s default search results', 'newskit' ),
+			'label'   => esc_html__( 'Show image credits in archives and WordPress’s default search results', 'gulir' ),
 			'section' => 'archive_options',
 		)
 	);
@@ -1152,7 +1152,7 @@ function newskit_customize_register( $wp_customize ) {
 		'archive_feature_latest_post',
 		array(
 			'default'           => true,
-			'sanitize_callback' => 'newskit_sanitize_checkbox',
+			'sanitize_callback' => 'gulir_sanitize_checkbox',
 		)
 	);
 
@@ -1160,7 +1160,7 @@ function newskit_customize_register( $wp_customize ) {
 		'archive_feature_latest_post',
 		array(
 			'type'    => 'checkbox',
-			'label'   => esc_html__( 'Use a large, featured display for the latest post in the archives', 'newskit' ),
+			'label'   => esc_html__( 'Use a large, featured display for the latest post in the archives', 'gulir' ),
 			'section' => 'archive_options',
 		)
 	);
@@ -1170,18 +1170,18 @@ function newskit_customize_register( $wp_customize ) {
 		'archive_layout',
 		array(
 			'default'           => 'default',
-			'sanitize_callback' => 'newskit_sanitize_radio',
+			'sanitize_callback' => 'gulir_sanitize_radio',
 		)
 	);
 	$wp_customize->add_control(
 		'archive_layout',
 		array(
 			'type'    => 'radio',
-			'label'   => esc_html__( 'Archive Layout', 'newskit' ),
+			'label'   => esc_html__( 'Archive Layout', 'gulir' ),
 			'choices' => array(
-				'default'         => esc_html__( 'With sidebar', 'newskit' ),
-				'one-column'      => esc_html__( 'One column', 'newskit' ),
-				'one-column-wide' => esc_html__( 'One column wide', 'newskit' ),
+				'default'         => esc_html__( 'With sidebar', 'gulir' ),
+				'one-column'      => esc_html__( 'One column', 'gulir' ),
+				'one-column-wide' => esc_html__( 'One column wide', 'gulir' ),
 			),
 			'section' => 'archive_options',
 		)
@@ -1192,7 +1192,7 @@ function newskit_customize_register( $wp_customize ) {
 		'archive_title_format',
 		array(
 			'default'           => 'default',
-			'sanitize_callback' => 'newskit_sanitize_radio',
+			'sanitize_callback' => 'gulir_sanitize_radio',
 		)
 	);
 
@@ -1200,11 +1200,11 @@ function newskit_customize_register( $wp_customize ) {
 		'archive_title_format',
 		array(
 			'type'        => 'radio',
-			'label'       => esc_html__( 'Archive Title Format', 'newskit' ),
-			'description' => esc_html__( 'Change the format of the title used on archive pages.', 'newskit' ),
+			'label'       => esc_html__( 'Archive Title Format', 'gulir' ),
+			'description' => esc_html__( 'Change the format of the title used on archive pages.', 'gulir' ),
 			'choices'     => array(
-				'default' => esc_html__( 'Default (eg. "Category: Featured", "Author: Jane Doe")', 'newskit' ),
-				'short'   => esc_html__( 'Only archive name (eg. "Featured", "Jane Doe")', 'newskit' ),
+				'default' => esc_html__( 'Default (eg. "Category: Featured", "Author: Jane Doe")', 'gulir' ),
+				'short'   => esc_html__( 'Only archive name (eg. "Featured", "Jane Doe")', 'gulir' ),
 			),
 			'section'     => 'archive_options',
 		)
@@ -1215,18 +1215,18 @@ function newskit_customize_register( $wp_customize ) {
 			'archive_list_or_grid',
 			array(
 				'default'           => 'list',
-				'sanitize_callback' => 'newskit_sanitize_radio',
+				'sanitize_callback' => 'gulir_sanitize_radio',
 			)
 		);
 		$wp_customize->add_control(
 			'archive_list_or_grid',
 			array(
 				'type'    => 'radio',
-				'label'   => esc_html__( 'List or Grid Layout', 'newskit' ),
-				'description' => esc_html__( 'When using grid, set the number of posts per page to a number divisible by 12 under Settings > Reading and disable the "Use a large, featured display for the latest post in the archives" above to get a full bottom row of posts.', 'newskit' ),
+				'label'   => esc_html__( 'List or Grid Layout', 'gulir' ),
+				'description' => esc_html__( 'When using grid, set the number of posts per page to a number divisible by 12 under Settings > Reading and disable the "Use a large, featured display for the latest post in the archives" above to get a full bottom row of posts.', 'gulir' ),
 				'choices' => array(
-					'list'         => esc_html__( 'List', 'newskit' ),
-					'grid'      => esc_html__( 'Grid', 'newskit' ),
+					'list'         => esc_html__( 'List', 'gulir' ),
+					'grid'      => esc_html__( 'Grid', 'gulir' ),
 				),
 				'section' => 'archive_options',
 			)
@@ -1238,7 +1238,7 @@ function newskit_customize_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'comments_options',
 		array(
-			'title' => esc_html__( 'Comments Settings', 'newskit' ),
+			'title' => esc_html__( 'Comments Settings', 'gulir' ),
 		)
 	);
 
@@ -1247,15 +1247,15 @@ function newskit_customize_register( $wp_customize ) {
 		'collapse_comments',
 		array(
 			'default'           => false,
-			'sanitize_callback' => 'newskit_sanitize_checkbox',
+			'sanitize_callback' => 'gulir_sanitize_checkbox',
 		)
 	);
 	$wp_customize->add_control(
 		'collapse_comments',
 		array(
 			'type'        => 'checkbox',
-			'label'       => esc_html__( 'Collapse Comments', 'newskit' ),
-			'description' => esc_html__( 'When using WordPress\'s default comments, checking this option will collapse the comments section when there is more than one comment, and display a button to expand.', 'newskit' ),
+			'label'       => esc_html__( 'Collapse Comments', 'gulir' ),
+			'description' => esc_html__( 'When using WordPress\'s default comments, checking this option will collapse the comments section when there is more than one comment, and display a button to expand.', 'gulir' ),
 			'section'     => 'comments_options',
 		)
 	);
@@ -1265,15 +1265,15 @@ function newskit_customize_register( $wp_customize ) {
 		'display_comment_policy',
 		array(
 			'default'           => false,
-			'sanitize_callback' => 'newskit_sanitize_checkbox',
+			'sanitize_callback' => 'gulir_sanitize_checkbox',
 		)
 	);
 	$wp_customize->add_control(
 		'display_comment_policy',
 		array(
 			'type'        => 'checkbox',
-			'label'       => esc_html__( 'Display comment policy', 'newskit' ),
-			'description' => esc_html__( 'Allows you to add an optional comment policy above the comment form when using WordPress\'s default comments.', 'newskit' ),
+			'label'       => esc_html__( 'Display comment policy', 'gulir' ),
+			'description' => esc_html__( 'Allows you to add an optional comment policy above the comment form when using WordPress\'s default comments.', 'gulir' ),
 			'section'     => 'comments_options',
 		)
 	);
@@ -1283,14 +1283,14 @@ function newskit_customize_register( $wp_customize ) {
 		'comment_policy',
 		array(
 			'default'           => '',
-			'sanitize_callback' => 'newskit_sanitize_textarea_balance',
+			'sanitize_callback' => 'gulir_sanitize_textarea_balance',
 		)
 	);
 	$wp_customize->add_control(
 		'comment_policy',
 		array(
 			'type'    => 'textarea',
-			'label'   => esc_html__( 'Comment policy text', 'newskit' ),
+			'label'   => esc_html__( 'Comment policy text', 'gulir' ),
 			'section' => 'comments_options',
 		)
 	);
@@ -1301,7 +1301,7 @@ function newskit_customize_register( $wp_customize ) {
 	$wp_customize->add_section(
 		'footer_options',
 		array(
-			'title' => esc_html__( 'Footer Settings', 'newskit' ),
+			'title' => esc_html__( 'Footer Settings', 'gulir' ),
 		)
 	);
 
@@ -1310,15 +1310,15 @@ function newskit_customize_register( $wp_customize ) {
 		'footer_show_branding',
 		array(
 			'default'           => true,
-			'sanitize_callback' => 'newskit_sanitize_checkbox',
+			'sanitize_callback' => 'gulir_sanitize_checkbox',
 		)
 	);
 	$wp_customize->add_control(
 		'footer_show_branding',
 		array(
 			'type'        => 'checkbox',
-			'label'       => esc_html__( 'Show footer branding', 'newskit' ),
-			'description' => esc_html__( 'Display the site logo in the footer when the footer widget area is populated.', 'newskit' ),
+			'label'       => esc_html__( 'Show footer branding', 'gulir' ),
+			'description' => esc_html__( 'Display the site logo in the footer when the footer widget area is populated.', 'gulir' ),
 			'section'     => 'footer_options',
 		)
 	);
@@ -1328,18 +1328,18 @@ function newskit_customize_register( $wp_customize ) {
 		'footer_widget_layout',
 		array(
 			'default'           => 'columns',
-			'sanitize_callback' => 'newskit_sanitize_radio',
+			'sanitize_callback' => 'gulir_sanitize_radio',
 		)
 	);
 	$wp_customize->add_control(
 		'footer_widget_layout',
 		array(
 			'type'        => 'radio',
-			'label'       => esc_html__( 'Footer Widget Layout', 'newskit' ),
-			'description' => esc_html__( 'Stack the footer widgets, or have them automatically divide into even columns.', 'newskit' ),
+			'label'       => esc_html__( 'Footer Widget Layout', 'gulir' ),
+			'description' => esc_html__( 'Stack the footer widgets, or have them automatically divide into even columns.', 'gulir' ),
 			'choices'     => array(
-				'columns' => esc_html__( 'Columns', 'newskit' ),
-				'stacked' => esc_html__( 'Stacked', 'newskit' ),
+				'columns' => esc_html__( 'Columns', 'gulir' ),
+				'stacked' => esc_html__( 'Stacked', 'gulir' ),
 			),
 			'section'     => 'footer_options',
 		)
@@ -1357,27 +1357,27 @@ function newskit_customize_register( $wp_customize ) {
 		'footer_copyright',
 		array(
 			'type'        => 'text',
-			'label'       => esc_html__( 'Copyright Information', 'newskit' ),
-			'description' => esc_html__( 'Add custom text to be displayed next to a copyright symbol and current year in the footer. By default, it will display your site title.', 'newskit' ),
+			'label'       => esc_html__( 'Copyright Information', 'gulir' ),
+			'description' => esc_html__( 'Add custom text to be displayed next to a copyright symbol and current year in the footer. By default, it will display your site title.', 'gulir' ),
 			'section'     => 'footer_options',
 		)
 	);
 }
-add_action( 'customize_register', 'newskit_customize_register' );
+add_action( 'customize_register', 'gulir_customize_register' );
 
 /**
  * Add custom font support in the Customizer
  *
  * @param WP_Customize_Manager $wp_customize Theme Customizer object.
  */
-function newskit_customize_typography_register( $wp_customize ) {
+function gulir_customize_typography_register( $wp_customize ) {
 
 	require_once get_parent_theme_file_path( '/inc/typography.php' );
 
 	$wp_customize->add_section(
-		'newskit_typography',
+		'gulir_typography',
 		array(
-			'title'    => __( 'Typography', 'newskit' ),
+			'title'    => __( 'Typography', 'gulir' ),
 			'priority' => 50,
 		)
 	);
@@ -1385,13 +1385,13 @@ function newskit_customize_typography_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'custom_font_import_code',
 		array(
-			'sanitize_callback' => 'newskit_sanitize_font_provider_url',
+			'sanitize_callback' => 'gulir_sanitize_font_provider_url',
 		)
 	);
 	$wp_customize->add_setting(
 		'custom_font_import_code_alternate',
 		array(
-			'sanitize_callback' => 'newskit_sanitize_font_provider_url',
+			'sanitize_callback' => 'gulir_sanitize_font_provider_url',
 		)
 	);
 	$wp_customize->add_setting(
@@ -1409,14 +1409,14 @@ function newskit_customize_typography_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'font_body_stack',
 		array(
-			'sanitize_callback' => 'newskit_sanitize_font_stack',
+			'sanitize_callback' => 'gulir_sanitize_font_stack',
 			'default'           => 'serif',
 		)
 	);
 	$wp_customize->add_setting(
 		'font_header_stack',
 		array(
-			'sanitize_callback' => 'newskit_sanitize_font_stack',
+			'sanitize_callback' => 'gulir_sanitize_font_stack',
 			'default'           => 'serif',
 		)
 	);
@@ -1424,9 +1424,9 @@ function newskit_customize_typography_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'custom_font_import_code',
 		array(
-			'label'       => __( 'Font Provider Import Code or URL', 'newskit' ),
+			'label'       => __( 'Font Provider Import Code or URL', 'gulir' ),
 			'description' => __( 'Example: &lt;link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"&gt; or https://fonts.googleapis.com/css?family=Open+Sans' ),
-			'section'     => 'newskit_typography',
+			'section'     => 'gulir_typography',
 			'type'        => 'text',
 		)
 	);
@@ -1434,8 +1434,8 @@ function newskit_customize_typography_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'custom_font_import_code_alternate',
 		array(
-			'label'   => __( 'Secondary Font Provider Import Code or URL', 'newskit' ),
-			'section' => 'newskit_typography',
+			'label'   => __( 'Secondary Font Provider Import Code or URL', 'gulir' ),
+			'section' => 'gulir_typography',
 			'type'    => 'text',
 		)
 	);
@@ -1443,14 +1443,14 @@ function newskit_customize_typography_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'font_header',
 		array(
-			'label'       => __( 'Header Font', 'newskit' ),
+			'label'       => __( 'Header Font', 'gulir' ),
 			'description' => __( 'Example: Open Sans' ),
-			'section'     => 'newskit_typography',
+			'section'     => 'gulir_typography',
 			'type'        => 'text',
 		)
 	);
 
-	$font_stacks = newskit_get_font_stacks_as_select_choices();
+	$font_stacks = gulir_get_font_stacks_as_select_choices();
 
 	foreach ( $font_stacks as $key => &$stack ) {
 		$stack = wp_kses( $stack, null );
@@ -1459,8 +1459,8 @@ function newskit_customize_typography_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'font_header_stack',
 		array(
-			'label'   => __( 'Header Font Fallback Stack', 'newskit' ),
-			'section' => 'newskit_typography',
+			'label'   => __( 'Header Font Fallback Stack', 'gulir' ),
+			'section' => 'gulir_typography',
 			'type'    => 'select',
 			'choices' => $font_stacks,
 		)
@@ -1469,8 +1469,8 @@ function newskit_customize_typography_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'font_body',
 		array(
-			'label'   => __( 'Body Font', 'newskit' ),
-			'section' => 'newskit_typography',
+			'label'   => __( 'Body Font', 'gulir' ),
+			'section' => 'gulir_typography',
 			'type'    => 'text',
 		)
 	);
@@ -1478,8 +1478,8 @@ function newskit_customize_typography_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'font_body_stack',
 		array(
-			'label'   => __( 'Body Font Fallback Stack', 'newskit' ),
-			'section' => 'newskit_typography',
+			'label'   => __( 'Body Font Fallback Stack', 'gulir' ),
+			'section' => 'gulir_typography',
 			'type'    => 'select',
 			'choices' => $font_stacks,
 		)
@@ -1490,27 +1490,27 @@ function newskit_customize_typography_register( $wp_customize ) {
 		'accent_allcaps',
 		array(
 			'default'           => true,
-			'sanitize_callback' => 'newskit_sanitize_checkbox',
+			'sanitize_callback' => 'gulir_sanitize_checkbox',
 		)
 	);
 	$wp_customize->add_control(
 		'accent_allcaps',
 		array(
 			'type'    => 'checkbox',
-			'label'   => esc_html__( 'Use all-caps for accent text.', 'newskit' ),
-			'section' => 'newskit_typography',
+			'label'   => esc_html__( 'Use all-caps for accent text.', 'gulir' ),
+			'section' => 'gulir_typography',
 		)
 	);
 }
 
-add_action( 'customize_register', 'newskit_customize_typography_register' );
+add_action( 'customize_register', 'gulir_customize_typography_register' );
 
 /**
  * Render the site title for the selective refresh partial.
  *
  * @return void
  */
-function newskit_customize_partial_blogname() {
+function gulir_customize_partial_blogname() {
 	bloginfo( 'name' );
 }
 
@@ -1519,32 +1519,32 @@ function newskit_customize_partial_blogname() {
  *
  * @return void
  */
-function newskit_customize_partial_blogdescription() {
+function gulir_customize_partial_blogdescription() {
 	bloginfo( 'description' );
 }
 
 /**
  * Bind JS handlers to instantly live-preview changes.
  */
-function newskit_customize_preview_js() {
-	wp_enqueue_script( 'newskit-customize-preview', get_theme_file_uri( '/js/dist/customize-preview.js' ), array( 'customize-preview' ), '20181231', true );
+function gulir_customize_preview_js() {
+	wp_enqueue_script( 'gulir-customize-preview', get_theme_file_uri( '/js/dist/customize-preview.js' ), array( 'customize-preview' ), '20181231', true );
 	wp_localize_script(
-		'newskit-customize-preview',
-		'_NewskitThemePreviewData',
+		'gulir-customize-preview',
+		'_GulirThemePreviewData',
 		array(
-			'default_hex' => newskit_get_primary_color(),
+			'default_hex' => gulir_get_primary_color(),
 		)
 	);
 }
-add_action( 'customize_preview_init', 'newskit_customize_preview_js' );
+add_action( 'customize_preview_init', 'gulir_customize_preview_js' );
 
 /**
  * Load dynamic logic for the customizer controls area.
  */
-function newskit_panels_js() {
-	wp_enqueue_script( 'newskit-customize-controls', get_theme_file_uri( '/js/dist/customize-controls.js' ), array(), '20181231', true );
+function gulir_panels_js() {
+	wp_enqueue_script( 'gulir-customize-controls', get_theme_file_uri( '/js/dist/customize-controls.js' ), array(), '20181231', true );
 }
-add_action( 'customize_controls_enqueue_scripts', 'newskit_panels_js' );
+add_action( 'customize_controls_enqueue_scripts', 'gulir_panels_js' );
 
 /**
  * Sanitize footer logo size.
@@ -1553,7 +1553,7 @@ add_action( 'customize_controls_enqueue_scripts', 'newskit_panels_js' );
  *
  * @return string
  */
-function newskit_sanitize_footer_logo_size( $choice ) {
+function gulir_sanitize_footer_logo_size( $choice ) {
 	$valid = array(
 		'small',
 		'medium',
@@ -1575,7 +1575,7 @@ function newskit_sanitize_footer_logo_size( $choice ) {
  *
  * @return string
  */
-function newskit_sanitize_color_option( $choice ) {
+function gulir_sanitize_color_option( $choice ) {
 	$valid = array(
 		'default',
 		'custom',
@@ -1595,7 +1595,7 @@ function newskit_sanitize_color_option( $choice ) {
  *
  * @return string
  */
-function newskit_sanitize_feature_image_position( $choice ) {
+function gulir_sanitize_feature_image_position( $choice ) {
 	$valid = array(
 		'large',
 		'small',
@@ -1619,7 +1619,7 @@ function newskit_sanitize_feature_image_position( $choice ) {
  *
  * @return string
  */
-function newskit_sanitize_post_template( $choice ) {
+function gulir_sanitize_post_template( $choice ) {
 	$valid = array(
 		'single-feature.php',
 		'single-wide.php',
@@ -1640,7 +1640,7 @@ function newskit_sanitize_post_template( $choice ) {
  *
  * @return string
  */
-function newskit_sanitize_slideout_sidebar_side( $choice ) {
+function gulir_sanitize_slideout_sidebar_side( $choice ) {
 	$valid = array(
 		'left',
 		'right',
@@ -1660,7 +1660,7 @@ function newskit_sanitize_slideout_sidebar_side( $choice ) {
  *
  * @return boolean true if is 1 or '1', false if anything else
  */
-function newskit_sanitize_checkbox( $input ) {
+function gulir_sanitize_checkbox( $input ) {
 	if ( 1 == $input ) {
 		return true;
 	} else {
@@ -1671,7 +1671,7 @@ function newskit_sanitize_checkbox( $input ) {
 /**
  * Sanitize the radio buttons.
  */
-function newskit_sanitize_radio( $input, $setting ) {
+function gulir_sanitize_radio( $input, $setting ) {
 
 	// Ensure input is a slug.
 	$input = sanitize_key( $input );
@@ -1690,7 +1690,7 @@ function newskit_sanitize_radio( $input, $setting ) {
  *
  * @return string The textarea value, sanitized and with HTML tags balanced.
  */
-function newskit_sanitize_textarea_balance( $input ) {
+function gulir_sanitize_textarea_balance( $input ) {
 	$input = wp_kses_post( force_balance_tags( $input ) );
 
 	return $input;
@@ -1703,7 +1703,7 @@ function newskit_sanitize_textarea_balance( $input ) {
  *
  * @return string|null Return a valid font provider URL if found or null if not.
  */
-function newskit_sanitize_font_provider_url( $code ) {
+function gulir_sanitize_font_provider_url( $code ) {
 	if ( '' === trim( $code ) ) {
 		return '';
 	}
@@ -1732,8 +1732,8 @@ function newskit_sanitize_font_provider_url( $code ) {
  *
  * @return string|null Return a valid font stack ID or null.
  */
-function newskit_sanitize_font_stack( $stack_id ) {
-	$stacks = newskit_get_font_stacks();
+function gulir_sanitize_font_stack( $stack_id ) {
+	$stacks = gulir_get_font_stacks();
 	if ( in_array( $stack_id, array_keys( $stacks ) ) ) {
 		return $stack_id;
 	}
@@ -1743,8 +1743,8 @@ function newskit_sanitize_font_stack( $stack_id ) {
 /**
  * Adds CSS to the Customizer controls.
  */
-function newskit_default_post_template_customize_css() {
+function gulir_default_post_template_customize_css() {
 	wp_add_inline_style( 'customize-controls', '#customize-control-post_updated_date_threshold { padding-left: 24px; }' );
 	wp_add_inline_style( 'customize-controls', '#customize-control-post_time_ago_cut_off { padding-left: 24px; }' );
 }
-add_action( 'customize_controls_enqueue_scripts', 'newskit_default_post_template_customize_css' );
+add_action( 'customize_controls_enqueue_scripts', 'gulir_default_post_template_customize_css' );

@@ -1,14 +1,14 @@
 <?php
 /**
- * Newskit Theme: Add Logo Size option in the customizer.
+ * Gulir Theme: Add Logo Size option in the customizer.
  *
- * @package Newskit
+ * @package Gulir
  */
 
 /**
  * Registers customizer controls for the logo resizer.
  */
-function newskit_logo_resizer_customize_register( $wp_customize ) {
+function gulir_logo_resizer_customize_register( $wp_customize ) {
 	// Logo Resizer additions
 	$wp_customize->add_setting(
 		'logo_size',
@@ -25,7 +25,7 @@ function newskit_logo_resizer_customize_register( $wp_customize ) {
 	$wp_customize->add_control(
 		'logo_size',
 		array(
-			'label'       => esc_html__( 'Logo Size', 'newskit' ),
+			'label'       => esc_html__( 'Logo Size', 'gulir' ),
 			'section'     => 'title_tagline',
 			'priority'    => 8,
 			'type'        => 'range',
@@ -42,12 +42,12 @@ function newskit_logo_resizer_customize_register( $wp_customize ) {
 		)
 	);
 }
-add_action( 'customize_register', 'newskit_logo_resizer_customize_register' );
+add_action( 'customize_register', 'gulir_logo_resizer_customize_register' );
 
 /**
  * Add support for logo resizing by filtering `get_custom_logo`.
  */
-function newskit_customize_logo_resize( $html ) {
+function gulir_customize_logo_resize( $html ) {
 	$size           = get_theme_mod( 'logo_size' );
 	$custom_logo_id = get_theme_mod( 'custom_logo' );
 	// set the short side minimum
@@ -73,7 +73,7 @@ function newskit_customize_logo_resize( $html ) {
 
 		// landscape or square
 		if ( $logo['width'] >= $logo['height'] ) {
-			$output = newskit_logo_resize_min_max(
+			$output = gulir_logo_resize_min_max(
 				$logo['height'],
 				$logo['width'],
 				$max['height'],
@@ -87,7 +87,7 @@ function newskit_customize_logo_resize( $html ) {
 			);
 		// portrait
 		} elseif ( $logo['width'] < $logo['height'] ) {
-			$output = newskit_logo_resize_min_max( $logo['width'], $logo['height'], $max['width'], $max['height'], $size, $min );
+			$output = gulir_logo_resize_min_max( $logo['width'], $logo['height'], $max['width'], $max['height'], $size, $min );
 			$img    = array(
 				'height' => $output['long'],
 				'width'  => $output['short'],
@@ -103,9 +103,9 @@ function newskit_customize_logo_resize( $html ) {
 		$sticky_max_width  = 400;
 		$sticky_max_height = 90;
 
-		$mobile  = newskit_logo_small_sizes( $img['width'], $img['height'], $mobile_max_width, $mobile_max_height );
-		$subhead = newskit_logo_small_sizes( $img['width'], $img['height'], $subhead_max_width, $subhead_max_height );
-		$sticky  = newskit_logo_small_sizes( $img['width'], $img['height'], $sticky_max_width, $sticky_max_height );
+		$mobile  = gulir_logo_small_sizes( $img['width'], $img['height'], $mobile_max_width, $mobile_max_height );
+		$subhead = gulir_logo_small_sizes( $img['width'], $img['height'], $subhead_max_width, $subhead_max_height );
+		$sticky  = gulir_logo_small_sizes( $img['width'], $img['height'], $sticky_max_width, $sticky_max_height );
 
 		// add the CSS
 		$css = '
@@ -150,12 +150,12 @@ function newskit_customize_logo_resize( $html ) {
 
 	return $html;
 }
-add_filter( 'get_custom_logo', 'newskit_customize_logo_resize' );
+add_filter( 'get_custom_logo', 'gulir_customize_logo_resize' );
 
 /**
  * Helper function to determine the max size of the logo
  */
-function newskit_logo_resize_min_max( $short, $long, $short_max, $long_max, $percent, $min ) {
+function gulir_logo_resize_min_max( $short, $long, $short_max, $long_max, $percent, $min ) {
 	$ratio        = ( $long / $short );
 	$max['long']  = ( $long_max >= $long ) ? $long : $long_max;
 	$max['short'] = ( $short_max >= ( $max['long'] / $ratio ) ) ? floor( $max['long'] / $ratio ) : $short_max;
@@ -171,7 +171,7 @@ function newskit_logo_resize_min_max( $short, $long, $short_max, $long_max, $per
 /**
  * Helper function to return smaller version of the logo size
  */
-function newskit_logo_small_sizes( $width, $height, $max_width, $max_height ) {
+function gulir_logo_small_sizes( $width, $height, $max_width, $max_height ) {
 	$size = array(
 		'width'  => round( $max_height * ( $width / $height ) ),
 		'height' => $max_height,
@@ -188,23 +188,23 @@ function newskit_logo_small_sizes( $width, $height, $max_width, $max_height ) {
 /**
  * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
  */
-function newskit_logo_resizer_customize_preview_js() {
-	wp_enqueue_script( 'newskit-logo-resizer-customizer', get_template_directory_uri() . '/js/dist/logo-customize-preview.js', array( 'jquery', 'customize-preview' ), '1.0', true );
+function gulir_logo_resizer_customize_preview_js() {
+	wp_enqueue_script( 'gulir-logo-resizer-customizer', get_template_directory_uri() . '/js/dist/logo-customize-preview.js', array( 'jquery', 'customize-preview' ), '1.0', true );
 }
-add_action( 'customize_preview_init', 'newskit_logo_resizer_customize_preview_js' );
+add_action( 'customize_preview_init', 'gulir_logo_resizer_customize_preview_js' );
 
 /**
  * JS handlers for Customizer Controls
  */
-function newskit_logo_resizer_customize_controls_js() {
-	wp_enqueue_script( 'newskit-logo-resizer-customizer-controls', get_template_directory_uri() . '/js/dist/logo-customize-controls.js', array( 'jquery', 'customize-controls' ), '1.0', true );
+function gulir_logo_resizer_customize_controls_js() {
+	wp_enqueue_script( 'gulir-logo-resizer-customizer-controls', get_template_directory_uri() . '/js/dist/logo-customize-controls.js', array( 'jquery', 'customize-controls' ), '1.0', true );
 }
-add_action( 'customize_controls_enqueue_scripts', 'newskit_logo_resizer_customize_controls_js' );
+add_action( 'customize_controls_enqueue_scripts', 'gulir_logo_resizer_customize_controls_js' );
 
 /**
  * Adds CSS to the Customizer controls.
  */
-function newskit_logo_resizer_customize_css() {
+function gulir_logo_resizer_customize_css() {
 	wp_add_inline_style( 'customize-controls', '#customize-control-logo_size input[type="range"] { width: 100%; }' );
 }
-add_action( 'customize_controls_enqueue_scripts', 'newskit_logo_resizer_customize_css' );
+add_action( 'customize_controls_enqueue_scripts', 'gulir_logo_resizer_customize_css' );

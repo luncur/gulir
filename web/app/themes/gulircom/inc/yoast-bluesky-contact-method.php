@@ -5,7 +5,7 @@ use Yoast\WP\SEO\User_Meta\Domain\Additional_Contactmethod_Interface;
 /**
  * The Facebook contactmethod.
  */
-class Newskit_Theme_Bluesky implements Additional_Contactmethod_Interface {
+class Gulir_Theme_Bluesky implements Additional_Contactmethod_Interface {
 
 	/**
 	 * Returns the key of the Bluesky contactmethod.
@@ -22,6 +22,6 @@ class Newskit_Theme_Bluesky implements Additional_Contactmethod_Interface {
 	 * @return string The label of the Bluesky field.
 	 */
 	public function get_label(): string {
-		return \__( 'Bluesky profile URL', 'newskit' );
+		return \__( 'Bluesky profile URL', 'gulir' );
 	}
 }

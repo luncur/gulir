@@ -35,7 +35,7 @@
 		figcaption {
 			margin-top: 8px;
 			@include utilities.media( tablet ) {
-				font-size: var(--newskit-font-size-xxs);
+				font-size: var(--gulir-font-size-xxs);
 			}
 		}
 	}
@@ -78,7 +78,7 @@
 
 .archive {
 	.page-title {
-		color: var(--newskit-color-primary-against-white);
+		color: var(--gulir-color-primary-against-white);
 	}
 
 	@include utilities.media( tablet ) {
@@ -137,11 +137,11 @@
 	}
 
 	.entry-header {
-		.entry-title:has(+ .newskit-post-subtitle) {
+		.entry-title:has(+ .gulir-post-subtitle) {
 			margin-bottom: calc(#{structure.$size__spacing-unit} * 0.25);
 		}
 
-		.newskit-post-subtitle {
+		.gulir-post-subtitle {
 			margin: 0 0 calc(#{structure.$size__spacing-unit} * 0.5);
 		}
 	}
@@ -184,7 +184,7 @@
 				}
 
 				.entry-title {
-					font-size: var(--newskit-font-size-md);
+					font-size: var(--gulir-font-size-md);
 				}
 			}
 
@@ -205,8 +205,8 @@
 			}
 		}
 
-		article.wp-block-newskit-collections__item,
-		&.archive-one-column-wide .site-main article.wp-block-newskit-collections__item,
+		article.wp-block-gulir-collections__item,
+		&.archive-one-column-wide .site-main article.wp-block-gulir-collections__item,
 		.pagination {
 			width: 100%;
 		}
@@ -214,7 +214,7 @@
 }
 
 .page-description {
-	color: var(--newskit-color-text-main);
+	color: var(--gulir-color-text-main);
 }
 
 .tag .page-description::first-letter {
@@ -222,7 +222,7 @@
 }
 
 .taxonomy-description {
-	color: var(--newskit-color-text-light);
+	color: var(--gulir-color-text-light);
 	font-style: italic;
 
 	a {

@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package Newskit
+ * @package Gulir
  */
 if ( ! is_active_sidebar( 'sidebar-1' ) ) {
 	return;
@@ -13,10 +13,10 @@ if ( ! is_active_sidebar( 'sidebar-1' ) ) {
 
 <aside id="secondary" class="widget-area">
 	<?php
-		remove_filter( 'get_the_date', 'newskit_convert_to_time_ago', 10, 3 );
+		remove_filter( 'get_the_date', 'gulir_convert_to_time_ago', 10, 3 );
 		do_action( 'before_sidebar' );
 		dynamic_sidebar( 'sidebar-1' );
 		do_action( 'after_sidebar' );
-		add_filter( 'get_the_date', 'newskit_convert_to_time_ago', 10, 3 );
+		add_filter( 'get_the_date', 'gulir_convert_to_time_ago', 10, 3 );
 	?>
 </aside><!-- #secondary -->

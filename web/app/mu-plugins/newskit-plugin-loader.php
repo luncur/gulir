@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       Newskit Plugin Scaffold
+ * Plugin Name:       Gulir Plugin Scaffold
  * Description:       A brief description of the plugin.
  * Version:           0.1.0
  * Requires at least: 4.9
@@ -16,4 +16,4 @@
  * @package           TenUpPlugin
  */
 
-require_once __DIR__ . '/newskit-plugin/plugin.php';
+require_once __DIR__ . '/gulir-plugin/plugin.php';

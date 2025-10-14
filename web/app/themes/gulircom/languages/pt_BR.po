@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Newskit\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/newskit\n"
+"Project-Id-Version: Gulir\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/gulir\n"
 "POT-Creation-Date: 2025-09-08T14:34:56+00:00\n"
 "PO-Revision-Date: 2025-03-14 10:02-0700\n"
 "Last-Translator: Luiz Eduardo Oliveira Fonseca <luizeof@gmail.com>\n"
@@ -12,23 +12,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Poedit 3.5\n"
-"X-Domain: newskit\n"
+"X-Domain: gulir\n"
 "X-Loco-Version: 2.3.0; wp-5.2.2\n"
 
 #. Theme Name of the theme
 #: style.css
-msgid "Newskit"
-msgstr "Newskit"
+msgid "Gulir"
+msgstr "Gulir"
 
 #. Theme URI of the theme
 #: style.css
-msgid "https://github.com/Automattic/newskit"
-msgstr "https://github.com/Automattic/newskit"
+msgid "https://github.com/Automattic/gulir"
+msgstr "https://github.com/Automattic/gulir"
 
 #. Description of the theme
 #: style.css
 msgid ""
-"The official theme for Newskit, an all-in-one platform that simplifies "
+"The official theme for Gulir, an all-in-one platform that simplifies "
 "publishing and drives audience and revenue right out of the box."
 msgstr ""
 
@@ -39,8 +39,8 @@ msgstr "Automattic"
 
 #. Author URI of the theme
 #: style.css
-msgid "https://newskit.com"
-msgstr "https://newskit.com"
+msgid "https://gulir.com"
+msgstr "https://gulir.com"
 
 #: 404.php:18
 msgid "Oops! That page can&rsquo;t be found."
@@ -50,41 +50,41 @@ msgstr "Opa! Essa página não pode ser encontrada."
 msgid "It looks like nothing was found at this location. Maybe try a search?"
 msgstr "Parece que nada foi encontrado neste local. Talvez tente uma pesquisa?"
 
-#: archive-newskit_correction.php:19
+#: archive-gulir_correction.php:19
 msgid "Corrections and clarifications"
 msgstr ""
 
-#: archive-newskit_correction.php:51 comments.php:116
+#: archive-gulir_correction.php:51 comments.php:116
 #: inc/template-tags.php:326
 msgid "Previous"
 msgstr "Anterior"
 
-#: archive-newskit_correction.php:52 comments.php:117
+#: archive-gulir_correction.php:52 comments.php:117
 #: inc/template-tags.php:324
 msgid "Next"
 msgstr "Próximo"
 
 #. translators: %s: comment author link
-#: classes/class-newskit-walker-comment.php:50
+#: classes/class-gulir-walker-comment.php:50
 #, php-format
 msgid "%s <span class=\"screen-reader-text says\">says:</span>"
 msgstr "%s <span class=\"screen-reader-text says\">disse:</span>"
 
-#: classes/class-newskit-walker-comment.php:62
+#: classes/class-gulir-walker-comment.php:62
 msgid "Article author"
 msgstr ""
 
 #. translators: 1: comment date, 2: comment time
-#: classes/class-newskit-walker-comment.php:75
+#: classes/class-gulir-walker-comment.php:75
 #, php-format
 msgid "%1$s at %2$s"
 msgstr "%1$s em %2$s"
 
-#: classes/class-newskit-walker-comment.php:83
+#: classes/class-gulir-walker-comment.php:83
 msgid "Edit"
 msgstr "Editar"
 
-#: classes/class-newskit-walker-comment.php:88
+#: classes/class-gulir-walker-comment.php:88
 msgid "Your comment is awaiting moderation."
 msgstr "Seu comentário aguarda moderação."
 
@@ -120,12 +120,12 @@ msgid "Comments are closed."
 msgstr "Comentários estão fechados."
 
 #: footer.php:54
-msgid "https://newskit.com/"
-msgstr "https://newskit.com/"
+msgid "https://gulir.com/"
+msgstr "https://gulir.com/"
 
 #: footer.php:55
-msgid "Powered by Newskit"
-msgstr "Feito por Newskit"
+msgid "Powered by Gulir"
+msgstr "Feito por Gulir"
 
 #: functions.php:88
 msgid "Primary Menu"
@@ -390,10 +390,10 @@ msgstr ""
 #: inc/back-compat.php:38 inc/back-compat.php:52 inc/back-compat.php:72
 #, php-format
 msgid ""
-"Newskit Theme requires at least WordPress version 4.7. You are running "
+"Gulir Theme requires at least WordPress version 4.7. You are running "
 "version %s. Please upgrade and try again."
 msgstr ""
-"O Newskit Theme requer pelo menos a versão 4.7 do WordPress. Você está "
+"O Gulir Theme requer pelo menos a versão 4.7 do WordPress. Você está "
 "executando a versão %s. Atualize e tente novamente."
 
 #: inc/customizer.php:17
@@ -1024,37 +1024,37 @@ msgstr "Use letras maiúsculas para acentuar o texto."
 msgid "Logo Size"
 msgstr "Tamanho do logotipo"
 
-#: inc/newskit-multibranded-site-plugin.php:17
+#: inc/gulir-multibranded-site-plugin.php:17
 msgid "Primary Color"
 msgstr "Cor primária"
 
-#: inc/newskit-multibranded-site-plugin.php:22
+#: inc/gulir-multibranded-site-plugin.php:22
 msgid "Secondary Color"
 msgstr ""
 
-#: inc/newskit-multibranded-site-plugin.php:27
+#: inc/gulir-multibranded-site-plugin.php:27
 msgid "Background color to the ads"
 msgstr ""
 
-#: inc/newskit-multibranded-site-plugin.php:32
+#: inc/gulir-multibranded-site-plugin.php:32
 msgid "Header background (Requires the Solid background option to be enabled)"
 msgstr ""
 
-#: inc/newskit-multibranded-site-plugin.php:37
+#: inc/gulir-multibranded-site-plugin.php:37
 msgid ""
 "Background color to the primary menu (Requires the Solid background option "
 "to be enabled)"
 msgstr ""
 
-#: inc/newskit-multibranded-site-plugin.php:42
+#: inc/gulir-multibranded-site-plugin.php:42
 msgid "Footer background color"
 msgstr ""
 
-#: inc/newskit-sponsors.php:28 inc/newskit-sponsors.php:271
+#: inc/gulir-sponsors.php:28 inc/gulir-sponsors.php:271
 msgid "Learn More"
 msgstr ""
 
-#: inc/newskit-sponsors.php:29 template-parts/header/desktop-sidebar.php:14
+#: inc/gulir-sponsors.php:29 template-parts/header/desktop-sidebar.php:14
 #: template-parts/header/desktop-sidebar.php:20
 #: template-parts/header/mobile-sidebar.php:12
 #: template-parts/header/mobile-sidebar.php:18
@@ -1064,30 +1064,30 @@ msgid "Close"
 msgstr "Fechar"
 
 #. translators: separates last two names; needs a space on either side.
-#: inc/newskit-sponsors.php:204 inc/template-tags.php:119
+#: inc/gulir-sponsors.php:204 inc/template-tags.php:119
 msgid " and "
 msgstr ""
 
 #. translators: separates all but the last two names; needs a space at the end.
-#: inc/newskit-sponsors.php:207 inc/template-tags.php:122
+#: inc/gulir-sponsors.php:207 inc/template-tags.php:122
 msgid ", "
 msgstr ","
 
 #. translators: %s is the post's sponsor's name.
-#: inc/newskit-sponsors.php:381
+#: inc/gulir-sponsors.php:381
 #, php-format
 msgid "Learn more about %s"
 msgstr ""
 
-#: inc/newskit-sponsors.php:564
+#: inc/gulir-sponsors.php:564
 msgid "Sponsored Content"
 msgstr ""
 
-#: inc/newskit-sponsors.php:581
+#: inc/gulir-sponsors.php:581
 msgid "Sponsored Content Label"
 msgstr ""
 
-#: inc/newskit-sponsors.php:582
+#: inc/gulir-sponsors.php:582
 msgid ""
 "Changes the background of the sponsored content flag that appears on posts "
 "and blocks. It should stand out boldly against your site's color scheme."
@@ -1193,7 +1193,7 @@ msgid "Top Menu"
 msgstr "Menu do Topo"
 
 #: inc/the-events-calendar.php:19
-msgid "Newskit Options"
+msgid "Gulir Options"
 msgstr ""
 
 #: inc/the-events-calendar.php:35

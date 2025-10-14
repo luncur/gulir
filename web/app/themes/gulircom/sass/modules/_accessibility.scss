@@ -14,12 +14,12 @@
 	word-wrap: normal !important; /* Many screen reader and browser combinations announce broken words as they would appear visually. */
 
 	&:focus {
-		background-color: var(--newskit-color-bg-light);
+		background-color: var(--gulir-color-bg-light);
 		border-radius: 3px;
 		box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
 		clip: auto !important;
 		clip-path: none;
-		color: var(--newskit-color-text-screen);
+		color: var(--gulir-color-text-screen);
 		display: block;
 		@include mixins-main.font-size( 0.875 );
 

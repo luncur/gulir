@@ -3,7 +3,7 @@
 a {
 	@include utilities.link-transition;
 
-	color: var(--newskit-color-text-light);
+	color: var(--gulir-color-text-light);
 
 	&:visited {
 		color: inherit;
@@ -11,7 +11,7 @@ a {
 
 	&:hover,
 	&:active {
-		color: var(--newskit-color-text-main);
+		color: var(--gulir-color-text-main);
 		outline: 0;
 		text-decoration: none;
 	}

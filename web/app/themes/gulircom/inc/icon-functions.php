@@ -2,32 +2,32 @@
 /**
  * SVG icons related functions
  *
- * @package Newskit
+ * @package Gulir
  */
 
 /**
  * Gets the SVG code for a given icon.
  */
-function newskit_get_icon_svg( $icon, $size = 24, $title = '' ) {
-	return Newskit_SVG_Icons::get_svg( 'ui', $icon, $size, $title );
+function gulir_get_icon_svg( $icon, $size = 24, $title = '' ) {
+	return Gulir_SVG_Icons::get_svg( 'ui', $icon, $size, $title );
 }
 
 /**
  * Gets the SVG code for a given social icon.
  */
-function newskit_get_social_icon_svg( $icon, $size = 24, $title = '' ) {
-	return Newskit_SVG_Icons::get_svg( 'social', $icon, $size, $title );
+function gulir_get_social_icon_svg( $icon, $size = 24, $title = '' ) {
+	return Gulir_SVG_Icons::get_svg( 'social', $icon, $size, $title );
 }
 
 /**
  * Detects the social network from a URL and returns the SVG code for its icon.
  */
-function newskit_get_social_link_svg( $uri, $size = 24, $title = '' ) {
-	$svg = Newskit_SVG_Icons::get_social_link_svg( $uri, $uri, $title );
+function gulir_get_social_link_svg( $uri, $size = 24, $title = '' ) {
+	$svg = Gulir_SVG_Icons::get_social_link_svg( $uri, $uri, $title );
 
-	$svg = apply_filters( 'newskit_get_social_link_svg', $svg, $uri, $size, $title );
+	$svg = apply_filters( 'gulir_get_social_link_svg', $svg, $uri, $size, $title );
 
-	return wp_kses( $svg, newskit_sanitize_svgs() );
+	return wp_kses( $svg, gulir_sanitize_svgs() );
 }
 
 /**
@@ -39,16 +39,16 @@ function newskit_get_social_link_svg( $uri, $size = 24, $title = '' ) {
  * @param  array   $args        wp_nav_menu() arguments.
  * @return string  $item_output The menu item output with social icon.
  */
-function newskit_nav_menu_social_icons( $item_output, $item, $depth, $args ) {
+function gulir_nav_menu_social_icons( $item_output, $item, $depth, $args ) {
 	// Change SVG icon inside social links menu if there is supported URL.
 	if ( 'social' === $args->theme_location ) {
-		$svg = newskit_get_social_link_svg( $item->url, 26 );
+		$svg = gulir_get_social_link_svg( $item->url, 26 );
 		if ( empty( $svg ) ) {
-			$svg = newskit_get_icon_svg( 'link' );
+			$svg = gulir_get_icon_svg( 'link' );
 		}
 		$item_output = str_replace( $args->link_after, '</span>' . $svg, $item_output );
 	}
 
 	return $item_output;
 }
-add_filter( 'walker_nav_menu_start_el', 'newskit_nav_menu_social_icons', 10, 4 );
+add_filter( 'walker_nav_menu_start_el', 'gulir_nav_menu_social_icons', 10, 4 );

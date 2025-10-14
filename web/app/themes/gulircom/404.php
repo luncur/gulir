@@ -4,7 +4,7 @@
  *
  * @link https://codex.wordpress.org/Creating_an_Error_404_Page
  *
- * @package Newskit
+ * @package Gulir
  */
 
 get_header();
@@ -15,11 +15,11 @@ get_header();
 
 			<div class="error-404 not-found">
 				<header class="page-header">
-					<h1 class="page-title"><?php _e( 'Oops! That page can&rsquo;t be found.', 'newskit' ); ?></h1>
+					<h1 class="page-title"><?php _e( 'Oops! That page can&rsquo;t be found.', 'gulir' ); ?></h1>
 				</header><!-- .page-header -->
 
 				<div class="page-content">
-					<p><?php _e( 'It looks like nothing was found at this location. Maybe try a search?', 'newskit' ); ?></p>
+					<p><?php _e( 'It looks like nothing was found at this location. Maybe try a search?', 'gulir' ); ?></p>
 					<?php get_search_form(); ?>
 				</div><!-- .page-content -->
 			</div><!-- .error-404 -->

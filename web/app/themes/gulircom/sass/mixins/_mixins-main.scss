@@ -30,14 +30,14 @@
 
 @mixin filter-duotone {
 	&::before {
-		background: var(--newskit-color-primary);
+		background: var(--gulir-color-primary);
 		mix-blend-mode: screen;
 		opacity: 0.1;
 		z-index: 2;
 	}
 
 	&::after {
-		background: var(--newskit-color-primary);
+		background: var(--gulir-color-primary);
 		mix-blend-mode: multiply;
 		opacity: 0.8;
 		z-index: 3;
@@ -64,7 +64,7 @@
 
 @mixin post-section-dash {
 	&::before {
-		background: var(--newskit-color-text-light);
+		background: var(--gulir-color-text-light);
 		content: "\020";
 		display: block;
 		height: 2px;
@@ -79,11 +79,11 @@
 
 @mixin box-shadow($size) {
 	box-shadow:
-		0 0 0 $size var(--newskit-color-text-light) inset,
+		0 0 0 $size var(--gulir-color-text-light) inset,
 		// Original border.
-		0 0 0 ($size + 1px) var(--newskit-color-text-light) inset,
+		0 0 0 ($size + 1px) var(--gulir-color-text-light) inset,
 		// Antialiasing, inner edge.
-		0 0 1px 0 rgba(var(--newskit-color-text-light), 0.7); // Antialiasing, outer edge.
+		0 0 1px 0 rgba(var(--gulir-color-text-light), 0.7); // Antialiasing, outer edge.
 }
 
 /* Calculates maximum width for post content */
@@ -104,7 +104,7 @@
 	}
 
 	ul > li > a::before {
-		font-family: var(--newskit-font-body);
+		font-family: var(--gulir-font-body);
 		font-weight: normal;
 		content: "\2013\00a0"counters(submenu, "\2013\00a0", none);
 		counter-increment: submenu;
@@ -190,7 +190,7 @@
 			}
 
 			.components-text-control__input {
-				border-color: var(--newskit-color-border);
+				border-color: var(--gulir-color-border);
 				border-radius: 0;
 			}
 

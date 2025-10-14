@@ -78,7 +78,7 @@
 	> small {
 		bottom: 1em;
 		display: block;
-		font-size: var(--newskit-font-size-base);
+		font-size: var(--gulir-font-size-base);
 		position: absolute;
 		right: 0;
 		white-space: nowrap;
@@ -116,7 +116,7 @@
 }
 
 .comment-policy {
-	font-size: var(--newskit-font-size-sm);
+	font-size: var(--gulir-font-size-sm);
 	margin: #{0.5 * structure.$size__spacing-unit} 0 structure.$size__spacing-unit;
 
 	a {
@@ -140,9 +140,9 @@
 	.pingback,
 	.trackback {
 		.comment-body {
-			color: var(--newskit-color-text-light);
-			font-family: var(--newskit-font-heading);
-			font-size: var(--newskit-font-size-xs);
+			color: var(--gulir-color-text-light);
+			font-family: var(--gulir-font-heading);
+			font-size: var(--gulir-font-size-xs);
 			font-weight: 500;
 			margin-top: structure.$size__spacing-unit;
 			margin-bottom: structure.$size__spacing-unit;
@@ -155,15 +155,15 @@
 			}
 
 			.comment-edit-link {
-				color: var(--newskit-color-text-light);
-				font-family: var(--newskit-font-heading);
+				color: var(--gulir-color-text-light);
+				font-family: var(--gulir-font-heading);
 				font-weight: 500;
 			}
 		}
 	}
 
 	#respond .comment-reply-title {
-		font-size: var(--newskit-font-size-base);
+		font-size: var(--gulir-font-size-base);
 	}
 }
 
@@ -214,15 +214,15 @@
 				color: inherit;
 
 				&:hover {
-					color: var(--newskit-color-primary-against-white);
+					color: var(--gulir-color-primary-against-white);
 				}
 			}
 		}
 
 		.post-author-badge {
-			background: var(--newskit-color-primary);
+			background: var(--gulir-color-primary);
 			border-radius: 100%;
-			color: var(--newskit-color-against-primary);
+			color: var(--gulir-color-against-primary);
 			display: inline-block;
 			height: 16px;
 			line-height: 16px;
@@ -251,7 +251,7 @@
 		.comment-edit-link {
 			display: inline;
 			font-weight: 500;
-			color: var(--newskit-color-text-light);
+			color: var(--gulir-color-text-light);
 			vertical-align: baseline;
 
 			time {
@@ -259,7 +259,7 @@
 			}
 
 			&:hover {
-				color: var(--newskit-color-primary-against-white);
+				color: var(--gulir-color-primary-against-white);
 				text-decoration: none;
 			}
 		}
@@ -269,13 +269,13 @@
 		}
 
 		.edit-link-sep {
-			color: var(--newskit-color-text-light);
+			color: var(--gulir-color-text-light);
 			margin: 0 0.2em;
 			vertical-align: baseline;
 		}
 
 		.edit-link {
-			color: var(--newskit-color-text-light);
+			color: var(--gulir-color-text-light);
 
 			svg {
 				transform: scale(0.8);
@@ -291,7 +291,7 @@
 			z-index: 1;
 
 			&:hover {
-				color: var(--newskit-color-primary-against-white);
+				color: var(--gulir-color-primary-against-white);
 			}
 		}
 	}
@@ -326,7 +326,7 @@
 }
 
 .must-log-in {
-	font-size: var(--newskit-font-size-sm);
+	font-size: var(--gulir-font-size-sm);
 	font-style: italic;
 }
 
@@ -336,7 +336,7 @@
 	font-weight: 500;
 
 	&:hover {
-		color: var(--newskit-color-primary-variation);
+		color: var(--gulir-color-primary-variation);
 	}
 }
 
@@ -378,9 +378,9 @@
 .comment-form {
 	.comment-notes,
 	label {
-		font-family: var(--newskit-font-heading);
-		font-size: var(--newskit-font-size-xs);
-		color: var(--newskit-color-text-light);
+		font-family: var(--gulir-font-heading);
+		font-size: var(--gulir-font-size-xs);
+		color: var(--gulir-color-text-light);
 	}
 
 	.comment-form-author,
@@ -424,10 +424,10 @@
 	align-items: center;
 	background: transparent;
 	border-radius: 0;
-	border-top: 1px solid var(--newskit-color-border);
-	color: var(--newskit-color-text-main);
+	border-top: 1px solid var(--gulir-color-border);
+	color: var(--gulir-color-text-main);
 	display: flex;
-	font-size: var(--newskit-font-size-sm);
+	font-size: var(--gulir-font-size-sm);
 	justify-content: center;
 	margin-top: 0;
 	position: relative;
@@ -440,7 +440,7 @@
 	&:hover,
 	&:focus {
 		background: transparent;
-		color: var(--newskit-color-primary-against-white);
+		color: var(--gulir-color-primary-against-white);
 	}
 }
 

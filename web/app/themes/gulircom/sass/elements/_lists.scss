@@ -27,7 +27,7 @@ ul {
 				height: 24px;
 				left: calc(-24px - 0.25em);
 				position: absolute;
-				top: calc(( 1em * var(--newskit-font-line-height-body) - 24px ) / 2);
+				top: calc(( 1em * var(--gulir-font-line-height-body) - 24px ) / 2);
 				width: 24px;
 			}
 		}
@@ -39,7 +39,7 @@ ol {
 }
 
 li {
-	line-height: var(--newskit-font-line-height-body);
+	line-height: var(--gulir-font-line-height-body);
 }
 
 li > ul,

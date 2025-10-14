@@ -34,7 +34,7 @@ const SummaryTitleEditor = ({ summaryTitle, saveSummaryTitle }) => {
 
 	return (
 		<TextControl
-			label={__('Title:', 'newskit')}
+			label={__('Title:', 'gulir')}
 			value={value}
 			onChange={setValue}
 			style={{ width: '100%' }}

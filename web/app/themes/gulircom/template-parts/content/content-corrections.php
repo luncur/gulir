@@ -4,13 +4,13 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Newskit
+ * @package Gulir
  */
 
-$related_post_id = get_post_meta( get_the_ID(), 'newskit_correction-post-id', true );
+$related_post_id = get_post_meta( get_the_ID(), 'gulir_correction-post-id', true );
 $correction_type = '';
-if ( method_exists( 'Newskit\Corrections', 'get_correction_type' ) ) {
-	$correction_type = Newskit\Corrections::get_correction_type();
+if ( method_exists( 'Gulir\Corrections', 'get_correction_type' ) ) {
+	$correction_type = Gulir\Corrections::get_correction_type();
 }
 
 $correction_heading = sprintf(

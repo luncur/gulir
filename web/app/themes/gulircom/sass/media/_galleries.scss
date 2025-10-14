@@ -33,9 +33,9 @@
 
 .gallery-caption {
 	display: block;
-	font-family: var(--newskit-font-heading);
-	font-size: var(--newskit-font-size-xs);
-	line-height: var(--newskit-font-line-height-body);
+	font-family: var(--gulir-font-heading);
+	font-size: var(--gulir-font-size-xs);
+	line-height: var(--gulir-font-line-height-body);
 	margin: 0;
 	padding: ( structure.$size__spacing-unit * 0.5 );
 }
@@ -48,6 +48,6 @@
 	box-shadow: 0 0 0 0 transparent;
 
 	&:focus {
-		box-shadow: 0 0 0 2px rgba(var(--newskit-color-primary), 1);
+		box-shadow: 0 0 0 2px rgba(var(--gulir-color-primary), 1);
 	}
 }

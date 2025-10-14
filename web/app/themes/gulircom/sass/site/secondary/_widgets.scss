@@ -3,8 +3,8 @@
 @use "../../variables-site/structure";
 
 .widget {
-	font-family: var(--newskit-font-heading);
-	font-size: var(--newskit-font-size-sm);
+	font-family: var(--gulir-font-heading);
+	font-size: var(--gulir-font-size-sm);
 	margin: 0 0 structure.$size__spacing-unit;
 	word-wrap: break-word;
 
@@ -32,7 +32,7 @@
 
 	a {
 		&:hover {
-			color: var(--newskit-color-secondary-variation);
+			color: var(--gulir-color-secondary-variation);
 		}
 	}
 }
@@ -50,7 +50,7 @@
 		list-style: none;
 
 		li {
-			font-family: var(--newskit-font-heading);
+			font-family: var(--gulir-font-heading);
 			margin: #{0.125 * structure.$size__spacing-unit} 0;
 
 			@include utilities.media( mobile ) {
@@ -83,14 +83,14 @@
 .widget_recent_entries {
 	a {
 		color: inherit;
-		font-size: var(--newskit-font-size-lg);
+		font-size: var(--gulir-font-size-lg);
 		font-weight: 700;
-		line-height: var(--newskit-font-line-height-heading);
+		line-height: var(--gulir-font-line-height-heading);
 	}
 
 	.post-date {
 		color: inherit;
-		font-size: var(--newskit-font-size-sm);
+		font-size: var(--gulir-font-size-sm);
 		display: block;
 		opacity: 0.8;
 	}
@@ -122,7 +122,7 @@
 .jetpack_subscription_widget {
 	.error,
 	div {
-		background-color: var(--newskit-color-bg-pre);
+		background-color: var(--gulir-color-bg-pre);
 		padding: structure.$size__spacing-unit;
 
 		p {
@@ -151,7 +151,7 @@
 .widget_top-posts {
 	p {
 		font-style: italic;
-		font-size: var(--newskit-font-size-sm);
+		font-size: var(--gulir-font-size-sm);
 	}
 
 	ul,
@@ -172,9 +172,9 @@
 		}
 
 		a {
-			color: var(--newskit-color-text-main);
+			color: var(--gulir-color-text-main);
 			display: block;
-			font-family: var(--newskit-font-heading);
+			font-family: var(--gulir-font-heading);
 			font-weight: bold;
 			line-height: 1.2;
 			text-decoration: none;
@@ -232,7 +232,7 @@
 
 	.widget-title,
 	.widgettitle {
-		font-size: var(--newskit-font-size-md);
+		font-size: var(--gulir-font-size-md);
 	}
 }
 
@@ -287,7 +287,7 @@
 }
 
 .h-db .above-header-widgets {
-	border-bottom: 1px solid var(--newskit-color-border);
+	border-bottom: 1px solid var(--gulir-color-border);
 }
 
 // The Subpage header + special featured image placements also can't really support an ad in this spot.

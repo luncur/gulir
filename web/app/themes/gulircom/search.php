@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#search-result
  *
- * @package Newskit
+ * @package Gulir
  */
 
 get_header();
@@ -14,7 +14,7 @@ get_header();
 
 		<header class="page-header">
 			<h1 class="page-title">
-				<?php esc_html_e( 'Search results', 'newskit' ); ?>
+				<?php esc_html_e( 'Search results', 'gulir' ); ?>
 			</h1>
 			<?php get_search_form(); ?>
 		</header><!-- .page-header -->
@@ -39,7 +39,7 @@ get_header();
 			endwhile;
 
 			// Previous/next page navigation.
-			newskit_the_posts_navigation();
+			gulir_the_posts_navigation();
 
 			// If no content, include the "No posts found" template.
 		else :

@@ -9,7 +9,7 @@
  */
 ( function ( $ ) {
 	const api = wp.customize;
-	const Logo = new NewskitLogo();
+	const Logo = new GulirLogo();
 	let resizeTimer;
 
 	api( 'custom_logo', function ( value ) {
@@ -37,7 +37,7 @@
 
 	/**
 	 */
-	function NewskitLogo() {
+	function GulirLogo() {
 		let hasLogo = null;
 		const min = 48;
 

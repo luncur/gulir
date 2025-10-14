@@ -22,7 +22,7 @@ get_header();
 	<?php
 	echo tribe( Template_Bootstrap::class )->get_view_html(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
-	if ( newskit_tec_show_sidebar() ) :
+	if ( gulir_tec_show_sidebar() ) :
 		get_sidebar();
 	endif;
 	?>

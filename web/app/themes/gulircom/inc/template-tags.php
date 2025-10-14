@@ -2,15 +2,15 @@
 /**
  * Custom template tags for this theme
  *
- * @package Newskit
+ * @package Gulir
  */
 
-if ( ! function_exists( 'newskit_posted_on' ) ) :
+if ( ! function_exists( 'gulir_posted_on' ) ) :
 	/**
 	 * Prints HTML with meta information for the current post-date/time.
 	 */
-	function newskit_posted_on() {
-		if ( true === apply_filters( 'newskit_listings_hide_publish_date', false ) ) {
+	function gulir_posted_on() {
+		if ( true === apply_filters( 'gulir_listings_hide_publish_date', false ) ) {
 			return;
 		}
 
@@ -19,19 +19,19 @@ if ( ! function_exists( 'newskit_posted_on' ) ) :
 			$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time>%3$s<time class="updated" datetime="%4$s">%5$s</time>';
 		}
 
-		if ( newskit_should_display_updated_date() ) {
-			add_filter( 'get_the_modified_date', 'newskit_convert_modified_to_time_ago', 10, 3 );
+		if ( gulir_should_display_updated_date() ) {
+			add_filter( 'get_the_modified_date', 'gulir_convert_modified_to_time_ago', 10, 3 );
 
 			$time_string = sprintf(
 				$time_string,
 				esc_attr( get_the_date( DATE_W3C ) ),
 				esc_html( get_the_date() ),
-				'<span class="updated-label">' . esc_html__( 'Updated', 'newskit' ) . ' </span>',
+				'<span class="updated-label">' . esc_html__( 'Updated', 'gulir' ) . ' </span>',
 				esc_attr( get_the_modified_date( DATE_W3C ) ),
 				esc_html( get_the_modified_date() )
 			);
 
-			remove_filter( 'get_the_modified_date', 'newskit_convert_modified_to_time_ago', 10, 3 );
+			remove_filter( 'get_the_modified_date', 'gulir_convert_modified_to_time_ago', 10, 3 );
 		} else {
 
 			$time_string = sprintf(
@@ -79,17 +79,17 @@ if ( ! function_exists( 'newskit_posted_on' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'newskit_posted_by' ) ) :
+if ( ! function_exists( 'gulir_posted_by' ) ) :
 	/**
 	 * Prints HTML with meta information about theme author.
 	 */
-	function newskit_posted_by() {
-		if ( true === apply_filters( 'newskit_listings_hide_author', false ) ) {
+	function gulir_posted_by() {
+		if ( true === apply_filters( 'gulir_listings_hide_author', false ) ) {
 			return;
 		}
 
-		// Short-circuit function if has newskit_posted_by_overwrite filter.
-		$byline = apply_filters( 'pre_newskit_posted_by', false );
+		// Short-circuit function if has gulir_posted_by_overwrite filter.
+		$byline = apply_filters( 'pre_gulir_posted_by', false );
 
 		if ( $byline ) :
 			echo $byline;
@@ -101,25 +101,25 @@ if ( ! function_exists( 'newskit_posted_by' ) ) :
 			$i            = 1;
 
 			foreach ( $authors as $author ) {
-				// avatar_img_tag is a property added by Newskit Network plugin to distributed posts.
+				// avatar_img_tag is a property added by Gulir Network plugin to distributed posts.
 				$author_avatar = $author->avatar_img_tag ?? coauthors_get_avatar( $author, 80 );
 
-				echo '<span class="author-avatar">' . wp_kses( $author_avatar, newskit_sanitize_avatars() ) . '</span>';
+				echo '<span class="author-avatar">' . wp_kses( $author_avatar, gulir_sanitize_avatars() ) . '</span>';
 			}
 			?>
 
 			<span class="byline">
-				<span><?php echo esc_html__( 'by', 'newskit' ); ?></span>
+				<span><?php echo esc_html__( 'by', 'gulir' ); ?></span>
 				<?php
 				foreach ( $authors as $author ) {
 
 					$i++;
 					if ( $author_count === $i ) :
 						/* translators: separates last two names; needs a space on either side. */
-						$sep = esc_html__( ' and ', 'newskit' );
+						$sep = esc_html__( ' and ', 'gulir' );
 					elseif ( $author_count > $i ) :
 						/* translators: separates all but the last two names; needs a space at the end. */
-						$sep = esc_html__( ', ', 'newskit' );
+						$sep = esc_html__( ', ', 'gulir' );
 					else :
 						$sep = '';
 					endif;
@@ -155,7 +155,7 @@ if ( ! function_exists( 'newskit_posted_by' ) ) :
 				/* translators: 1: Author avatar. 2: post author, only visible to screen readers. 3: author link. */
 				'<span class="author-avatar">%1$s</span><span class="byline"><span>%2$s</span> <span class="author vcard"><a class="url fn n" href="%3$s">%4$s</a></span></span>',
 				get_avatar( get_the_author_meta( 'ID' ) ),
-				esc_html__( 'by', 'newskit' ),
+				esc_html__( 'by', 'gulir' ),
 				esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
 				esc_html( $author )
 			);
@@ -164,12 +164,12 @@ if ( ! function_exists( 'newskit_posted_by' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'newskit_post_subtitle' ) ) :
+if ( ! function_exists( 'gulir_post_subtitle' ) ) :
 	/**
 	 * Prints the post subtitle.
 	 */
-	function newskit_post_subtitle() {
-		$subtitle              = get_post_meta( get_the_ID(), 'newskit_post_subtitle', true );
+	function gulir_post_subtitle() {
+		$subtitle              = get_post_meta( get_the_ID(), 'gulir_post_subtitle', true );
 		$subtitle_allowed_tags = array(
 			'b'      => true,
 			'strong' => true,
@@ -192,12 +192,12 @@ if ( ! function_exists( 'newskit_post_subtitle' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'newskit_author_social_links' ) ) :
+if ( ! function_exists( 'gulir_author_social_links' ) ) :
 	/**
 	 * Prints list of social links for the current author.
 	 */
-	function newskit_author_social_links( $author_id, $size = 24 ) {
-		$links = newskit_author_get_social_links( $author_id, $size );
+	function gulir_author_social_links( $author_id, $size = 24 ) {
+		$links = gulir_author_get_social_links( $author_id, $size );
 
 		// Create array of allowed HTML, including SVG markup.
 		$allowed_html = array(
@@ -210,7 +210,7 @@ if ( ! function_exists( 'newskit_author_social_links' ) ) :
 				'class' => array(),
 			),
 		);
-		$allowed_html = array_merge( $allowed_html, newskit_sanitize_svgs() );
+		$allowed_html = array_merge( $allowed_html, gulir_sanitize_svgs() );
 
 		if ( '' !== $links && true === get_theme_mod( 'show_author_social', false ) ) {
 			echo '<ul class="author-social-links">' . wp_kses( $links, $allowed_html ) . '</ul>';
@@ -218,14 +218,14 @@ if ( ! function_exists( 'newskit_author_social_links' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'newskit_author_get_social_links' ) ) :
+if ( ! function_exists( 'gulir_author_get_social_links' ) ) :
 	/**
 	 * Gets a list of social links for the current author.
 	 *
 	 * @param integer $author_id The author ID.
 	 * @param integer $size The SVG icon size.
 	 */
-	function newskit_author_get_social_links( $author_id, $size = 24 ) {
+	function gulir_author_get_social_links( $author_id, $size = 24 ) {
 		// Get list of available social profiles.
 		$social_profiles = array(
 			'facebook',
@@ -247,9 +247,9 @@ if ( ! function_exists( 'newskit_author_get_social_links' ) ) :
 		foreach ( $social_profiles as $profile ) {
 			if ( '' !== get_the_author_meta( $profile, $author_id ) ) {
 				if ( 'twitter' === $profile ) {
-					$links .= '<li class="twitter"><a href="https://x.com/' . esc_attr( get_the_author_meta( $profile, $author_id ) ) . '" target="_blank">' . newskit_get_social_icon_svg( 'x', $size, 'x' ) . '</a></li>';
+					$links .= '<li class="twitter"><a href="https://x.com/' . esc_attr( get_the_author_meta( $profile, $author_id ) ) . '" target="_blank">' . gulir_get_social_icon_svg( 'x', $size, 'x' ) . '</a></li>';
 				} else {
-					$links .= '<li class="' . esc_attr( $profile ) . '"><a href="' . esc_url( get_the_author_meta( $profile, $author_id ) ) . '" target="_blank">' . newskit_get_social_icon_svg( $profile, $size, $profile ) . '</a></li>';
+					$links .= '<li class="' . esc_attr( $profile ) . '"><a href="' . esc_url( get_the_author_meta( $profile, $author_id ) ) . '" target="_blank">' . gulir_get_social_icon_svg( $profile, $size, $profile ) . '</a></li>';
 				}
 			}
 		}
@@ -258,28 +258,28 @@ if ( ! function_exists( 'newskit_author_get_social_links' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'newskit_comment_count' ) ) :
+if ( ! function_exists( 'gulir_comment_count' ) ) :
 	/**
 	 * Prints HTML with the comment count for the current post.
 	 */
-	function newskit_comment_count() {
+	function gulir_comment_count() {
 		if ( ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
 			echo '<span class="comments-link">';
-			echo newskit_get_icon_svg( 'comment', 16 );
+			echo gulir_get_icon_svg( 'comment', 16 );
 
 			/* translators: %s: Name of current post. Only visible to screen readers. */
-			comments_popup_link( sprintf( __( 'Leave a comment<span class="screen-reader-text"> on %s</span>', 'newskit' ), get_the_title() ) );
+			comments_popup_link( sprintf( __( 'Leave a comment<span class="screen-reader-text"> on %s</span>', 'gulir' ), get_the_title() ) );
 
 			echo '</span>';
 		}
 	}
 endif;
 
-if ( ! function_exists( 'newskit_categories' ) ) :
+if ( ! function_exists( 'gulir_categories' ) ) :
 	/**
 	 * Prints HTML with the current post's categories.
 	 */
-	function newskit_categories() {
+	function gulir_categories() {
 		$categories_list     = '';
 		$primary_cat_enabled = get_theme_mod( 'post_primary_category', true );
 
@@ -297,33 +297,33 @@ if ( ! function_exists( 'newskit_categories' ) ) :
 
 		if ( ! $categories_list ) {
 			/* translators: used between list items; followed by a space. */
-			$categories_list = get_the_category_list( '<span class="sep">' . esc_html__( ',', 'newskit' ) . ' </span>' );
+			$categories_list = get_the_category_list( '<span class="sep">' . esc_html__( ',', 'gulir' ) . ' </span>' );
 		}
 
 		if ( $categories_list ) {
 			printf(
 				/* translators: 1: posted in label, only visible to screen readers. 2: list of categories. */
 				'<span class="cat-links"><span class="screen-reader-text">%1$s</span>%2$s</span>',
-				esc_html__( 'Posted in', 'newskit' ),
-				apply_filters( 'newskit_theme_categories', $categories_list )
+				esc_html__( 'Posted in', 'gulir' ),
+				apply_filters( 'gulir_theme_categories', $categories_list )
 			); // WPCS: XSS OK.
 		}
 	}
 endif;
 
-if ( ! function_exists( 'newskit_previous_next' ) ) :
+if ( ! function_exists( 'gulir_previous_next' ) ) :
 	/**
 	 * Prints previous and next links for single posts.
 	 */
-	function newskit_previous_next() {
+	function gulir_previous_next() {
 		$show_prev_next_links = get_theme_mod( 'post_previous_next', false );
 
 		if ( true === $show_prev_next_links && is_singular( 'post' ) ) {
 			the_post_navigation(
 				array(
-					'next_text' => '<span class="meta-nav">' . __( 'Next', 'newskit' ) . '</span> ' .
+					'next_text' => '<span class="meta-nav">' . __( 'Next', 'gulir' ) . '</span> ' .
 						'<span class="post-title">%title</span>',
-					'prev_text' => '<span class="meta-nav">' . __( 'Previous', 'newskit' ) . '</span> ' .
+					'prev_text' => '<span class="meta-nav">' . __( 'Previous', 'gulir' ) . '</span> ' .
 						'<span class="post-title">%title</span>',
 				)
 			);
@@ -331,21 +331,21 @@ if ( ! function_exists( 'newskit_previous_next' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'newskit_entry_footer' ) ) :
+if ( ! function_exists( 'gulir_entry_footer' ) ) :
 	/**
 	 * Prints HTML with meta information for the tags and comments.
 	 */
-	function newskit_entry_footer() {
+	function gulir_entry_footer() {
 
 		// Hide author, post date, category and tag text for pages.
 		if ( 'post' === get_post_type() ) {
 			/* translators: used between list items; followed by a space. */
-			$tags_list = get_the_tag_list( '', '<span class="sep">' . esc_html__( ',', 'newskit' ) . '&nbsp;</span>' );
+			$tags_list = get_the_tag_list( '', '<span class="sep">' . esc_html__( ',', 'gulir' ) . '&nbsp;</span>' );
 			if ( $tags_list ) {
 				printf(
 					/* translators: 1: posted in label, only visible to screen readers. 2: list of tags. */
 					'<span class="tags-links"><span>%1$s </span>%2$s</span>',
-					esc_html__( 'Tagged:', 'newskit' ),
+					esc_html__( 'Tagged:', 'gulir' ),
 					$tags_list
 				); // WPCS: XSS OK.
 			}
@@ -356,7 +356,7 @@ if ( ! function_exists( 'newskit_entry_footer' ) ) :
 			sprintf(
 				wp_kses(
 					/* translators: %s: Name of current post; only visible to screen readers. */
-					__( 'Edit <span class="screen-reader-text">%s</span>', 'newskit' ),
+					__( 'Edit <span class="screen-reader-text">%s</span>', 'gulir' ),
 					array(
 						'span' => array(
 							'class' => array(),
@@ -365,13 +365,13 @@ if ( ! function_exists( 'newskit_entry_footer' ) ) :
 				),
 				get_the_title()
 			),
-			'<span class="edit-link">' . newskit_get_icon_svg( 'edit', 16 ),
+			'<span class="edit-link">' . gulir_get_icon_svg( 'edit', 16 ),
 			'</span>'
 		);
 	}
 endif;
 
-if ( ! function_exists( 'newskit_post_thumbnail' ) ) :
+if ( ! function_exists( 'gulir_post_thumbnail' ) ) :
 	/**
 	 * Displays an optional post thumbnail.
 	 *
@@ -380,12 +380,12 @@ if ( ! function_exists( 'newskit_post_thumbnail' ) ) :
 	 *
 	 * @param string $size Optional custom image size name to use.
 	 */
-	function newskit_post_thumbnail( $size = 'newskit-featured-image' ) {
-		if ( ! newskit_can_show_post_thumbnail() ) {
+	function gulir_post_thumbnail( $size = 'gulir-featured-image' ) {
+		if ( ! gulir_can_show_post_thumbnail() ) {
 			return;
 		}
 
-		$after_first_featured_image = isset( $GLOBALS['newskit_after_first_featured_image'] );
+		$after_first_featured_image = isset( $GLOBALS['gulir_after_first_featured_image'] );
 
 		$default_image_attributes = array(
 			'loading'             => $after_first_featured_image ? 'lazy' : false, // Disable lazy loading for first featured image on the page.
@@ -401,7 +401,7 @@ if ( ! function_exists( 'newskit_post_thumbnail' ) ) :
 				<?php
 
 				// If using the behind or beside image styles, add the object-fit argument for AMP.
-				if ( in_array( newskit_featured_image_position(), array( 'behind', 'beside' ) ) ) :
+				if ( in_array( gulir_featured_image_position(), array( 'behind', 'beside' ) ) ) :
 
 					the_post_thumbnail(
 						$size,
@@ -414,7 +414,7 @@ if ( ! function_exists( 'newskit_post_thumbnail' ) ) :
 					);
 				else :
 
-					if ( 'above' === newskit_featured_image_position() ) :
+					if ( 'above' === gulir_featured_image_position() ) :
 						the_post_thumbnail(
 							$size,
 							wp_parse_args(
@@ -428,7 +428,7 @@ if ( ! function_exists( 'newskit_post_thumbnail' ) ) :
 						the_post_thumbnail( $size, $default_image_attributes );
 					endif;
 
-					newskit_post_thumbnail_caption();
+					gulir_post_thumbnail_caption();
 				endif;
 				?>
 
@@ -444,7 +444,7 @@ if ( ! function_exists( 'newskit_post_thumbnail' ) ) :
 					<?php
 					$featured_image_id = get_post_thumbnail_id();
 					$caption           = wp_get_attachment_caption( $featured_image_id );
-					$credit            = method_exists( 'Newskit\Newskit_Image_Credits', 'get_media_credit_string' ) && \Newskit\Newskit_Image_Credits::get_media_credit_string( $featured_image_id );
+					$credit            = method_exists( 'Gulir\Gulir_Image_Credits', 'get_media_credit_string' ) && \Gulir\Gulir_Image_Credits::get_media_credit_string( $featured_image_id );
 					if ( $caption || $credit ) :
 						?>
 						<figcaption>
@@ -452,7 +452,7 @@ if ( ! function_exists( 'newskit_post_thumbnail' ) ) :
 								<?php echo esc_html( $caption ); ?>
 							<?php endif; ?>
 							<?php if ( get_theme_mod( 'archive_show_credits' ) && $credit ) : ?>
-								<?php echo wp_kses_post( \Newskit\Newskit_Image_Credits::get_media_credit_string( get_post_thumbnail_id() ) ); ?>
+								<?php echo wp_kses_post( \Gulir\Gulir_Image_Credits::get_media_credit_string( get_post_thumbnail_id() ) ); ?>
 							<?php endif; ?>
 						</figcaption>
 					<?php endif; ?>
@@ -463,20 +463,20 @@ if ( ! function_exists( 'newskit_post_thumbnail' ) ) :
 		endif; // End is_singular().
 
 		// Set a global variable to identify that the first featured image has been displayed.
-		if ( ! isset( $GLOBALS['newskit_after_first_featured_image'] ) ) {
-			$GLOBALS['newskit_after_first_featured_image'] = true;
+		if ( ! isset( $GLOBALS['gulir_after_first_featured_image'] ) ) {
+			$GLOBALS['gulir_after_first_featured_image'] = true;
 		}
 	}
 endif;
 
-if ( ! function_exists( 'newskit_post_thumbnail_caption' ) ) {
+if ( ! function_exists( 'gulir_post_thumbnail_caption' ) ) {
 	/**
 	 * Displays a post thumbnail caption and/or credit.
 	 *
 	 * Wraps the caption and credit in a figcaption and span.
 	 */
-	function newskit_post_thumbnail_caption() {
-		if ( ! newskit_can_show_post_thumbnail() ) {
+	function gulir_post_thumbnail_caption() {
+		if ( ! gulir_can_show_post_thumbnail() ) {
 			return;
 		}
 
@@ -490,10 +490,10 @@ if ( ! function_exists( 'newskit_post_thumbnail_caption' ) ) {
 		}
 
 		// Account for featured images that have a credit but no caption.
-		if ( ! $caption_exists && class_exists( '\Newskit\Newskit_Image_Credits' ) ) {
-			$maybe_newskit_image_credit = \Newskit\Newskit_Image_Credits::get_media_credit_string( get_post_thumbnail_id() );
-			if ( strlen( wp_strip_all_tags( $maybe_newskit_image_credit ) ) ) {
-				$caption        = $maybe_newskit_image_credit;
+		if ( ! $caption_exists && class_exists( '\Gulir\Gulir_Image_Credits' ) ) {
+			$maybe_gulir_image_credit = \Gulir\Gulir_Image_Credits::get_media_credit_string( get_post_thumbnail_id() );
+			if ( strlen( wp_strip_all_tags( $maybe_gulir_image_credit ) ) ) {
+				$caption        = $maybe_gulir_image_credit;
 				$caption_exists = true;
 			}
 		}
@@ -506,11 +506,11 @@ if ( ! function_exists( 'newskit_post_thumbnail_caption' ) ) {
 	}
 }
 
-if ( ! function_exists( 'newskit_comment_form' ) ) :
+if ( ! function_exists( 'gulir_comment_form' ) ) :
 	/**
 	 * Documentation for function.
 	 */
-	function newskit_comment_form( $order ) {
+	function gulir_comment_form( $order ) {
 		if ( true === $order || strtolower( $order ) === strtolower( get_option( 'comment_order', 'asc' ) ) ) {
 
 			$comment_attributes = array(
@@ -533,14 +533,14 @@ if ( ! function_exists( 'newskit_comment_form' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'newskit_comments_template' ) ) {
+if ( ! function_exists( 'gulir_comments_template' ) ) {
 
 	/**
 	 * Output the comment template.
 	 */
-	function newskit_comments_template() {
+	function gulir_comments_template() {
 		// Add Coral AMP compatibility because they integrated with AMP for WP plugin instead of the official AMP plugin.
-		if ( newskit_is_amp() && function_exists( 'coral_talk_comments_amp_template' ) ) {
+		if ( gulir_is_amp() && function_exists( 'coral_talk_comments_amp_template' ) ) {
 			coral_talk_comments_amp_template();
 		} else {
 			comments_template();
@@ -548,36 +548,36 @@ if ( ! function_exists( 'newskit_comments_template' ) ) {
 	}
 }
 
-if ( ! function_exists( 'newskit_the_posts_navigation' ) ) :
+if ( ! function_exists( 'gulir_the_posts_navigation' ) ) :
 	/**
 	 * Documentation for function.
 	 */
-	function newskit_the_posts_navigation() {
+	function gulir_the_posts_navigation() {
 		the_posts_pagination(
 			array(
 				'mid_size'  => 2,
 				'prev_text' => sprintf(
 					'%s <span class="nav-prev-text">%s</span>',
-					newskit_get_icon_svg( 'chevron_left', 22 ),
-					__( 'Newer posts', 'newskit' )
+					gulir_get_icon_svg( 'chevron_left', 22 ),
+					__( 'Newer posts', 'gulir' )
 				),
 				'next_text' => sprintf(
 					'<span class="nav-next-text">%s</span> %s',
-					__( 'Older posts', 'newskit' ),
-					newskit_get_icon_svg( 'chevron_right', 22 )
+					__( 'Older posts', 'gulir' ),
+					gulir_get_icon_svg( 'chevron_right', 22 )
 				),
 			)
 		);
 	}
 endif;
 
-if ( ! function_exists( 'newskit_mobile_cta' ) ) :
+if ( ! function_exists( 'gulir_mobile_cta' ) ) :
 	/**
 	 * Echo a CTA link in the mobile header.
 	 */
-	function newskit_mobile_cta() {
+	function gulir_mobile_cta() {
 		$cta_show   = get_theme_mod( 'show_header_cta', false );
-		$cta_text   = get_theme_mod( 'header_cta_text', esc_html__( 'Donate', 'newskit' ) );
+		$cta_text   = get_theme_mod( 'header_cta_text', esc_html__( 'Donate', 'gulir' ) );
 		$cta_url    = get_theme_mod( 'header_cta_url', '' );
 		$cta_target = get_theme_mod( 'header_cta_target', false );
 
@@ -594,7 +594,7 @@ endif;
 /**
  * Check if any header menus are applied; used to show menu toggle on smaller screens.
  */
-function newskit_has_menus() {
+function gulir_has_menus() {
 	// check if primary, secondary or tertiary menus are populated, or if slideout sidebar widget is populated & should show on mobile.
 	if ( ( has_nav_menu( 'primary-menu' ) || has_nav_menu( 'secondary-menu' ) || has_nav_menu( 'tertiary-menu' ) ) ||
 		( true === get_theme_mod( 'header_show_slideout', false ) && true === get_theme_mod( 'slideout_widget_mobile', false ) && is_active_sidebar( 'header-1' ) ) ) {
@@ -604,11 +604,11 @@ function newskit_has_menus() {
 	}
 }
 
-if ( ! function_exists( 'newskit_primary_menu' ) ) :
+if ( ! function_exists( 'gulir_primary_menu' ) ) :
 	/**
 	 * Displays primary menu; created a function to reduce duplication.
 	 */
-	function newskit_primary_menu() {
+	function gulir_primary_menu() {
 		if ( ! has_nav_menu( 'primary-menu' ) ) {
 			return;
 		}
@@ -619,7 +619,7 @@ if ( ! function_exists( 'newskit_primary_menu' ) ) :
 			$toolbar_attributes = 'toolbar-target="site-navigation" toolbar="(min-width: 767px)"';
 		}
 		?>
-		<nav class="main-navigation nav1 dd-menu" aria-label="<?php esc_attr_e( 'Top Menu', 'newskit' ); ?>" <?php echo $toolbar_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+		<nav class="main-navigation nav1 dd-menu" aria-label="<?php esc_attr_e( 'Top Menu', 'gulir' ); ?>" <?php echo $toolbar_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 			<?php
 			wp_nav_menu(
 				array(
@@ -635,11 +635,11 @@ if ( ! function_exists( 'newskit_primary_menu' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'newskit_secondary_menu' ) ) :
+if ( ! function_exists( 'gulir_secondary_menu' ) ) :
 	/**
 	 * Displays secondary menu; created a function to reduce duplication.
 	 */
-	function newskit_secondary_menu() {
+	function gulir_secondary_menu() {
 		if ( ! has_nav_menu( 'secondary-menu' ) ) {
 			return;
 		}
@@ -651,7 +651,7 @@ if ( ! function_exists( 'newskit_secondary_menu' ) ) :
 		}
 
 		?>
-		<nav class="secondary-menu nav2 dd-menu" aria-label="<?php esc_attr_e( 'Secondary Menu', 'newskit' ); ?>" <?php echo $toolbar_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+		<nav class="secondary-menu nav2 dd-menu" aria-label="<?php esc_attr_e( 'Secondary Menu', 'gulir' ); ?>" <?php echo $toolbar_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 			<?php
 			wp_nav_menu(
 				array(
@@ -667,11 +667,11 @@ if ( ! function_exists( 'newskit_secondary_menu' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'newskit_tertiary_menu' ) ) :
+if ( ! function_exists( 'gulir_tertiary_menu' ) ) :
 	/**
 	 * Displays tertiary menu; created a function to reduce duplication.
 	 */
-	function newskit_tertiary_menu() {
+	function gulir_tertiary_menu() {
 		if ( ! has_nav_menu( 'tertiary-menu' ) ) {
 			return;
 		}
@@ -682,7 +682,7 @@ if ( ! function_exists( 'newskit_tertiary_menu' ) ) :
 			$toolbar_attributes = 'toolbar-target="tertiary-nav-contain" toolbar="(min-width: 767px)"';
 		}
 		?>
-			<nav class="tertiary-menu nav3" aria-label="<?php esc_attr_e( 'Tertiary Menu', 'newskit' ); ?>" <?php echo $toolbar_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+			<nav class="tertiary-menu nav3" aria-label="<?php esc_attr_e( 'Tertiary Menu', 'gulir' ); ?>" <?php echo $toolbar_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 				<?php
 				wp_nav_menu(
 					array(
@@ -698,18 +698,18 @@ if ( ! function_exists( 'newskit_tertiary_menu' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'newskit_social_menu_settings' ) ) :
+if ( ! function_exists( 'gulir_social_menu_settings' ) ) :
 	/**
 	 * Displays social links menu; create a function for the wp_nav_menu settings to reduce duplication.
 	 */
-	function newskit_social_menu_settings() {
+	function gulir_social_menu_settings() {
 		wp_nav_menu(
 			array(
 				'theme_location' => 'social-menu',
 				'menu_class'     => 'social-links-menu',
 				'container'      => false,
 				'link_before'    => '<span class="screen-reader-text">',
-				'link_after'     => '</span>' . newskit_get_icon_svg( 'link' ),
+				'link_after'     => '</span>' . gulir_get_icon_svg( 'link' ),
 				'depth'          => 1,
 			)
 		);
@@ -719,7 +719,7 @@ endif;
 /**
  * Displays social links menu for the header; includes AMP toolbar and toolbar-target attributes.
  */
-function newskit_social_menu_header() {
+function gulir_social_menu_header() {
 	if ( ! has_nav_menu( 'social' ) ) {
 		return;
 	}
@@ -739,8 +739,8 @@ function newskit_social_menu_header() {
 		$toolbar_attributes = '';
 	}
 	?>
-	<nav class="social-navigation" aria-label="<?php esc_attr_e( 'Social Links Menu', 'newskit' ); ?>" <?php echo $toolbar_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
-		<?php newskit_social_menu_settings(); ?>
+	<nav class="social-navigation" aria-label="<?php esc_attr_e( 'Social Links Menu', 'gulir' ); ?>" <?php echo $toolbar_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+		<?php gulir_social_menu_settings(); ?>
 	</nav><!-- .social-navigation -->
 	<?php
 }
@@ -748,13 +748,13 @@ function newskit_social_menu_header() {
 /**
  * Displays social links menu for the footer; without AMP-related attributes, to prevent duplication errors.
  */
-function newskit_social_menu_footer() {
+function gulir_social_menu_footer() {
 	if ( ! has_nav_menu( 'social' ) ) {
 		return;
 	}
 	?>
-	<nav class="social-navigation" aria-label="<?php esc_attr_e( 'Social Links Menu', 'newskit' ); ?>">
-		<?php newskit_social_menu_settings(); ?>
+	<nav class="social-navigation" aria-label="<?php esc_attr_e( 'Social Links Menu', 'gulir' ); ?>">
+		<?php gulir_social_menu_settings(); ?>
 	</nav><!-- .social-navigation -->
 	<?php
 }

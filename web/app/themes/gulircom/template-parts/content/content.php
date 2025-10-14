@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Newskit
+ * @package Gulir
  */
 
 ?>
@@ -14,7 +14,7 @@
 		<?php get_template_part( 'template-parts/header/entry', 'header' ); ?>
 	</header>
 
-	<?php newskit_post_thumbnail(); ?>
+	<?php gulir_post_thumbnail(); ?>
 
 	<div class="entry-content">
 		<?php
@@ -22,7 +22,7 @@
 			sprintf(
 				wp_kses(
 					/* translators: %s: Name of current post. Only visible to screen readers */
-					__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'newskit' ),
+					__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'gulir' ),
 					array(
 						'span' => array(
 							'class' => array(),
@@ -35,7 +35,7 @@
 
 		wp_link_pages(
 			array(
-				'before' => '<div class="page-links">' . __( 'Pages:', 'newskit' ),
+				'before' => '<div class="page-links">' . __( 'Pages:', 'gulir' ),
 				'after'  => '</div>',
 			)
 		);
@@ -43,7 +43,7 @@
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer">
-		<?php newskit_entry_footer(); ?>
+		<?php gulir_entry_footer(); ?>
 	</footer><!-- .entry-footer -->
 </article><!-- #post-${ID} -->
 

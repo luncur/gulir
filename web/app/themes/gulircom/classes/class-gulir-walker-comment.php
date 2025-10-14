@@ -2,7 +2,7 @@
 /**
  * Custom comment walker for this theme
  *
- * @package Newskit
+ * @package Gulir
  */
 
 /**
@@ -10,7 +10,7 @@
  *
  * @since 1.0.0
  */
-class Newskit_Walker_Comment extends Walker_Comment {
+class Gulir_Walker_Comment extends Walker_Comment {
 
 	/**
 	 * Outputs a comment in the HTML5 format.
@@ -47,7 +47,7 @@ class Newskit_Walker_Comment extends Walker_Comment {
 						printf(
 							wp_kses(
 								/* translators: %s: comment author link */
-								__( '%s <span class="screen-reader-text says">says:</span>', 'newskit' ),
+								__( '%s <span class="screen-reader-text says">says:</span>', 'gulir' ),
 								array(
 									'span' => array(
 										'class' => array(),
@@ -58,8 +58,8 @@ class Newskit_Walker_Comment extends Walker_Comment {
 						);
 
 						/* Display icon if the commenter is the current post's author. */
-						if ( newskit_is_comment_by_post_author( $comment ) ) {
-							printf( '<span class="post-author-badge" aria-hidden="true">%s</span>', wp_kses( newskit_get_icon_svg( 'person', 24, esc_html__( 'Article author', 'newskit' ) ), newskit_sanitize_svgs() ) );
+						if ( gulir_is_comment_by_post_author( $comment ) ) {
+							printf( '<span class="post-author-badge" aria-hidden="true">%s</span>', wp_kses( gulir_get_icon_svg( 'person', 24, esc_html__( 'Article author', 'gulir' ) ), gulir_sanitize_svgs() ) );
 						}
 
 						if ( ! empty( $comment_author_url ) ) {
@@ -72,20 +72,20 @@ class Newskit_Walker_Comment extends Walker_Comment {
 						<a href="<?php echo esc_url( get_comment_link( $comment, $args ) ); ?>">
 							<?php
 								/* translators: 1: comment date, 2: comment time */
-								$comment_timestamp = sprintf( __( '%1$s at %2$s', 'newskit' ), get_comment_date( '', $comment ), get_comment_time() );
+								$comment_timestamp = sprintf( __( '%1$s at %2$s', 'gulir' ), get_comment_date( '', $comment ), get_comment_time() );
 							?>
 							<time datetime="<?php comment_time( 'c' ); ?>" title="<?php echo $comment_timestamp; ?>">
 								<?php echo $comment_timestamp; ?>
 							</time>
 						</a>
 						<?php
-							$edit_comment_icon = newskit_get_icon_svg( 'edit', 16 );
-							edit_comment_link( __( 'Edit', 'newskit' ), '<span class="edit-link-sep">&mdash;</span> <span class="edit-link">' . $edit_comment_icon, '</span>' );
+							$edit_comment_icon = gulir_get_icon_svg( 'edit', 16 );
+							edit_comment_link( __( 'Edit', 'gulir' ), '<span class="edit-link-sep">&mdash;</span> <span class="edit-link">' . $edit_comment_icon, '</span>' );
 						?>
 					</div><!-- .comment-metadata -->
 
 					<?php if ( '0' == $comment->comment_approved ) : ?>
-					<p class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'newskit' ); ?></p>
+					<p class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'gulir' ); ?></p>
 					<?php endif; ?>
 				</footer><!-- .comment-meta -->
 

@@ -7,7 +7,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Newskit
+ * @package Gulir
  */
 
 /*
@@ -19,7 +19,7 @@ if ( post_password_required() ) {
 	return;
 }
 
-$discussion         = newskit_get_discussion_data();
+$discussion         = gulir_get_discussion_data();
 $collapse_comments  = get_theme_mod( 'collapse_comments', false );
 $on_first_page      = true;
 $comments_collapsed = false;
@@ -46,14 +46,14 @@ if ( $collapse_comments && 1 < (int) $discussion->responses && $on_first_page ) 
 		<?php
 		if ( comments_open() ) {
 			if ( have_comments() ) {
-				echo esc_html( apply_filters( 'newskit_comment_section_title_nocomments', __( 'Join the Conversation', 'newskit' ) ) );
+				echo esc_html( apply_filters( 'gulir_comment_section_title_nocomments', __( 'Join the Conversation', 'gulir' ) ) );
 			} else {
-				echo esc_html( apply_filters( 'newskit_comment_section_title', __( 'Leave a comment', 'newskit' ) ) );
+				echo esc_html( apply_filters( 'gulir_comment_section_title', __( 'Leave a comment', 'gulir' ) ) );
 			}
 		} else {
 			if ( '1' == $discussion->responses ) {
 				/* translators: %s: post title */
-				printf( _x( 'One reply on &ldquo;%s&rdquo;', 'comments title', 'newskit' ), get_the_title() );
+				printf( _x( 'One reply on &ldquo;%s&rdquo;', 'comments title', 'gulir' ), get_the_title() );
 			} else {
 				printf(
 					/* translators: 1: number of comments, 2: post title */
@@ -62,7 +62,7 @@ if ( $collapse_comments && 1 < (int) $discussion->responses && $on_first_page ) 
 						'%1$s replies on &ldquo;%2$s&rdquo;',
 						$discussion->responses,
 						'comments title',
-						'newskit'
+						'gulir'
 					),
 					number_format_i18n( $discussion->responses ),
 					get_the_title()
@@ -78,13 +78,13 @@ if ( $collapse_comments && 1 < (int) $discussion->responses && $on_first_page ) 
 		}
 		?>
 	</div><!-- .comments-title-flex -->
-	<?php do_action( 'newskit_comments_above_comments' ); ?>
+	<?php do_action( 'gulir_comments_above_comments' ); ?>
 	<?php
 	if ( have_comments() ) :
 
 		// Show comment form at top if showing newest comments at the top.
 		if ( comments_open() ) {
-			newskit_comment_form( 'desc' );
+			gulir_comment_form( 'desc' );
 		}
 		?>
 
@@ -96,8 +96,8 @@ if ( $collapse_comments && 1 < (int) $discussion->responses && $on_first_page ) 
 				<?php
 				wp_list_comments(
 					array(
-						'walker'      => new newskit_Walker_Comment(),
-						'avatar_size' => newskit_get_avatar_size(),
+						'walker'      => new gulir_Walker_Comment(),
+						'avatar_size' => gulir_get_avatar_size(),
 						'short_ping'  => true,
 						'style'       => 'ol',
 					)
@@ -108,13 +108,13 @@ if ( $collapse_comments && 1 < (int) $discussion->responses && $on_first_page ) 
 
 			// Show comment navigation
 			if ( have_comments() ) :
-				$prev_icon     = newskit_get_icon_svg( 'chevron_left', 22 );
-				$next_icon     = newskit_get_icon_svg( 'chevron_right', 22 );
-				$comments_text = apply_filters( 'newskit_comments_name_plural', __( 'Comments', 'newskit' ) );
+				$prev_icon     = gulir_get_icon_svg( 'chevron_left', 22 );
+				$next_icon     = gulir_get_icon_svg( 'chevron_right', 22 );
+				$comments_text = apply_filters( 'gulir_comments_name_plural', __( 'Comments', 'gulir' ) );
 				the_comments_navigation(
 					array(
-						'prev_text' => sprintf( '%s <span class="nav-prev-text"><span class="primary-text">%s</span> <span class="secondary-text">%s</span></span>', $prev_icon, __( 'Previous', 'newskit' ), $comments_text ),
-						'next_text' => sprintf( '<span class="nav-next-text"><span class="primary-text">%s</span> <span class="secondary-text">%s</span></span> %s', __( 'Next', 'newskit' ), $comments_text, $next_icon ),
+						'prev_text' => sprintf( '%s <span class="nav-prev-text"><span class="primary-text">%s</span> <span class="secondary-text">%s</span></span>', $prev_icon, __( 'Previous', 'gulir' ), $comments_text ),
+						'next_text' => sprintf( '<span class="nav-next-text"><span class="primary-text">%s</span> <span class="secondary-text">%s</span></span> %s', __( 'Next', 'gulir' ), $comments_text, $next_icon ),
 					)
 				);
 			endif;
@@ -123,18 +123,18 @@ if ( $collapse_comments && 1 < (int) $discussion->responses && $on_first_page ) 
 		<?php if ( $comments_collapsed ) : ?>
 			</div><!-- .comments-wrapper -->
 			<button class="comments-toggle" id="comments-toggle" on="tap:AMP.setState({showComments: !showComments})">
-				<?php echo wp_kses( newskit_get_icon_svg( 'chevron_left', 24 ), newskit_sanitize_svgs() ); ?><span [text]="showComments ? '<?php esc_html_e( 'Collapse comments', 'newskit' ); ?>' : '<?php esc_html_e( 'Expand comments', 'newskit' ); ?>'"><?php esc_html_e( 'Expand comments', 'newskit' ); ?></span>
+				<?php echo wp_kses( gulir_get_icon_svg( 'chevron_left', 24 ), gulir_sanitize_svgs() ); ?><span [text]="showComments ? '<?php esc_html_e( 'Collapse comments', 'gulir' ); ?>' : '<?php esc_html_e( 'Expand comments', 'gulir' ); ?>'"><?php esc_html_e( 'Expand comments', 'gulir' ); ?></span>
 			</button>
 		<?php endif; ?>
 
 		<?php
 		// Show comment form at bottom if showing newest comments at the bottom.
 		if ( comments_open() && 'asc' === strtolower( get_option( 'comment_order', 'asc' ) ) ) :
-			$leave_comment_text = apply_filters( 'newskit_comments_leave_comment', __( 'Leave a comment', 'newskit' ) );
+			$leave_comment_text = apply_filters( 'gulir_comments_leave_comment', __( 'Leave a comment', 'gulir' ) );
 			?>
 			<div class="comment-form-flex">
 				<span class="screen-reader-text"><?php echo esc_html( $leave_comment_text ); ?></span>
-				<?php newskit_comment_form( 'asc' ); ?>
+				<?php gulir_comment_form( 'asc' ); ?>
 				<h2 class="comments-title" aria-hidden="true"><?php echo esc_html( $leave_comment_text ); ?></h2>
 			</div>
 			<?php
@@ -145,7 +145,7 @@ if ( $collapse_comments && 1 < (int) $discussion->responses && $on_first_page ) 
 			?>
 			<p class="no-comments">
 				<?php
-					echo esc_html( apply_filters( 'newskit_comments_closed', __( 'Comments are closed.', 'newskit' ) ) );
+					echo esc_html( apply_filters( 'gulir_comments_closed', __( 'Comments are closed.', 'gulir' ) ) );
 				?>
 			</p>
 			<?php
@@ -154,7 +154,7 @@ if ( $collapse_comments && 1 < (int) $discussion->responses && $on_first_page ) 
 	else :
 
 		// Show comment form.
-		newskit_comment_form( true );
+		gulir_comment_form( true );
 
 	endif; // if have_comments();
 	?>

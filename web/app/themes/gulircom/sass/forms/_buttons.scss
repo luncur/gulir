@@ -9,16 +9,16 @@ input[type="submit"],
 .wp-block-search__button {
 	@include utilities.button-transition;
 
-	background-color: var(--newskit-color-secondary);
+	background-color: var(--gulir-color-secondary);
 	border: none;
 	border-radius: 5px;
 	box-sizing: border-box;
 	display: inline-block;
-	color: var(--newskit-color-against-secondary);
-	font-family: var(--newskit-font-heading);
-	font-size: var(--newskit-font-size-sm);
+	color: var(--gulir-color-against-secondary);
+	font-family: var(--gulir-font-heading);
+	font-size: var(--gulir-font-size-sm);
 	font-weight: 700;
-	line-height: var(--newskit-font-line-height-heading);
+	line-height: var(--gulir-font-line-height-heading);
 	outline: none;
 	padding: ( structure.$size__spacing-unit * 0.76 ) structure.$size__spacing-unit;
 	text-decoration: none;
@@ -26,8 +26,8 @@ input[type="submit"],
 
 	&:hover,
 	&:hover:visited {
-		background-color: var(--newskit-color-bg-button-hover);
-		color: var(--newskit-color-bg-body);
+		background-color: var(--gulir-color-bg-button-hover);
+		color: var(--gulir-color-bg-body);
 		cursor: pointer;
 	}
 
@@ -37,16 +37,16 @@ input[type="submit"],
 	}
 
 	&:focus {
-		background-color: var(--newskit-color-bg-button-hover);
-		color: var(--newskit-color-bg-body);
+		background-color: var(--gulir-color-bg-button-hover);
+		color: var(--gulir-color-bg-body);
 		outline: thin dotted;
 		outline-offset: -4px;
 	}
 
 	&[disabled],
 	&[disabled]:hover {
-		background-color: var(--newskit-ui-color-neutral-30, #ddd);
-		color: var(--newskit-ui-color-neutral-0, #fff);
+		background-color: var(--gulir-ui-color-neutral-30, #ddd);
+		color: var(--gulir-ui-color-neutral-0, #fff);
 		cursor: default;
 	}
 }
