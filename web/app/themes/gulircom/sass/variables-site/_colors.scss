@@ -1,0 +1,48 @@
+// Custom Colors - defaults
+:root {
+	--newskit-color-primary: #003da5; // TODO: rename --newskit-primary-color, --newskit-listings--primary elsewhere
+	--newskit-color-primary-variation: #2055b0;
+	--newskit-color-secondary: #555; // TODO: replace --newskit-secondary-color elsewhere
+	--newskit-color-secondary-variation: #3e3e3e;
+	--newskit-color-highlight: #fed850;
+	--newskit-color-primary-darken-5: #00296e; // TODO: find a better approach than being this literal.
+	--newskit-color-primary-darken-10: #001f53; // TODO: find a better approach than being this literal.
+
+	// Constast colors - text against white background, if light changes to grey:
+	--newskit-color-primary-against-white: var(--newskit-color-primary); // primary color against white bg.
+	--newskit-color-secondary-against-white: var(--newskit-color-secondary); // secondary color against white bg.
+
+	// Contrast colors - text to use against primary or secondary (black or white)
+	--newskit-color-against-primary: #fff; // text color on top of primary color bg.
+	--newskit-color-against-secondary: #fff; // text color on top of primary color bg.
+
+	// Backgrounds
+	--newskit-color-bg-body: #fff;
+	--newskit-color-bg-input: var(--newskit-color-bg-body);
+	--newskit-color-bg-light: #f0f0f0;
+	--newskit-color-bg-button-hover: #111;
+	--newskit-color-bg-pre: #eee;
+	--newskit-color-bg-pre-lighten-5: #fbfbfb; // TODO: find a better approach than being this literal.
+	--newskit-color-bg-dark: #333;
+	--newskit-color-bg-dark-lighten-5: #404040; // TODO: find a better approach than being this literal.
+	--newskit-color-bg-dark-darken-5: #262626; // TODO: find a better approach than being this literal.
+
+	// Text
+	--newskit-color-text-main: #111;
+	--newskit-color-text-light: #515151;
+	--newskit-color-text-hover: var(--newskit-color-bg-dark-lighten-5);
+	--newskit-color-text-screen: #21759b;
+
+	// Links
+	--newskit-color-link: var(--newskit-color-secondary);
+	--newskit-color-link-hover: var(--newskit-color-secondary-variation-against-white);
+
+	// Borders
+	--newskit-color-border: #ccc;
+	--newskit-color-border-light: #e0e0e0;
+
+	// Alert
+	--newskit-color-alert-yellow: #dba617;
+	--newskit-color-alert-red: #d63638;
+	--newskit-color-alert-green: #008a20;
+}
