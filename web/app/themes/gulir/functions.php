@@ -7,6 +7,40 @@
  * @package Gulir
  */
 
+// Useful global constants.
+define( 'GULIR_VERSION', '0.1.0' );
+define( 'GULIR_TEMPLATE_URL', get_template_directory_uri() );
+define( 'GULIR_PATH', get_template_directory() . '/' );
+define( 'GULIR_DIST_PATH', GULIR_PATH . 'dist/' );
+define( 'GULIR_DIST_URL', GULIR_TEMPLATE_URL . '/dist/' );
+define( 'GULIR_INC', GULIR_PATH . 'src/' );
+define( 'GULIR_BLOCK_DIR', GULIR_PATH . 'blocks/' );
+define( 'GULIR_BLOCK_DIST_DIR', GULIR_PATH . 'dist/blocks/' );
+
+$is_local_env = in_array( wp_get_environment_type(), [ 'local', 'development' ], true );
+$is_local_url = strpos( home_url(), '.test' ) || strpos( home_url(), '.local' );
+$is_local     = $is_local_env || $is_local_url;
+
+if ( $is_local && file_exists( __DIR__ . '/dist/fast-refresh.php' ) ) {
+	require_once __DIR__ . '/dist/fast-refresh.php';
+
+	if ( function_exists( 'TenUpToolkit\set_dist_url_path' ) ) {
+		TenUpToolkit\set_dist_url_path( basename( __DIR__ ), GULIR_DIST_URL, GULIR_DIST_PATH );
+	}
+}
+
+// Require Composer autoloader if it exists.
+if ( ! file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
+	throw new Exception( 'Please run `composer install` in your theme directory.' );
+}
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+
+$theme_core = new \Gulir\ThemeCore();
+$theme_core->setup();
+
+
 /**
  * Gulir Theme only works in WordPress 4.7 or later.
  */
