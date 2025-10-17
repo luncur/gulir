@@ -1,21 +1,20 @@
 <?php
-/**
- * Gulir Theme functions and definitions
- *
- * @link https://developer.wordpress.org/themes/basics/theme-functions/
- *
- * @package Gulir
- */
+/** Don't load directly */
+defined( 'ABSPATH' ) || exit;
 
-// Useful global constants.
-define( 'GULIR_VERSION', '0.1.0' );
-define( 'GULIR_TEMPLATE_URL', get_template_directory_uri() );
-define( 'GULIR_PATH', get_template_directory() . '/' );
-define( 'GULIR_DIST_PATH', GULIR_PATH . 'dist/' );
-define( 'GULIR_DIST_URL', GULIR_TEMPLATE_URL . '/dist/' );
-define( 'GULIR_INC', GULIR_PATH . 'src/' );
-define( 'GULIR_BLOCK_DIR', GULIR_PATH . 'blocks/' );
-define( 'GULIR_BLOCK_DIST_DIR', GULIR_PATH . 'dist/blocks/' );
+define( 'GULIR_THEME_VERSION', '0.0.1' );
+define( 'GULIR_THEME_DIR', trailingslashit( get_template_directory() ) );
+define( 'GULIR_THEME_URI', trailingslashit( esc_url( get_template_directory_uri() ) ) );
+define( 'GULIR_CHILD_THEME_DIR', trailingslashit( get_stylesheet_directory() ) );
+define( 'GULIR_CHILD_THEME_URI', trailingslashit( esc_url( get_stylesheet_directory_uri() ) ) );
+defined( 'GULIR_TOS_ID' ) || define( 'GULIR_TOS_ID', 'gulir_theme_options' );
+
+define( 'GULIR_THEME_DIST_DIR', GULIR_THEME_DIR . 'dist/' );
+define( 'GULIR_THEME_DIST_URI', GULIR_THEME_URI . '/dist/' );
+define( 'GULIR_THEME_INC', GULIR_THEME_DIR . 'src/' );
+define( 'GULIR_THEME_BLOCK_DIR', GULIR_THEME_DIR . 'blocks/' );
+define( 'GULIR_THEME_BLOCK_DIST_DIR', GULIR_THEME_DIR . 'dist/blocks/' );
+
 
 $is_local_env = in_array( wp_get_environment_type(), [ 'local', 'development' ], true );
 $is_local_url = strpos( home_url(), '.test' ) || strpos( home_url(), '.local' );
@@ -25,7 +24,7 @@ if ( $is_local && file_exists( __DIR__ . '/dist/fast-refresh.php' ) ) {
 	require_once __DIR__ . '/dist/fast-refresh.php';
 
 	if ( function_exists( 'TenUpToolkit\set_dist_url_path' ) ) {
-		TenUpToolkit\set_dist_url_path( basename( __DIR__ ), GULIR_DIST_URL, GULIR_DIST_PATH );
+		TenUpToolkit\set_dist_url_path( basename( __DIR__ ), GULIR_THEME_DIST_URI, GULIR_THEME_DIST_DIR );
 	}
 }
 
@@ -36,1409 +35,185 @@ if ( ! file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 
 require_once __DIR__ . '/vendor/autoload.php';
 
+// $theme_core = new \Gulir\ThemeCore();
+// $theme_core->setup();
 
-$theme_core = new \Gulir\ThemeCore();
-$theme_core->setup();
+include_once GULIR_THEME_DIR . 'includes/core-functions.php';
+include_once GULIR_THEME_DIR . 'includes/file.php';
 
+add_action( 'after_setup_theme', 'gulir_theme_setup', 10 );
+add_action( 'wp_enqueue_scripts', 'gulir_register_script_frontend', 990 );
 
-/**
- * Gulir Theme only works in WordPress 4.7 or later.
- */
-if ( version_compare( $GLOBALS['wp_version'], '4.7', '<' ) ) {
-	require get_template_directory() . '/inc/back-compat.php';
-	return;
-}
+/** setup */
+if ( ! function_exists( 'gulir_theme_setup' ) ) {
+	function gulir_theme_setup() {
 
-// Default for the "time ago" date format. Dates older than this cutoff will be displayed as a full date.
-const NP_DEFAULT_POST_TIME_AGO_CUT_OFF_DAYS = 14;
+		// load_theme_textdomain
+		$locale          = function_exists( 'determine_locale' ) ? determine_locale() : get_locale();
+		$loco_path       = WP_LANG_DIR . '/loco/themes/gulir-' . $locale . '.mo';
+		$theme_lang_path = WP_LANG_DIR . '/themes/gulir-' . $locale . '.mo';
+		if ( is_readable( $loco_path ) ) {
+			load_textdomain( 'gulir', $loco_path );
+		} elseif ( file_exists( $theme_lang_path ) ) {
+			load_textdomain( 'gulir', $theme_lang_path );
+		} else {
+			load_theme_textdomain( 'gulir', get_theme_file_path( 'languages' ) );
+		}
 
-if ( ! function_exists( 'gulir_is_amp' ) ) {
-	/**
-	 * Determine whether it is an AMP response.
-	 *
-	 * @return bool Whether AMP.
-	 */
-	function gulir_is_amp() {
-		return function_exists( 'is_amp_endpoint' ) && is_amp_endpoint();
-	}
-}
+		if ( ! isset( $GLOBALS['content_width'] ) ) {
+			$GLOBALS['content_width'] = 1170;
+		}
 
-if ( ! function_exists( 'gulir_setup' ) ) :
-	/**
-	 * Sets up theme defaults and registers support for various WordPress features.
-	 *
-	 * Note that this function is hooked into the after_setup_theme hook, which
-	 * runs before the init hook. The init hook is too late for some features, such
-	 * as indicating support for post thumbnails.
-	 */
-	function gulir_setup() {
-		/*
-		 * Make theme available for translation.
-		 * Translations can be filed in the /languages/ directory.
-		 * If you're building a theme based on Gulir Theme, use a find and replace
-		 * to change 'gulir' to the name of your theme in all the template files.
-		 */
-		load_theme_textdomain( 'gulir', get_template_directory() . '/languages' );
-
-		// Add default posts and comments RSS feed links to head.
 		add_theme_support( 'automatic-feed-links' );
-
-		/*
-		 * Let WordPress manage the document title.
-		 * By adding theme support, we declare that this theme does not use a
-		 * hard-coded <title> tag in the document head, and expect WordPress to
-		 * provide it for us.
-		 */
 		add_theme_support( 'title-tag' );
-
-		/*
-		 * Enable support for Post Thumbnails on posts and pages.
-		 *
-		 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
-		 */
+		add_theme_support( 'html5', [
+			'search-form',
+			'comment-form',
+			'comment-list',
+			'gallery',
+			'caption',
+			'script',
+			'style',
+		] );
+		add_theme_support( 'post-formats', [ 'gallery', 'video', 'audio' ] );
 		add_theme_support( 'post-thumbnails' );
-		set_post_thumbnail_size( 1200, 9999 );
-
-		add_image_size( 'gulir-featured-image', 1200, 9999 );
-		add_image_size( 'gulir-featured-image-large', 2000, 9999 );
-		add_image_size( 'gulir-featured-image-small', 780, 9999 );
-		add_image_size( 'gulir-archive-image', 800, 600, true );
-		add_image_size( 'gulir-archive-image-large', 1200, 900, true );
-		add_image_size( 'gulir-footer-logo', 400, 9999 );
-
-		if ( ! get_theme_mod( 'archive_enable_cropping', true ) ) {
-			add_image_size( 'gulir-archive-image', 800, 9999, false );
-			add_image_size( 'gulir-archive-image-large', 1200, 9999, false );
-		}
-
-		/**
-		 * Enable feature support for specific post types.
-		 */
-		add_post_type_support( 'page', 'excerpt' ); // Custom excerpts for pages, normally restricted to posts.
-
-		// This theme uses wp_nav_menu() in two locations.
-		register_nav_menus(
-			array(
-				'primary-menu'   => __( 'Primary Menu', 'gulir' ),
-				'secondary-menu' => __( 'Secondary Menu', 'gulir' ),
-				'tertiary-menu'  => __( 'Tertiary Menu', 'gulir' ),
-				'highlight-menu' => __( 'Topic Highlight Menu', 'gulir' ),
-				'social-menu'         => __( 'Social Links Menu', 'gulir' ),
-				'mobile-menu'         => __( 'Mobile Menu', 'gulir' ),
-			)
-		);
-
-		/*
-		 * Switch default core markup for search form, comment form, and comments
-		 * to output valid HTML5.
-		 */
-		add_theme_support(
-			'html5',
-			array(
-				'caption',
-				'comment-form',
-				'comment-list',
-				'gallery',
-				'script',
-				'search-form',
-				'style',
-			)
-		);
-
-		/**
-		 * Add support for core custom logo.
-		 *
-		 * @link https://codex.wordpress.org/Theme_Logo
-		 */
-		add_theme_support(
-			'custom-logo',
-			array(
-				'flex-width'  => true,
-				'flex-height' => true,
-				'header-text' => array( 'site-title' ),
-			)
-		);
-
-		// Add theme support for selective refresh for widgets.
-		add_theme_support( 'customize-selective-refresh-widgets' );
-
-		// Add support for Block Styles.
-		add_theme_support( 'wp-block-styles' );
-
-		// Add support for full and wide align images.
-		add_theme_support( 'align-wide' );
-
-		// Add support for editor styles.
-		add_theme_support( 'editor-styles' );
-
-		// Enqueue editor styles.
-		add_editor_style( 'style-editor.css' );
-
-		// Add custom editor font sizes.
-		add_theme_support(
-			'editor-font-sizes',
-			array(
-				array(
-					'name'      => __( 'Small', 'gulir' ),
-					'shortName' => __( 'S', 'gulir' ),
-					'size'      => 16,
-					'slug'      => 'small',
-				),
-				array(
-					'name'      => __( 'Normal', 'gulir' ),
-					'shortName' => __( 'M', 'gulir' ),
-					'size'      => 20,
-					'slug'      => 'normal',
-				),
-				array(
-					'name'      => __( 'Large', 'gulir' ),
-					'shortName' => __( 'L', 'gulir' ),
-					'size'      => 36,
-					'slug'      => 'large',
-				),
-				array(
-					'name'      => __( 'Huge', 'gulir' ),
-					'shortName' => __( 'XL', 'gulir' ),
-					'size'      => 44,
-					'slug'      => 'huge',
-				),
-			)
-		);
-
-		$primary_color   = gulir_get_primary_color();
-		$secondary_color = gulir_get_secondary_color();
-
-		if ( 'default' !== get_theme_mod( 'theme_colors' ) ) {
-			$primary_color   = get_theme_mod( 'primary_color_hex', $primary_color );
-			$secondary_color = get_theme_mod( 'secondary_color_hex', $secondary_color );
-		}
-
-		$primary_color_variation   = gulir_adjust_brightness( $primary_color, -40 );
-		$secondary_color_variation = gulir_adjust_brightness( $secondary_color, -40 );
-
-		// Editor color palette.
-		add_theme_support(
-			'editor-color-palette',
-			array(
-				array(
-					'name'  => __( 'Primary', 'gulir' ),
-					'slug'  => 'primary',
-					'color' => $primary_color,
-				),
-				array(
-					'name'  => __( 'Primary Variation', 'gulir' ),
-					'slug'  => 'primary-variation',
-					'color' => $primary_color_variation,
-				),
-				array(
-					'name'  => __( 'Secondary', 'gulir' ),
-					'slug'  => 'secondary',
-					'color' => $secondary_color,
-				),
-				array(
-					'name'  => __( 'Secondary Variation', 'gulir' ),
-					'slug'  => 'secondary-variation',
-					'color' => $secondary_color_variation,
-				),
-				array(
-					'name'  => __( 'Dark Gray', 'gulir' ),
-					'slug'  => 'dark-gray',
-					'color' => '#111111', // color__text-main
-				),
-				array(
-					'name'  => __( 'Medium Gray', 'gulir' ),
-					'slug'  => 'medium-gray',
-					'color' => '#767676', // color__text-light
-				),
-				array(
-					'name'  => __( 'Light Gray', 'gulir' ),
-					'slug'  => 'light-gray',
-					'color' => '#EEEEEE', // color__background-pre
-				),
-				array(
-					'name'  => __( 'White', 'gulir' ),
-					'slug'  => 'white',
-					'color' => '#FFFFFF',
-				),
-			)
-		);
-
-		add_theme_support(
-			'editor-gradient-presets',
-			array(
-				array(
-					'name'     => __( 'Primary to primary variation', 'gulir' ),
-					'gradient' => 'linear-gradient( 135deg, ' . esc_attr( gulir_hex_to_rgb( $primary_color ) ) . ' 0%, ' . esc_attr( gulir_hex_to_rgb( $primary_color_variation ) ) . ' 100% )',
-					'slug'     => 'grad-1',
-				),
-				array(
-					'name'     => __( 'Secondary to secondary variation', 'gulir' ),
-					'gradient' => 'linear-gradient( 135deg, ' . esc_attr( gulir_hex_to_rgb( $secondary_color ) ) . ' 0%, ' . esc_attr( gulir_hex_to_rgb( $secondary_color_variation ) ) . ' 100% )',
-					'slug'     => 'grad-2',
-				),
-				array(
-					'name'     => __( 'Black to medium gray', 'gulir' ),
-					'gradient' => 'linear-gradient( 135deg, rgb( 17, 17, 17 ) 0%, rgb( 85, 85, 85 ) 100% )',
-					'slug'     => 'grad-3',
-				),
-				array(
-					'name'     => __( 'Dark gray to medium gray', 'gulir' ),
-					'gradient' => 'linear-gradient( 135deg, rgb( 68, 68, 68 ) 0%, rgb( 136, 136, 136 ) 100% )',
-					'slug'     => 'grad-4',
-				),
-				array(
-					'name'     => __( 'Medium gray to light gray', 'gulir' ),
-					'gradient' => 'linear-gradient( 135deg, rgb( 119, 119, 119 ) 0%, rgb( 221, 221, 221 ) 100% )',
-					'slug'     => 'grad-5',
-				),
-				array(
-					'name'     => __( 'Light gray to white', 'gulir' ),
-					'gradient' => 'linear-gradient( 135deg, rgb( 221, 221, 221 ) 0%, rgb( 255, 255, 255 ) 100% )',
-					'slug'     => 'grad-6',
-				),
-			)
-		);
-
-		// Add block custom spacing support.
-		add_theme_support( 'custom-spacing' );
-
-		// Add support for responsive embedded content.
 		add_theme_support( 'responsive-embeds' );
+		add_theme_support( 'align-wide' );
+		add_theme_support( 'woocommerce', [
+			'gallery_thumbnail_image_width' => 110,
+			'thumbnail_image_width'         => 300,
+			'single_image_width'            => 760,
+		] );
+		add_theme_support( 'wc-product-gallery-lightbox' );
+		add_theme_support( 'wc-product-gallery-slider' );
 
-		// Make our theme AMP/PWA Native
-		add_theme_support(
-			'amp',
-			[
-				'service_worker' => [
-					'cdn_script_caching'   => true,
-					'google_fonts_caching' => true,
-				],
-			]
-		);
+		if ( ! gulir_get_option( 'widget_block_editor' ) ) {
+			remove_theme_support( 'widgets-block-editor' );
+		}
+		register_nav_menus( [
+			'gulir_main'         => esc_html__( 'Main Menu', 'gulir' ),
+			'gulir_mobile'       => esc_html__( 'Mobile Menu', 'gulir' ),
+			'gulir_mobile_quick' => esc_html__( 'Mobile Quick Access', 'gulir' ),
+		] );
 
-		// Add custom theme support - post subtitle
-		add_theme_support( 'post-subtitle' );
+		$sizes = gulir_calc_crop_sizes();
+		foreach ( $sizes as $crop_id => $size ) {
+			add_image_size( $crop_id, $size[0], $size[1], $size[2] );
+		}
 	}
-endif;
-add_action( 'after_setup_theme', 'gulir_setup' );
-
-/**
- * Register widget area.
- *
- * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
- */
-function gulir_widgets_init() {
-
-	register_sidebar(
-		array(
-			'name'          => __( 'Sidebar', 'gulir' ),
-			'id'            => 'sidebar-1',
-			'description'   => __( 'Add widgets here to appear in your sidebar.', 'gulir' ),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title accent-header"><span>',
-			'after_title'   => '</span></h2>',
-		)
-	);
-
-	register_sidebar(
-		array(
-			'name'          => __( 'Slide-out Sidebar', 'gulir' ),
-			'id'            => 'header-1',
-			'description'   => esc_html__( 'Add widgets here to appear in an off-screen sidebar when it is enabled under the Customizer Header Settings.', 'gulir' ),
-			'before_widget' => '<section id="%1$s" class="below-content widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
-		)
-	);
-
-	register_sidebar(
-		array(
-			'name'          => __( 'Above Header', 'gulir' ),
-			'id'            => 'header-2',
-			'description'   => esc_html__( 'Add widgets here to appear above the site header.', 'gulir' ),
-			'before_widget' => '<section id="%1$s" class="below-content widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
-		)
-	);
-
-	register_sidebar(
-		array(
-			'name'          => __( 'Below Header', 'gulir' ),
-			'id'            => 'header-3',
-			'description'   => esc_html__( 'Add widgets here to appear below the site header.', 'gulir' ),
-			'before_widget' => '<section id="%1$s" class="below-content widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
-		)
-	);
-
-	register_sidebar(
-		array(
-			'name'          => __( 'Above Footer', 'gulir' ),
-			'id'            => 'footer-3',
-			'description'   => esc_html__( 'Add widgets here to appear above the site footer.', 'gulir' ),
-			'before_widget' => '<section id="%1$s" class="above-footer widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
-		)
-	);
-
-	register_sidebar(
-		array(
-			'name'          => __( 'Footer', 'gulir' ),
-			'id'            => 'footer-1',
-			'description'   => __( 'Add widgets here to appear in your footer.', 'gulir' ),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
-		)
-	);
-
-	register_sidebar(
-		array(
-			'name'          => __( 'Above Copyright', 'gulir' ),
-			'id'            => 'footer-2',
-			'description'   => __( 'Add widgets here to appear below the footer, above the copyright information.', 'gulir' ),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
-		)
-	);
-
-	register_sidebar(
-		array(
-			'name'          => __( 'Article above content', 'gulir' ),
-			'id'            => 'article-1',
-			'description'   => __( 'Add widgets here to appear above article content.', 'gulir' ),
-			'before_widget' => '<section id="%1$s" class="above-content widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
-		)
-	);
-
-	register_sidebar(
-		array(
-			'name'          => __( 'Article below content', 'gulir' ),
-			'id'            => 'article-2',
-			'description'   => __( 'Add widgets here to appear below article content.', 'gulir' ),
-			'before_widget' => '<section id="%1$s" class="below-content widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
-		)
-	);
-
-}
-add_action( 'widgets_init', 'gulir_widgets_init' );
-
-/**
- * Set the content width in pixels, based on the theme's design and stylesheet.
- *
- * Priority 0 to make it available to lower priority callbacks.
- *
- * @global int $content_width Content width.
- */
-function gulir_content_width() {
-	$content_width = 780;
-
-	// Check if front page or using One-Column Wide template
-	if ( ( is_front_page() && 'posts' !== get_option( 'show_on_front' ) ) || is_page_template( 'single-wide.php' ) ) {
-		$content_width = 1200;
-	}
-	// This variable is intended to be overruled from themes.
-	// Open WPCS issue: {@link https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards/issues/1043}.
-	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
-	$GLOBALS['content_width'] = apply_filters( 'gulir_content_width', $content_width );
-}
-add_action( 'template_redirect', 'gulir_content_width', 0 );
-
-/**
- * Return the list of custom fonts in use.
- */
-function gulir_get_used_custom_fonts(): array {
-	return array_filter( [ get_theme_mod( 'font_header', '' ), get_theme_mod( 'font_body', '' ) ] );
 }
 
-/**
- * Enqueue scripts and styles.
- */
-function gulir_scripts() {
-	wp_enqueue_style( 'gulir-style', get_stylesheet_uri(), array(), wp_get_theme()->get( 'Version' ) );
+/* register scripts */
+if ( ! function_exists( 'gulir_register_script_frontend' ) ) {
+	function gulir_register_script_frontend() {
 
-	wp_style_add_data( 'gulir-style', 'rtl', 'replace' );
+		$style_deps  = [];
+		$script_deps = [
+			'jquery',
+			'jquery-waypoints',
+			'rbswiper',
+			'jquery-magnific-popup',
+		];
 
-	/**
-	 * Filters whether to enqueue print styles.
-	 *
-	 * @param bool $should_enqueue_print_styles Whether to enqueue print styles.
-	 */
-	if ( apply_filters( 'gulir_theme_enqueue_print_styles', true ) ) {
-		wp_enqueue_style( 'gulir-print-style', get_template_directory_uri() . '/styles/print.css', array(), wp_get_theme()->get( 'Version' ), 'print' );
-	}
+		$main_filename        = 'main';
+		$woocommerce_filename = 'woocommerce';
+		$podcast_filename     = 'podcast';
 
-	// Load custom fonts, if any.
-	if ( get_theme_mod( 'custom_font_import_code', '' ) ) {
-		wp_enqueue_style( 'gulir-font-import', gulir_custom_typography_link( 'custom_font_import_code' ), array(), null );
-	}
-
-	if ( get_theme_mod( 'custom_font_import_code_alternate', '' ) ) {
-		wp_enqueue_style( 'gulir-font-alternative-import', gulir_custom_typography_link( 'custom_font_import_code_alternate' ), array(), null );
-	}
-
-	/**
-	 * Filters whether to enqueue JS.
-	 *
-	 * @param bool $should_enqueue_js Whether to enqueue JS.
-	 */
-	if ( ! apply_filters( 'gulir_theme_enqueue_js', true ) ) {
-		return;
-	}
-
-	$gulir_l10n = array(
-		'open_search'         => esc_html__( 'Open Search', 'gulir' ),
-		'close_search'        => esc_html__( 'Close Search', 'gulir' ),
-		'expand_comments'     => esc_html__( 'Expand Comments', 'gulir' ),
-		'collapse_comments'   => esc_html__( 'Collapse Comments', 'gulir' ),
-		'show_order_details'  => esc_html__( 'Show details', 'gulir' ),
-		'hide_order_details'  => esc_html__( 'Hide details', 'gulir' ),
-		'open_dropdown_menu'  => esc_html__( 'Open dropdown menu', 'gulir' ),
-		'close_dropdown_menu' => esc_html__( 'Close dropdown menu', 'gulir' ),
-		'is_amp'              => gulir_is_amp(),
-	);
-
-	if ( ! gulir_is_amp() ) {
-		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-			wp_enqueue_script( 'comment-reply' );
+		if ( is_rtl() ) {
+			$main_filename        = 'rtl';
+			$woocommerce_filename = 'woocommerce-rtl';
+			$podcast_filename     = 'podcast-rtl';
 		}
 
-		wp_enqueue_script( 'gulir-amp-fallback', get_theme_file_uri( '/js/dist/amp-fallback.js' ), array(), wp_get_theme()->get( 'Version' ), true );
-		wp_localize_script( 'gulir-amp-fallback', 'gulirScreenReaderText', $gulir_l10n );
-	}
+		$gfont_url = Gulir_Font::get_font_url();
 
-	wp_enqueue_script( 'gulir-menu-accessibility', get_theme_file_uri( '/js/dist/menu-accessibility.js' ), array(), wp_get_theme()->get( 'Version' ), true );
-	wp_localize_script( 'gulir-menu-accessibility', 'gulirScreenReaderText', $gulir_l10n );
-
-	if ( gulir_is_sticky_animated_header() ) {
-		wp_enqueue_script( 'amp-animation', 'https://cdn.ampproject.org/v0/amp-animation-0.1.js', array(), '0.1', true );
-		wp_enqueue_script( 'amp-position-observer', 'https://cdn.ampproject.org/v0/amp-position-observer-0.1.js', array(), '0.1', true );
-	}
-
-	wp_enqueue_script( 'gulir-font-loading', get_theme_file_uri( '/js/dist/font-loading.js' ), array(), wp_get_theme()->get( 'Version' ), true );
-	wp_localize_script(
-		'gulir-font-loading',
-		'gulirFontLoading',
-		[
-			'fonts' => gulir_get_used_custom_fonts(),
-		]
-	);
-
-	if ( get_theme_mod( 'post_time_ago' ) ) {
-		wp_register_script( 'gulir-relative-time', get_theme_file_uri( '/js/dist/relative-time.js' ), [], wp_get_theme()->get( 'Version' ), true );
-
-		$cutoff_in_days = get_theme_mod( 'post_time_ago_cut_off', NP_DEFAULT_POST_TIME_AGO_CUT_OFF_DAYS );
-		if ( get_theme_mod( 'post_updated_date' ) ) {
-			// Switch cut off to 24 hours if we are also displaying the updated date.
-			$cutoff_in_days = 1;
+		if ( ! empty( $gfont_url ) ) {
+			wp_register_style( 'gulir-font', esc_url_raw( $gfont_url ), [], GULIR_THEME_VERSION, 'all' );
+			$style_deps[] = 'gulir-font';
 		}
-		wp_localize_script(
-			'gulir-relative-time',
-			'gulir_relative_time',
-			[
-				'language_tag' => str_replace( '_', '-', get_locale() ), // The language tag in the format of 'en-US' for example.
-				'cutoff'       => $cutoff_in_days,
-			]
-		);
-		wp_enqueue_script( 'gulir-relative-time' );
-	}
-}
-add_action( 'wp_enqueue_scripts', 'gulir_scripts' );
 
-/**
- * Add AMP-related attributes to the script tags.
- *
- * @param string $tag Enqueued script tag.
- * @param string $handle Handle of enqueued of script.
- *
- * @return string Modified $tag.
- */
-function gulir_add_amp_attributes( $tag, $handle ) {
+		if ( gulir_get_option( 'font_awesome' ) ) {
+			wp_deregister_style( 'font-awesome' );
+			wp_register_style( 'font-awesome', gulir_get_file_uri( 'assets/css/font-awesome.css' ), [], '6.1.1', 'all' );
+			$style_deps[] = 'font-awesome';
+		}
 
-	if ( gulir_is_sticky_animated_header() ) {
-		$scripts_to_defer = array( 'amp-animation', 'amp-position-observer' );
-		foreach ( $scripts_to_defer as $defer_script ) {
-			if ( $defer_script === $handle ) {
-				return str_replace( ' src', ' async custom-element="true" src', $tag );
+		wp_register_style( 'gulir-main', gulir_get_file_uri( 'assets/css/' . $main_filename . '.css' ), [], GULIR_THEME_VERSION, 'all' );
+		wp_add_inline_style( 'gulir-main', gulir_get_dynamic_css() );
+		$style_deps[] = 'gulir-main';
+
+		if ( gulir_get_option( 'podcast_supported' ) ) {
+			wp_register_style( 'gulir-podcast', gulir_get_file_uri( 'assets/css/' . $podcast_filename . '.css' ), [], GULIR_THEME_VERSION, 'all' );
+			$style_deps[] = 'gulir-podcast';
+		}
+
+		if ( ! gulir_is_amp() ) {
+
+			wp_register_style( 'gulir-print', gulir_get_file_uri( 'assets/css/print.css' ), [], GULIR_THEME_VERSION, 'all' );
+			$style_deps[] = 'gulir-print';
+
+			if ( class_exists( 'WooCommerce' ) ) {
+				wp_deregister_style( 'yith-wcwl-font-awesome' );
+				wp_register_style( 'gulir-woocommerce', gulir_get_file_uri( 'assets/css/' . $woocommerce_filename . '.css' ), [], GULIR_THEME_VERSION, 'all' );
+				$style_deps[] = 'gulir-woocommerce';
 			}
 		}
-	}
-	return $tag;
-}
-add_filter( 'script_loader_tag', 'gulir_add_amp_attributes', 10, 3 );
 
-/**
- * Add AMP animation for when:
- * - A site has a sticky header, and a simplified subpage header
- * - When viewing a page or post with a featured image behind or beside.
- */
-function gulir_sticky_header_amp_animation() {
-	if ( gulir_is_sticky_animated_header() ) {
-		$sticky_header_fade_out = array(
-			'duration'   => '500ms',
-			'fill'       => 'both',
-			'iterations' => '1',
-			'animations' => array(
-				array(
-					'selector'  => '#masthead .sticky-bg',
-					'keyframes' => array(
-						'opacity' => 0,
-					),
-				),
-			),
-		);
+		wp_register_style( 'gulir-style', get_stylesheet_uri(), $style_deps, GULIR_THEME_VERSION, 'all' );
+		wp_enqueue_style( 'gulir-style' );
 
-		$sticky_header_fade_in = array(
-			'duration'   => '500ms',
-			'fill'       => 'both',
-			'iterations' => '1',
-			'animations' => array(
-				array(
-					'selector'  => '#masthead .sticky-bg',
-					'keyframes' => array(
-						'opacity' => 0.7,
-					),
-				),
-			),
-		);
+		if ( ! gulir_is_amp() ) {
 
-		echo '<amp-animation id="headerFadeOut" layout="nodisplay"><script type="application/json">' . wp_json_encode( $sticky_header_fade_out ) . '</script></amp-animation>';
-		echo '<amp-animation id="headerFadeIn" layout="nodisplay"><script type="application/json">' . wp_json_encode( $sticky_header_fade_in ) . '</script></amp-animation>';
-	}
-}
-add_action( 'wp_body_open', 'gulir_sticky_header_amp_animation' );
+			wp_register_script( 'html5', gulir_get_file_uri( 'assets/js/html5shiv.min.js' ), [], '3.7.3' );
+			wp_script_add_data( 'html5', 'conditional', 'lt IE 9' );
 
-/**
- * Enqueue scripts for:
- * - Featured Image position option
- * - Article Subtitle
- */
-function gulir_enqueue_scripts() {
-	$languages_path = get_parent_theme_file_path( '/languages' );
-	$theme_version  = wp_get_theme()->get( 'Version' );
-	$post_type      = get_post_type();
-	$current_screen = get_current_screen();
-
-	// Add check to see if currently on the widgets screen; none of these files are needed there, but are loaded as of WP 5.8.
-	// See: https://github.com/WordPress/gutenberg/issues/28538.
-	if ( 'widgets' === $current_screen->id ) {
-		return;
-	}
-
-	// Featured Image options.
-	wp_register_script(
-		'gulir-extend-featured-image-script',
-		get_theme_file_uri( '/js/dist/extend-featured-image-editor.js' ),
-		array( 'wp-blocks', 'wp-components' ),
-		$theme_version
-	);
-	wp_set_script_translations( 'gulir-extend-featured-image-script', 'gulir', $languages_path );
-	wp_localize_script(
-		'gulir-extend-featured-image-script',
-		'gulir_theme_featured_image_post_types',
-		gulir_get_featured_image_post_types()
-	);
-	wp_enqueue_script( 'gulir-extend-featured-image-script' );
-
-	// Article subtitle.
-	if ( 'post' === $post_type ) {
-		wp_enqueue_script( 'gulir-post-subtitle', get_theme_file_uri( '/js/dist/post-subtitle.js' ), array(), $theme_version, true );
-		wp_set_script_translations( 'gulir-post-subtitle', 'gulir', $languages_path );
-
-		wp_enqueue_script( 'gulir-post-summary', get_theme_file_uri( '/js/dist/post-summary.js' ), array(), $theme_version, true );
-		wp_set_script_translations( 'gulir-post-summary', 'gulir', $languages_path );
-
-	}
-
-	// Post meta options.
-	wp_register_script(
-		'gulir-post-meta-toggles',
-		get_theme_file_uri( '/js/dist/post-meta-toggles.js' ),
-		array(),
-		$theme_version,
-		true
-	);
-	wp_set_script_translations( 'gulir-post-meta-toggles', 'gulir', $languages_path );
-	wp_localize_script(
-		'gulir-post-meta-toggles',
-		'gulir_post_meta_post_types',
-		gulir_get_post_toggle_post_types()
-	);
-	wp_enqueue_script( 'gulir-post-meta-toggles' );
-
-	// Remove FSE-related Gutenberg blocks.
-	$allowed_fse_blocks = gulir_fse_blocks_to_remove();
-	wp_register_script( 'gulir-hide-fse-blocks', get_theme_file_uri( '/js/dist/editor-remove-blocks.js' ), array( 'wp-blocks', 'wp-dom-ready', 'wp-edit-post' ), $theme_version, true );
-	wp_localize_script( 'gulir-hide-fse-blocks', 'updateAllowedBlocks', $allowed_fse_blocks );
-	wp_enqueue_script( 'gulir-hide-fse-blocks' );
-}
-add_action( 'enqueue_block_editor_assets', 'gulir_enqueue_scripts' );
-
-
-/**
- * Check for additional allowed blocks
- *
- * Add this flag to the wp-config.php to allow more blocks, formatted in a array --
- * for example: `define( 'NEWSPACK_FSE_BLOCKS_ALLOWED', ['core/avatar', 'core/loginout'] );`
- *
- * @return array List of allowed FSE blocks.
- */
-function gulir_is_fse_blocks_allowed() {
-	if ( defined( 'NEWSPACK_FSE_BLOCKS_ALLOWED' ) ) {
-		return NEWSPACK_FSE_BLOCKS_ALLOWED;
-	}
-}
-
-/**
- * Put together list of FSE blocks to remove
- *
- * @return array FSE blocks to remove from editor.
- */
-function gulir_fse_blocks_to_remove() {
-
-	// List of all FSE blocks to remove from the editor.
-	$fse_blocks = array(
-		'core/loginout',
-		'core/comments',
-		'core/post-comments-form',
-		'core/comments-query-loop',
-		'core/query',
-		// 'core/post-title', Temporarily allow this block. Ref. https://github.com/woocommerce/woocommerce/pull/52209
-		'core/post-featured-image',
-		'core/post-excerpt',
-		'core/post-content',
-		'core/post-terms',
-		'core/post-date',
-		'core/post-author',
-		'core/post-author-name',
-		'core/post-navigation-link',
-		'core/read-more',
-		'core/avatar',
-		'core/post-author-biography',
-		'core/query-title',
-		'core/term-description',
-	);
-
-	// Get site-specific allowed FSE blocks.
-	if ( is_array( gulir_is_fse_blocks_allowed() ) ) {
-		$get_allowed_blocks = array_map( 'esc_html', gulir_is_fse_blocks_allowed() );
-
-		// Remove the allowed FSE blocks from the list of blocks to remove.
-		if ( $get_allowed_blocks ) {
-			$fse_blocks = array_diff( $fse_blocks, $get_allowed_blocks );
-		}
-	}
-
-	// Turn FSE blocks array into a string.
-	$fse_blocks = implode( ',', $fse_blocks );
-
-	// Format FSE block list so it can be passed to the JavaScript file as a translation.
-	$blocks_to_remove = array(
-		'removeblocks' => $fse_blocks,
-	);
-
-	// Return the list of blocks to remove.
-	return $blocks_to_remove;
-}
-
-/**
- * Fix skip link focus in IE11.
- *
- * This does not enqueue the script because it is tiny and because it is only for IE11,
- * thus it does not warrant having an entire dedicated blocking script being loaded.
- *
- * @link https://git.io/vWdr2
- */
-function gulir_skip_link_focus_fix() {
-	// Bail if this is an AMP page, because AMP already handles this bug.
-	if ( gulir_is_amp() ) {
-		return;
-	}
-
-	// The following is minified via `terser --compress --mangle -- js/skip-link-focus-fix.js`.
-	?>
-	<script>
-	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
-	</script>
-	<?php
-}
-add_action( 'wp_print_footer_scripts', 'gulir_skip_link_focus_fix' );
-
-/**
- * Checks whether the amp animation files need to be loaded for the sticky header.
- */
-function gulir_is_sticky_animated_header() {
-	$header_sticky          = get_theme_mod( 'header_sticky', false );
-	$header_sub_simplified  = get_theme_mod( 'header_sub_simplified', false );
-	$feat_img_behind_beside = in_array( gulir_featured_image_position(), array( 'behind', 'beside' ) );
-
-	if ( $header_sticky && $header_sub_simplified && $feat_img_behind_beside && gulir_is_amp() ) {
-		return true;
-	} else {
-		return false;
-	}
-}
-
-/**
- * Enqueue supplemental block editor styles.
- */
-function gulir_editor_customizer_styles() {
-
-	wp_enqueue_style( 'gulir-editor-customizer-styles', get_theme_file_uri( '/styles/style-editor-customizer.css' ), false, '1.1', 'all' );
-
-	// Check for color or font customizations.
-	$theme_customizations = '';
-	if ( 'custom' === get_theme_mod( 'theme_colors' ) ) {
-		// Include color patterns.
-		require_once get_parent_theme_file_path( '/inc/color-patterns.php' );
-		$theme_customizations .= gulir_custom_colors_css();
-	}
-
-	if ( get_theme_mod( 'font_body', '' ) || get_theme_mod( 'font_header', '' ) || get_theme_mod( 'accent_allcaps', true ) ) {
-		$theme_customizations .= gulir_custom_typography_css();
-	}
-
-	// If there are any, add those styles inline.
-	if ( $theme_customizations ) {
-		wp_add_inline_style( 'gulir-editor-customizer-styles', $theme_customizations );
-	}
-
-	// If custom fonts are assigned, enqueue them as well.
-	if ( get_theme_mod( 'custom_font_import_code', '' ) ) {
-		wp_enqueue_style( 'gulir-font-import', gulir_custom_typography_link( 'custom_font_import_code' ), array(), null );
-	}
-	if ( get_theme_mod( 'custom_font_import_code_alternate', '' ) ) {
-		wp_enqueue_style( 'gulir-font-alternative-import', gulir_custom_typography_link( 'custom_font_import_code_alternate' ), array(), null );
-	}
-
-}
-add_action( 'enqueue_block_editor_assets', 'gulir_editor_customizer_styles' );
-
-/**
- * Determine if current editor page is the static front page.
- */
-function gulir_is_static_front_page() {
-	global $post;
-	$page_on_front = intval( get_option( 'page_on_front' ) );
-	return isset( $post->ID ) && intval( $post->ID ) === $page_on_front;
-}
-
-/**
- * Check for specific templates.
- */
-function gulir_check_current_template() {
-	global $post;
-
-	$template_file = ( $post && $post->ID ) ? get_post_meta( $post->ID, '_wp_page_template', true ) : '';
-
-	return $template_file;
-}
-
-/**
- * Add body class on editor pages if editing the static front page.
- */
-function gulir_filter_admin_body_class( $classes ) {
-
-	if ( gulir_is_static_front_page() ) {
-		$classes .= ' gulir-static-front-page';
-	}
-
-	if ( ! is_active_sidebar( 'sidebar-1' ) ) {
-		$classes .= ' no-sidebar';
-	}
-
-	if (
-		'single-feature.php' === gulir_check_current_template()
-		|| 'no-header-footer.php' === gulir_check_current_template()
-	) {
-		$classes .= ' gulir-single-column-template';
-	} elseif ( 'single-wide.php' === gulir_check_current_template() ) {
-		$classes .= ' gulir-single-wide-template';
-	} else {
-		$classes .= ' gulir-default-template';
-	}
-
-	return $classes;
-}
-add_filter( 'admin_body_class', 'gulir_filter_admin_body_class', 10, 1 );
-
-
-/**
- * Enqueue CSS styles for the editor that use the <body> tag.
- */
-function gulir_enqueue_editor_override_assets( $classes ) {
-	wp_enqueue_style( 'gulir-editor-overrides', get_theme_file_uri( '/styles/style-editor-overrides.css' ), false, '1.1', 'all' );
-}
-add_action( 'enqueue_block_editor_assets', 'gulir_enqueue_editor_override_assets' );
-
-/**
- * Use front-page.php when Front page displays is set to a static page.
- *
- * @param string $template front-page.php.
- *
- * @return string The template to be used: blank if is_home() is true (defaults to index.php), else $template.
- */
-function gulir_front_page_template( $template ) {
-	return is_home() ? '' : $template;
-}
-add_filter( 'frontpage_template', 'gulir_front_page_template' );
-
-/**
- * Override Jetpack Image Accelerator (Photon) downsizing of avatars. If an image has a square aspect ratio and the width is between 1-120px, assume it is an avatar and block downsizing.
- * https://developer.jetpack.com/hooks/jetpack_photon_override_image_downsize/
- *
- * @param boolean $default The default value, generally false.
- * @param array   $args Array of image details.
- *
- * @return boolean Should Photon be stopped from downsizing.
- */
-function gulir_override_avatar_downsizing( $default, $args ) {
-	if ( is_array( $args['size'] ) && 2 === count( $args['size'] ) ) {
-		list( $width, $height ) = $args['size'];
-		if ( $width === $height && $width <= 120 & $width > 0 ) {
-			return true;
-		}
-	}
-	return $default;
-}
-add_filter( 'jetpack_photon_override_image_downsize', 'gulir_override_avatar_downsizing', 10, 2 );
-
-/**
- * Register meta fields:
- * - Featured Image position option
- * - Article Subtitle
- */
-function gulir_register_meta() {
-	$featured_image_post_types = gulir_get_featured_image_post_types();
-
-	foreach ( $featured_image_post_types as $post_type ) {
-		register_post_meta(
-			$post_type,
-			'gulir_featured_image_position',
-			array(
-				'show_in_rest' => true,
-				'single'       => true,
-				'type'         => 'string',
-			)
-		);
-	}
-
-	register_post_meta(
-		'post',
-		'gulir_post_subtitle',
-		array(
-			'show_in_rest' => true,
-			'single'       => true,
-			'type'         => 'string',
-		)
-	);
-
-	register_post_meta(
-		'post',
-		'gulir_article_summary_title',
-		array(
-			'default'      => esc_html__( 'Overview:', 'gulir' ),
-			'show_in_rest' => true,
-			'single'       => true,
-			'type'         => 'string',
-		)
-	);
-
-	register_post_meta(
-		'post',
-		'gulir_article_summary',
-		array(
-			'show_in_rest' => true,
-			'single'       => true,
-			'type'         => 'string',
-		)
-	);
-
-	$updated_date_post_types = gulir_get_updated_date_supported_post_types();
-
-	foreach ( $updated_date_post_types as $post_type ) {
-		register_post_meta(
-			$post_type,
-			'gulir_hide_updated_date',
-			array(
-				'show_in_rest' => true,
-				'single'       => true,
-				'type'         => 'boolean',
-			)
-		);
-
-		register_post_meta(
-			$post_type,
-			'gulir_show_updated_date',
-			array(
-				'show_in_rest' => true,
-				'single'       => true,
-				'type'         => 'boolean',
-			)
-		);
-	}
-
-	register_post_meta(
-		'page',
-		'gulir_hide_page_title',
-		array(
-			'show_in_rest' => true,
-			'single'       => true,
-			'type'         => 'boolean',
-		)
-	);
-
-	register_post_meta(
-		'page',
-		'gulir_show_share_buttons',
-		array(
-			'show_in_rest' => true,
-			'single'       => true,
-			'type'         => 'boolean',
-			'default'      => false,
-		)
-	);
-}
-add_action( 'init', 'gulir_register_meta' );
-
-
-/**
- * Migrate theme settings when switching within the family of Gulir themes.
- *
- * @since Gulir Theme 1.0.0
- */
-function gulir_migrate_settings( $old_name, $old_theme = false ) {
-	$theme           = wp_get_theme();
-	$old_stylesheet  = is_a( $old_theme, 'WP_Theme' ) ? $old_theme->get_stylesheet() : null;
-	$new_stylesheet  = $theme->get_stylesheet();
-	$gulir_prefix = 'gulir-';
-
-	if ( 0 === strrpos( $old_stylesheet, $gulir_prefix ) && 0 === strrpos( $new_stylesheet, $gulir_prefix ) ) {
-		$mods = get_option( 'theme_mods_' . $old_stylesheet, null );
-		if ( $mods ) {
-			update_option( 'theme_mods_' . $new_stylesheet, $mods );
-		}
-	}
-}
-add_action( 'after_switch_theme', 'gulir_migrate_settings', 10, 2 );
-
-/**
- * Display custom color CSS in customizer and on frontend.
- */
-function gulir_colors_css_wrap() {
-
-	// Only bother if we haven't customized the color.
-	if ( ( ! is_customize_preview() && ( 'default' === get_theme_mod( 'theme_colors', 'default' ) && gulir_get_mobile_cta_color() === get_theme_mod( 'header_cta_hex', gulir_get_mobile_cta_color() ) && 'default' === get_theme_mod( 'ads_color', 'default' ) ) ) || is_admin() ) {
-		return;
-	}
-
-	require_once get_parent_theme_file_path( '/inc/color-patterns.php' );
-	?>
-
-	<style type="text/css" id="custom-theme-colors">
-		<?php echo gulir_custom_colors_css(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-	</style>
-	<?php
-}
-add_action( 'wp_head', 'gulir_colors_css_wrap' );
-
-/**
- * Get theme colors' values.
- *
- * @return string[] Array of colors.
- */
-function gulir_get_colors() {
-	$colors              = [];
-	$colors['primary']   = gulir_get_primary_color();
-	$colors['secondary'] = gulir_get_secondary_color();
-	$colors['cta']       = get_theme_mod( 'header_cta_hex', gulir_get_mobile_cta_color() );
-
-	if ( true === get_theme_mod( 'header_solid_background', false ) ) {
-		$colors['header'] = $colors['primary'];
-	}
-
-	if ( 'default' !== get_theme_mod( 'theme_colors', 'default' ) ) {
-		$colors['primary']   = get_theme_mod( 'primary_color_hex', $colors['primary'] );
-		$colors['secondary'] = get_theme_mod( 'secondary_color_hex', $colors['secondary'] );
-
-		if ( 'default' !== get_theme_mod( 'header_color', 'default' ) ) {
-			$colors['header']       = get_theme_mod( 'header_color_hex', '#666666' );
-			$colors['primary_menu'] = get_theme_mod( 'header_primary_menu_color_hex', '' );
-		} else {
-			$colors['header'] = $colors['primary'];
-		}
-
-		if ( 'default' !== get_theme_mod( 'footer_color', 'default' ) ) {
-			$colors['footer'] = get_theme_mod( 'footer_color_hex', '' );
-		}
-	}
-
-	// Set color contrasts.
-	foreach ( $colors as $color_key => $color_value ) {
-		$colors[ $color_key . '_contrast' ] = gulir_get_color_contrast( $color_value );
-	}
-
-	return $colors;
-}
-
-/**
- * Add CSS variables to theme's colors.
- */
-function gulir_colors_css_variables() {
-	$colors = gulir_get_colors();
-	?>
-	<style type="text/css" id="gulir-colors-variables">
-		:root {
-			<?php foreach ( $colors as $color_key => $color_value ) : ?>
-				--gulir-<?php echo esc_attr( str_replace( '_', '-', $color_key ) ); ?>-color: <?php echo esc_attr( $color_value ); ?>;
-			<?php endforeach; ?>
-		}
-	</style>
-	<?php
-}
-add_action( 'wp_head', 'gulir_colors_css_variables' );
-
-/**
- * Display custom font CSS in customizer and on frontend.
- */
-function gulir_typography_css_wrap() {
-
-	if ( is_admin() || ( ! get_theme_mod( 'font_body', '' ) && ! get_theme_mod( 'font_header', '' ) && ! get_theme_mod( 'accent_allcaps', true ) ) ) {
-		return;
-	}
-	?>
-
-	<style type="text/css" id="custom-theme-fonts">
-		<?php echo gulir_custom_typography_css(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-	</style>
-
-	<?php
-}
-add_action( 'wp_head', 'gulir_typography_css_wrap' );
-
-/**
- * Returns an array of 'acceptable' SVG tags to use with wp_kses().
- */
-function gulir_sanitize_svgs() {
-	$svg_args = array(
-		'svg'      => array(
-			'class'           => true,
-			'aria-hidden'     => true,
-			'aria-labelledby' => true,
-			'role'            => true,
-			'xmlns'           => true,
-			'width'           => true,
-			'height'          => true,
-			'viewbox'         => true,
-		),
-		'g'        => array(
-			'fill'      => true,
-			'fill-rule' => true,
-		),
-		'title'    => array(
-			'title' => true,
-		),
-		'path'     => array(
-			'd'    => true,
-			'fill' => true,
-		),
-		'defs'     => true,
-		'clipPath' => true,
-		'polygon'  => array(
-			'points' => true,
-		),
-	);
-
-	return $svg_args;
-}
-
-/**
- * Truncates text to a specific character length, without breaking a character.
- */
-function gulir_truncate_text( $content, $length, $after = '...' ) {
-	// If content is already shorter than the truncate length, return it.
-	if ( strlen( $content ) <= $length ) {
-		return $content;
-	}
-
-	// Find the first space after the desired length:
-	$breakpoint = strpos( $content, ' ', $length );
-
-	// Make sure $breakpoint isn't returning false, and is less than length of content:
-	if ( false !== $breakpoint && $breakpoint < strlen( $content ) - 1 ) {
-		$content = substr( $content, 0, $breakpoint ) . $after;
-	}
-	return $content;
-}
-
- /**
-  * Returns an array of 'acceptable' avatar tags, to use with wp_kses().
-  */
-function gulir_sanitize_avatars() {
-	$avatar_args = array(
-		'img'      => array(
-			'class'  => true,
-			'src'    => true,
-			'alt'    => true,
-			'width'  => true,
-			'height' => true,
-			'data-*' => true,
-			'srcset' => true,
-		),
-		'noscript' => array(),
-	);
-
-	return $avatar_args;
-}
-
-/**
- * Get post types that support featured image settings.
- *
- * @return array Array of post type slugs.
- */
-function gulir_get_featured_image_post_types() {
-	return apply_filters( 'gulir_theme_featured_image_post_types', array( 'post', 'page' ) );
-}
-
-/**
- * Get post types that support the hiding date and page title settings.
- *
- * @return array Array of post type slugs.
- */
-function gulir_get_post_toggle_post_types() {
-	$hide_date_post_types = [];
-	$show_date_post_types = [];
-	if ( true === get_theme_mod( 'post_updated_date', false ) ) {
-		$hide_date_post_types = gulir_get_updated_date_supported_post_types();
-	} else {
-		$show_date_post_types = gulir_get_updated_date_supported_post_types();
-	}
-
-	return array(
-		'hide_date'          => $hide_date_post_types,
-		'show_date'          => $show_date_post_types,
-		'hide_title'         => [ 'page' ],
-		'show_share_buttons' => function_exists( 'sharing_display' ) ? [ 'page' ] : [],
-	);
-}
-
-/**
- * Co-authors in RSS and other feeds
- * /wp-includes/feed-rss2.php uses the_author(), so we selectively filter the_author value
- */
-function gulir_coauthors_in_rss( $the_author ) {
-	if ( ! is_feed() || ! function_exists( 'coauthors' ) ) {
-		return $the_author;
-	} else {
-		return coauthors( null, null, null, null, false );
-	}
-}
-add_filter( 'the_author', 'gulir_coauthors_in_rss' );
-
-/**
- * Should a particular Ad deployment use responsive placement.
- *
- * @param boolean $responsive Default value of whether to use responsive placement.
- * @param string  $placement ID of the ad placement.
- * @param string  $context Optional second string describing the ad placement. For Widget placements, the ID of the Widget.
- * @return boolean Whether to use responsive placement.
- */
-function gulir_theme_gulir_ads_maybe_use_responsive_placement( $responsive, $placement, $context ) {
-	// Apply Responsive placement to widgets using Super Cool Ad Inserter.
-	if ( 'gulir_ads_widget' === $placement && strpos( $context, 'scaip' ) === 0 ) {
-		return true;
-	}
-	return $responsive;
-}
-add_filter( 'gulir_ads_maybe_use_responsive_placement', 'gulir_theme_gulir_ads_maybe_use_responsive_placement', 10, 3 );
-
-/**
- * Add a extra span and class to the_archive_title, for easier styling.
- */
-function gulir_update_the_archive_title( $title ) {
-	// Split the title into parts so we can wrap them with spans:
-	$title_parts  = explode( '<span class="page-description">', $title, 2 );
-	$title_format = get_theme_mod( 'archive_title_format', 'default' );
-
-	// Glue it back together again.
-	if ( ! empty( $title_parts[1] ) ) {
-		$title = wp_kses(
-			$title_parts[1],
-			array(
-				'span' => array(
-					'class' => array(),
-				),
-			)
-		);
-		if ( 'default' === $title_format ) {
-			$title = '<span class="page-subtitle">' . esc_html( $title_parts[0] ) . '</span><span class="page-description">' . $title;
-		} else {
-			$title = '<span class="page-description">' . $title;
-		}
-	}
-	return $title;
-}
-add_filter( 'get_the_archive_title', 'gulir_update_the_archive_title', 11, 1 );
-
-/**
- * When new post is created, maybe set the post template.
- *
- * @param integer $post_ID The post ID.
- * @param WP_Post $post Post object.
- * @param boolean $update Whether this is an existing post being updated or not.
- */
-function gulir_maybe_set_default_post_template( $post_ID, $post, $update ) {
-	if ( ! $update ) {
-		if ( 'post' === $post->post_type ) {
-			$post_template_default = get_theme_mod( 'post_template_default' );
-			if ( 'default' !== $post_template_default ) {
-				update_post_meta( $post_ID, '_wp_page_template', $post_template_default );
+			if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+				wp_enqueue_script( 'comment-reply' );
 			}
-		} elseif ( 'page' === $post->post_type ) {
-			$page_template_default = get_theme_mod( 'page_template_default' );
-			if ( 'default' !== $page_template_default ) {
-				update_post_meta( $post_ID, '_wp_page_template', $page_template_default );
+
+			wp_register_script( 'jquery-waypoints', gulir_get_file_uri( 'assets/js/jquery.waypoints.min.js' ), [ 'jquery' ], '3.1.1', true );
+			wp_register_script( 'rbswiper', gulir_get_file_uri( 'assets/js/rbswiper.min.js' ), [], '6.8.4', true );
+			wp_register_script( 'jquery-magnific-popup', gulir_get_file_uri( 'assets/js/jquery.mp.min.js' ), [ 'jquery' ], '1.1.0', true );
+
+			if ( gulir_get_option( 'site_tooltips' ) && ! gulir_is_wc_pages() ) {
+				wp_register_script( 'rb-tipsy', gulir_get_file_uri( 'assets/js/jquery.tipsy.min.js' ), [ 'jquery' ], '1.0', true );
+				$script_deps[] = 'rb-tipsy';
 			}
+
+			if ( gulir_get_option( 'single_post_highlight_shares' ) ) {
+				wp_register_script( 'highlight-share', gulir_get_file_uri( 'assets/js/highlight-share.js' ), '1.1.0', true );
+				$script_deps[] = 'highlight-share';
+			}
+
+			if ( gulir_get_option( 'back_top' ) ) {
+				wp_register_script( 'jquery-uitotop', gulir_get_file_uri( 'assets/js/jquery.ui.totop.min.js' ), [ 'jquery' ], 'v1.2', true );
+				$script_deps[] = 'jquery-uitotop';
+			}
+
+			if ( class_exists( 'GULIR_CORE' ) ) {
+				if ( gulir_get_option( 'bookmark_system' ) ) {
+					wp_register_script( 'gulir-personalize', gulir_get_file_uri( 'assets/js/personalized.js' ), [
+						'jquery',
+						'gulir-core',
+					], GULIR_THEME_VERSION, true );
+					$script_deps[] = 'gulir-personalize';
+				}
+				$script_deps[] = 'gulir-core';
+			}
+			wp_register_script( 'gulir-global', gulir_get_file_uri( 'assets/js/global.js' ), $script_deps, GULIR_THEME_VERSION, true );
+			wp_localize_script( 'gulir-global', 'gulirParams', gulir_get_js_settings() );
+			wp_enqueue_script( 'gulir-global' );
 		}
 	}
 }
-add_action( 'wp_insert_post', 'gulir_maybe_set_default_post_template', 10, 3 );
 
-/**
- * Dequeue Media Element styles if AMP is enabled.
- */
-function gulir_dequeue_mediaelement() {
-	if ( gulir_is_amp() ) {
-		wp_deregister_script( 'wp-mediaelement' );
-		wp_deregister_style( 'wp-mediaelement' );
-	}
+/* register funtion to allow autor publish iframes */
+    function add_theme_caps() {
+    // gets the author role
+    $role = get_role( 'author' );
+
+    // This only works, because it accesses the class instance.
+    // would allow the author to edit others' posts for current theme only
+    $role->add_cap( 'unfiltered_html' ); 
 }
-add_action( 'wp_enqueue_scripts', 'gulir_dequeue_mediaelement', 20 );
-
-/**
- * SVG Icons class.
- */
-require get_template_directory() . '/classes/class-gulir-svg-icons.php';
-
-/**
- * Custom Comment Walker template.
- */
-require get_template_directory() . '/classes/class-gulir-walker-comment.php';
-
-/**
- * Enhance the theme by hooking into WordPress.
- */
-require get_template_directory() . '/inc/template-functions.php';
-
-/**
- * Custom typography functions.
- */
-require get_template_directory() . '/inc/typography.php';
-
-/**
- * SVG Icons related functions.
- */
-require get_template_directory() . '/inc/icon-functions.php';
-
-/**
- * Custom template tags for the theme.
- */
-require get_template_directory() . '/inc/template-tags.php';
-
-/**
- * Customizer additions.
- */
-require get_template_directory() . '/inc/customizer.php';
-
-/**
- * Logo Resizer.
- */
-require get_template_directory() . '/inc/logo-resizer.php';
-
-/**
- * Custom Login Screen.
- */
-require get_template_directory() . '/inc/login-screen.php';
-
-/**
- * Load Jetpack compatibility file.
- */
-if ( defined( 'JETPACK__VERSION' ) ) {
-	require get_template_directory() . '/inc/jetpack.php';
-}
-
-/**
- * Load WooCommerce compatibility file.
- */
-if ( class_exists( 'WooCommerce' ) ) {
-	require get_template_directory() . '/inc/woocommerce.php';
-}
-
-/**
- * Load Trust Indicators compatibility file.
- */
-if ( class_exists( 'Trust_Indicators' ) ) {
-	require get_template_directory() . '/inc/trust-indicators.php';
-}
-
-/**
- * Load Sponsored Content compatibility file.
- */
-if ( function_exists( '\Gulir_Sponsors\get_sponsors_for_post' ) ) {
-	require get_template_directory() . '/inc/gulir-sponsors.php';
-}
-
-/**
- * Load Newsletters compatibility file.
- */
-if ( class_exists( '\Gulir_Newsletters' ) ) {
-	require get_template_directory() . '/inc/gulir-newsletters.php';
-}
-
-/**
- * Load Web Stories compatibility file.
- */
-require get_template_directory() . '/inc/web-stories.php';
-
-/**
- * Load The Events Calendar compatibility file.
- */
-if ( class_exists( 'Tribe__Events__Main' ) ) {
-	require get_template_directory() . '/inc/the-events-calendar.php';
-}
-
-/**
- * Multi-branded plugin support
- */
-if ( class_exists( 'Gulir_Multibranded_Site\Customizations\Theme_Colors' ) ) {
-	require get_template_directory() . '/inc/gulir-multibranded-site-plugin.php';
-}
-
-/**
- * Woo Templates cache handling
- */
-require get_template_directory() . '/woocommerce/templates.php';
-
-/**
- * Yoast customizations
- */
-if ( class_exists( 'WPSEO_Options' ) ) {
-	require get_template_directory() . '/inc/yoast.php';
-}
+add_action( 'admin_init', 'add_theme_caps');

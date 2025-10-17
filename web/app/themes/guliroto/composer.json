@@ -1,5 +1,5 @@
 {
-  "name": "guliroto/wp-theme",
+  "name": "gulir/wp-theme",
   "description": "The starting point for all 10up WordPress themes.",
   "license": "MIT",
   "type": "wordpress-theme",
@@ -11,11 +11,12 @@
   ],
   "require": {
     "php": ">=8.2",
-     "10up/wp-framework": "~1.2.0"
+    "10up/wp-framework": "~1.2.0",
+    "log1x/navi": "^3.1"
   },
   "autoload": {
     "psr-4": {
-      "Gulircom\\": "src/"
+      "Gulir\\": "src/"
     }
   }
 }

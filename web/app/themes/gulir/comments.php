@@ -1,161 +1,58 @@
 <?php
-/**
- * The template for displaying comments
- *
- * This is the template that displays the area of the page that contains both the current comments
- * and the comment form.
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
- *
- * @package Gulir
- */
+/** Don't load directly */
+defined( 'ABSPATH' ) || exit;
 
-/*
- * If the current post is protected by a password and
- * the visitor has not yet entered the password we will
- * return early without loading the comments.
-*/
-if ( post_password_required() ) {
+/** comment template */
+if ( post_password_required() || ( ! comments_open() && ! pings_open() ) ) {
 	return;
 }
 
-$discussion         = gulir_get_discussion_data();
-$collapse_comments  = get_theme_mod( 'collapse_comments', false );
-$on_first_page      = true;
-$comments_collapsed = false;
-$url_end            = '';
+$hidden_comment_btn = get_query_var( 'rbsnp' ) ? gulir_get_option( 'ajax_next_comment_button' ) : gulir_get_option( 'single_post_comment_button' );
+$hidden_comment_btn = ( gulir_is_amp() || function_exists( 'run_disqus' ) ) ? false : $hidden_comment_btn;
 
-if ( isset( $_SERVER['REQUEST_URI'] ) ) {
-	$url_end = basename( sanitize_text_field( $_SERVER['REQUEST_URI'] ) );
+$class_name = 'comment-holder' . ( ! get_comments_number() ? ' no-comment' : '' ) . ( ! empty( $button ) && ! is_page() ? ' is-hidden' : '' );
+
+$class_name = 'comment-holder';
+if ( ! get_comments_number() ) {
+	$class_name .= ' no-comment';
 }
 
-// Figure out if we're into comment pagination, to check if there's a new comment, or we're in subpages:
-if ( false !== strpos( $url_end, 'cpage=' ) || false !== strpos( $url_end, 'comment-page-' ) || false !== strpos( $url_end, 'moderation-hash=' ) ) {
-	$on_first_page = false;
+if ( $hidden_comment_btn && ! is_page() ) {
+	$class_name .= ' is-hidden';
 }
 
-// Collapse comments if that's set, if there's more than one, and if we're on the first page:
-if ( $collapse_comments && 1 < (int) $discussion->responses && $on_first_page ) {
-	$comments_collapsed = true;
-}
 ?>
-
-<div id="comments" class="<?php echo comments_open() ? 'comments-area' : 'comments-area comments-closed'; ?>">
-	<div class="<?php echo $discussion->responses > 0 ? 'comments-title-wrap' : 'comments-title-wrap no-responses'; ?>">
-		<h2 class="comments-title">
-		<?php
-		if ( comments_open() ) {
-			if ( have_comments() ) {
-				echo esc_html( apply_filters( 'gulir_comment_section_title_nocomments', __( 'Join the Conversation', 'gulir' ) ) );
-			} else {
-				echo esc_html( apply_filters( 'gulir_comment_section_title', __( 'Leave a comment', 'gulir' ) ) );
-			}
-		} else {
-			if ( '1' == $discussion->responses ) {
-				/* translators: %s: post title */
-				printf( _x( 'One reply on &ldquo;%s&rdquo;', 'comments title', 'gulir' ), get_the_title() );
-			} else {
-				printf(
-					/* translators: 1: number of comments, 2: post title */
-					_nx(
-						'%1$s reply on &ldquo;%2$s&rdquo;',
-						'%1$s replies on &ldquo;%2$s&rdquo;',
-						$discussion->responses,
-						'comments title',
-						'gulir'
-					),
-					number_format_i18n( $discussion->responses ),
-					get_the_title()
-				);
-			}
-		}
-		?>
-		</h2><!-- .comments-title -->
-		<?php
-			// Only show discussion meta information when comments are open and available.
-		if ( have_comments() && comments_open() ) {
-			get_template_part( 'template-parts/post/discussion', 'meta' );
-		}
-		?>
-	</div><!-- .comments-title-flex -->
-	<?php do_action( 'gulir_comments_above_comments' ); ?>
-	<?php
-	if ( have_comments() ) :
-
-		// Show comment form at top if showing newest comments at the top.
-		if ( comments_open() ) {
-			gulir_comment_form( 'desc' );
-		}
-		?>
-
-		<?php if ( $comments_collapsed ) : ?>
-			<div id="comments-wrapper" class="comments-wrapper comments-hide" [class]="showComments ? 'comments-wrapper' : 'comments-wrapper comments-hide'">
-		<?php endif; ?>
-
-			<ol class="comment-list">
-				<?php
-				wp_list_comments(
-					array(
-						'walker'      => new gulir_Walker_Comment(),
-						'avatar_size' => gulir_get_avatar_size(),
-						'short_ping'  => true,
-						'style'       => 'ol',
-					)
-				);
-				?>
-			</ol><!-- .comment-list -->
-			<?php
-
-			// Show comment navigation
-			if ( have_comments() ) :
-				$prev_icon     = gulir_get_icon_svg( 'chevron_left', 22 );
-				$next_icon     = gulir_get_icon_svg( 'chevron_right', 22 );
-				$comments_text = apply_filters( 'gulir_comments_name_plural', __( 'Comments', 'gulir' ) );
-				the_comments_navigation(
-					array(
-						'prev_text' => sprintf( '%s <span class="nav-prev-text"><span class="primary-text">%s</span> <span class="secondary-text">%s</span></span>', $prev_icon, __( 'Previous', 'gulir' ), $comments_text ),
-						'next_text' => sprintf( '<span class="nav-next-text"><span class="primary-text">%s</span> <span class="secondary-text">%s</span></span> %s', __( 'Next', 'gulir' ), $comments_text, $next_icon ),
-					)
-				);
-			endif;
-			?>
-
-		<?php if ( $comments_collapsed ) : ?>
-			</div><!-- .comments-wrapper -->
-			<button class="comments-toggle" id="comments-toggle" on="tap:AMP.setState({showComments: !showComments})">
-				<?php echo wp_kses( gulir_get_icon_svg( 'chevron_left', 24 ), gulir_sanitize_svgs() ); ?><span [text]="showComments ? '<?php esc_html_e( 'Collapse comments', 'gulir' ); ?>' : '<?php esc_html_e( 'Expand comments', 'gulir' ); ?>'"><?php esc_html_e( 'Expand comments', 'gulir' ); ?></span>
-			</button>
-		<?php endif; ?>
-
-		<?php
-		// Show comment form at bottom if showing newest comments at the bottom.
-		if ( comments_open() && 'asc' === strtolower( get_option( 'comment_order', 'asc' ) ) ) :
-			$leave_comment_text = apply_filters( 'gulir_comments_leave_comment', __( 'Leave a comment', 'gulir' ) );
-			?>
-			<div class="comment-form-flex">
-				<span class="screen-reader-text"><?php echo esc_html( $leave_comment_text ); ?></span>
-				<?php gulir_comment_form( 'asc' ); ?>
-				<h2 class="comments-title" aria-hidden="true"><?php echo esc_html( $leave_comment_text ); ?></h2>
+<div class="comment-box-header">
+	<?php if ( $hidden_comment_btn ) : ?>
+		<span class="comment-box-title h3"><i class="rbi rbi-comment" aria-hidden="true"></i><span class="is-invisible"><?php echo gulir_get_comment_heading( get_the_ID() ); ?></span></span>
+		<a href="#" role="button" class="show-post-comment"><i class="rbi rbi-comment" aria-hidden="true"></i><?php echo gulir_get_comment_heading( get_the_ID() ); ?>
+		</a>
+	<?php else: ?>
+		<span class="h3"><i class="rbi rbi-comment" aria-hidden="true"></i><?php echo gulir_get_comment_heading( get_the_ID() ); ?></span>
+	<?php endif; ?>
+</div>
+<div class="<?php echo strip_tags( $class_name ); ?>">
+	<div id="comments" class="comments-area">
+		<?php if ( have_comments() ) : ?>
+			<div class="rb-section">
+				<ul class="comment-list entry">
+					<?php wp_list_comments( [
+									'avatar_size' => 100,
+									'style'       => 'ul',
+									'short_ping'  => true,
+							]
+					); ?>
+				</ul>
+				<?php the_comments_pagination( [
+								'prev_text' => '<span class="nav-previous">' . gulir_html__( '&larr; Older Comments', 'gulir' ) . '</span>',
+								'next_text' => '<span class="nav-next">' . gulir_html__( 'Newer Comments &rarr;', 'gulir' ) . '</span>',
+						]
+				); ?>
 			</div>
-			<?php
-		endif;
-
-		// If comments are closed and there are comments, let's leave a little note, shall we?
-		if ( ! comments_open() ) :
-			?>
-			<p class="no-comments">
-				<?php
-					echo esc_html( apply_filters( 'gulir_comments_closed', __( 'Comments are closed.', 'gulir' ) ) );
-				?>
-			</p>
-			<?php
-		endif;
-
-	else :
-
-		// Show comment form.
-		gulir_comment_form( true );
-
-	endif; // if have_comments();
-	?>
-</div><!-- #comments -->
+		<?php endif;
+		if ( ! comments_open() && post_type_supports( get_post_type(), 'comments' ) ) : ?>
+			<p class="no-comments"><?php echo gulir_html__( 'Comments are closed.', 'gulir' ); ?></p>
+		<?php endif; ?>
+		<?php comment_form(); ?>
+	</div>
+</div>

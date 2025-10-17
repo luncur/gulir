@@ -1,46 +1,14 @@
 <?php
-/**
- * The main template file
- *
- * This is the most generic template file in a WordPress theme
- * and one of the two required files for a theme (the other being style.css).
- * It is used to display a page when nothing more specific matches a query.
- * E.g., it puts together the home page when no home.php file exists.
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
- *
- * @package Gulir
- */
+/** Don't load directly */
+defined( 'ABSPATH' ) || exit;
 
 get_header();
-?>
-
-	<section id="primary" class="content-area">
-		<main id="main" class="site-main">
-
-		<?php
-		if ( have_posts() ) {
-
-			// Load posts loop.
-			while ( have_posts() ) {
-				the_post();
-				get_template_part( 'template-parts/content/content', 'excerpt' );
-			}
-
-			// Previous/next page navigation.
-			gulir_the_posts_navigation();
-
-		} else {
-
-			// If no content, include the "No posts found" template.
-			get_template_part( 'template-parts/content/content', 'none' );
-
-		}
-		?>
-
-		</main><!-- .site-main -->
-		<?php get_sidebar(); ?>
-	</section><!-- .content-area -->
-
-<?php
+$gulir_settings = gulir_get_archive_page_settings( 'blog_' );
+if ( have_posts() ) {
+	gulir_blog_embed_template( $gulir_settings );
+	gulir_the_blog( $gulir_settings );
+	gulir_blog_embed_template_bottom( $gulir_settings );
+} else {
+	gulir_blog_empty();
+}
 get_footer();
